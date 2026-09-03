@@ -10,6 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Outfit:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="scrollcraft.css">
+<script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
 <style>
   :root {
     --sc-canvas:     #0A0D0E;
@@ -98,16 +99,15 @@
   }
 
   /* ------------------------------------------------------------- hero --- */
-  .hero { min-height: 100svh; display: flex; align-items: flex-end; overflow: clip; }
-  .hero__bg { position: absolute; inset: 0; margin: 0; z-index: 0; }
-  .hero__bg img { width: 100%; height: 100%; object-fit: cover; }
+  .hero { min-height: 100svh; display: flex; align-items: flex-end; overflow: clip; background: var(--sc-canvas); }
+  .hero__canvas { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; display: block; }
   .hero__scrim {
     position: absolute; inset: 0; z-index: 1; pointer-events: none;
     background: linear-gradient(0deg,
-      color-mix(in oklab, var(--sc-canvas) 92%, transparent) 0%,
-      color-mix(in oklab, var(--sc-canvas) 62%, transparent) 34%,
-      color-mix(in oklab, var(--sc-canvas) 18%, transparent) 62%,
-      transparent 82%);
+      color-mix(in oklab, var(--sc-canvas) 86%, transparent) 0%,
+      color-mix(in oklab, var(--sc-canvas) 50%, transparent) 30%,
+      color-mix(in oklab, var(--sc-canvas) 10%, transparent) 58%,
+      transparent 78%);
   }
   .hero__copy { position: relative; z-index: 2; width: 100%; padding-block-end: clamp(3.5rem, 10vh, 7rem); padding-top: 88px; }
   .hero__title {
@@ -295,10 +295,7 @@
 
   <!-- 1 · HERO -->
   <section class="act hero" data-sc-act="flow" id="hero">
-    <figure class="hero__bg" data-sc-reveal="iris" data-sc-reveal-at="0.02 0.32">
-      <img src="assets/event-present.jpg" width="1600" height="1066"
-           alt="A Reapers community mentoring session, screen glow lighting the room">
-    </figure>
+    <canvas id="heroCanvas" class="hero__canvas" aria-hidden="true"></canvas>
     <div class="hero__scrim" aria-hidden="true"></div>
     <div class="hero__copy sc-wrap">
       <h1 class="sc-display hero__title" data-sc-cue="0 0.86 0" data-sc-kinetic="lines">Play. Connect. Create. Dominate.</h1>
@@ -321,11 +318,18 @@
     </div>
   </section>
 
-  <!-- 4 · TURN: kinetic -->
+  <!-- 4 · TURN: kinetic + reveal -->
   <section class="act" data-sc-act="flow">
-    <div class="sc-wrap act-inner sc-stack type-only">
-      <h2 class="sc-display sc-display--lg" data-sc-cue="0 0.86 0" data-sc-kinetic="lines">One app. Whole scene.</h2>
-      <p class="sc-body">Chat, events, demo feedback, expert mentors, and hiring, together in one place built for the people making Pakistan's games.</p>
+    <div class="sc-wrap act-inner">
+      <div class="feature__grid feature__grid--reverse">
+        <figure class="feature__media blade" data-sc-reveal="iris" data-sc-reveal-at="0.08 0.55">
+          <img src="assets/event-present.jpg" width="1600" height="1066" alt="A Reapers community mentoring session, screen glow lighting the room">
+        </figure>
+        <div class="feature__copy sc-stack">
+          <h2 class="sc-display sc-display--lg" data-sc-cue="0 0.86 0" data-sc-kinetic="lines">One app. Whole scene.</h2>
+          <p class="sc-body">Chat, events, demo feedback, expert mentors, and hiring, together in one place built for the people making Pakistan's games.</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -503,6 +507,111 @@
 <script>
 (function () {
   'use strict';
+
+  // ---- Hero crystal scene: brand-matched 3D centerpiece -------------------
+  // Vanilla three.js (this build has no React runtime). Ports the shard
+  // cluster's geometry, material and colours from the brand's original
+  // (unused) react-three-fiber scene, so it reads as the real logo's
+  // teal/purple crystalline swirl rather than generic decoration. Idle
+  // rotation plus a gentle pointer-follow tilt; gated to fine pointers and
+  // off under reduced motion; degrades to a plain dark ground if WebGL is
+  // unavailable.
+  (function initHeroScene() {
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var canvas = document.getElementById('heroCanvas');
+    var heroSection = document.getElementById('hero');
+    if (!canvas || !heroSection || !window.THREE) return;
+
+    var renderer;
+    try {
+      renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+    } catch (e) { return; }
+
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera(42, 1, 0.1, 20);
+    camera.position.set(0, 0, 5.2);
+
+    scene.add(new THREE.AmbientLight(0xffffff, 0.45));
+    var keyLight = new THREE.DirectionalLight(0x17b3a3, 1.15);
+    keyLight.position.set(4, 3, 6);
+    scene.add(keyLight);
+    var rimLight = new THREE.DirectionalLight(0x8a4a84, 0.85);
+    rimLight.position.set(-5, -2, 3);
+    scene.add(rimLight);
+    var specular = new THREE.PointLight(0xffffff, 0.9, 12);
+    specular.position.set(0, 2, 4);
+    scene.add(specular);
+
+    var group = new THREE.Group();
+    var geo = new THREE.OctahedronGeometry(1, 0);
+    [
+      { pos: [0, 0.1, 0], scale: [1.15, 2.1, 0.55], color: 0x17b3a3, rot: [0.3, 0.4, 0.2] },
+      { pos: [0.9, 0.5, -0.2], scale: [0.7, 1.4, 0.35], color: 0x8a4a84, rot: [-0.4, 0.6, 0.1] },
+      { pos: [-0.8, -0.1, 0.15], scale: [0.55, 1.2, 0.3], color: 0x4f8fba, rot: [0.5, -0.3, 0.4] },
+      { pos: [0.25, -0.75, 0.35], scale: [0.45, 0.9, 0.25], color: 0x17b3a3, rot: [0.1, 1.1, -0.2] },
+      { pos: [-0.15, 1.05, -0.3], scale: [0.4, 0.85, 0.22], color: 0x8a4a84, rot: [-0.6, 0.2, 0.5] }
+    ].forEach(function (d) {
+      var mesh = new THREE.Mesh(geo, new THREE.MeshPhysicalMaterial({
+        color: d.color, roughness: 0.15, metalness: 0.5,
+        transmission: 0.22, thickness: 0.6, iridescence: 0.6, iridescenceIOR: 1.3,
+        clearcoat: 0.6, clearcoatRoughness: 0.25
+      }));
+      mesh.position.fromArray(d.pos);
+      mesh.scale.fromArray(d.scale);
+      mesh.rotation.fromArray(d.rot);
+      group.add(mesh);
+    });
+    scene.add(group);
+
+    var pointer = { x: 0, y: 0 };
+    var fineHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (fineHover && !reduced) {
+      window.addEventListener('pointermove', function (e) {
+        pointer.x = (e.clientX / window.innerWidth) * 2 - 1;
+        pointer.y = (e.clientY / window.innerHeight) * 2 - 1;
+      });
+    }
+
+    function renderFrame() { renderer.render(scene, camera); }
+
+    function resize() {
+      var w = heroSection.clientWidth, h = heroSection.clientHeight;
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
+      renderer.setSize(w, h, false);
+      camera.aspect = w / Math.max(h, 1);
+      camera.updateProjectionMatrix();
+      if (reduced) renderFrame();
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    if (reduced) {
+      group.rotation.set(0.15, 0.35, 0);
+      renderFrame();
+      return;
+    }
+
+    var running = true;
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        running = entries[0].isIntersecting;
+      }, { threshold: 0 }).observe(heroSection);
+    }
+
+    var driftY = 0, driftX = 0;
+    var clock = new THREE.Clock();
+    (function tick() {
+      requestAnimationFrame(tick);
+      if (!running) return;
+      var t = clock.getElapsedTime();
+      driftY += ((pointer.x * 0.35) - driftY) * 0.04;
+      driftX += ((-pointer.y * 0.2) - driftX) * 0.04;
+      group.rotation.y = t * 0.18 + driftY;
+      group.rotation.x = Math.sin(t * 0.4) * 0.12 + driftX;
+      group.position.y = Math.sin(t * 0.6) * 0.08;
+      renderFrame();
+    })();
+  })();
 
   // ---- Combo Meter HUD: the signature move -------------------------------
   // Cross-act accumulating state living in the fixed chrome, driven by plain
