@@ -3,3 +3,7 @@ dist
 .DS_Store
 .env
 .env.local
+
+# scroll-craft iteration workspace: BRIEF.md, working build, contact sheets.
+# The finished page is deployed at the repo root (index.html, scrollcraft.js/css, assets/).
+scrollcraft/

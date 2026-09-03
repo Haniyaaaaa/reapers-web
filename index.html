@@ -1,24 +1,607 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="apple-touch-icon" href="/favicon.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Reapers is LinkedIn + Discord + events, built for gamers and developers in Pakistan. Join the waitlist."
-    />
-    <title>Reapers — Play. Connect. Create. Dominate.</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Reapers: Play. Connect. Create. Dominate.</title>
+<meta name="description" content="Reapers is the community home for Pakistan's gaming and game-dev scene: chatrooms, events, demo feedback, expert sessions and hiring, in one app.">
+<link rel="icon" href="assets/logo-160.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Outfit:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="scrollcraft.css">
+<style>
+  :root {
+    --sc-canvas:     #0A0D0E;
+    --sc-surface:    #131A1B;
+    --sc-ink:        #F3F5F1;
+    --sc-ink-soft:   #8CA39D;
+    --sc-accent:     #5FE8C4;
+    --sc-accent-ink: #04120D;
+    --sc-font-display: "Chakra Petch", system-ui, sans-serif;
+    --sc-font-text:    "Outfit", system-ui, sans-serif;
+    --sc-font-mono:    "IBM Plex Mono", ui-monospace, monospace;
+
+    /* Peak-only moment colour. Never used as a functional accent elsewhere. */
+    --peak-magenta: #FF3FCC;
+
+    /* One chamfer scale, held across the whole page. */
+    --chamfer: 16px;
+    --chamfer-sm: 8px;
+  }
+
+  /* ---------------------------------------------------------- utilities -- */
+  .blade {
+    clip-path: polygon(var(--chamfer) 0, 100% 0, 100% calc(100% - var(--chamfer)),
+                        calc(100% - var(--chamfer)) 100%, 0 100%, 0 var(--chamfer));
+  }
+  .blade-sm {
+    clip-path: polygon(var(--chamfer-sm) 0, 100% 0, 100% calc(100% - var(--chamfer-sm)),
+                        calc(100% - var(--chamfer-sm)) 100%, 0 100%, 0 var(--chamfer-sm));
+  }
+
+  .act { position: relative; background: var(--sc-canvas); }
+  .act--dim { background: var(--sc-surface); }
+  .act-inner { padding-block: clamp(3.5rem, 7vw, 6rem); }
+
+  /* --------------------------------------------------------------- HUD --- */
+  .hud {
+    position: fixed; inset: 0 0 auto 0; z-index: var(--sc-z-chrome);
+    background: color-mix(in oklab, var(--sc-canvas) 86%, transparent);
+    backdrop-filter: blur(10px) saturate(1.4);
+    -webkit-backdrop-filter: blur(10px) saturate(1.4);
+    border-bottom: 1px solid var(--sc-hairline);
+  }
+  .hud__inner {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: var(--sc-4); height: 64px;
+  }
+  .hud__brand { display: flex; align-items: center; gap: var(--sc-3); text-decoration: none; color: var(--sc-ink); }
+  .hud__brand img { width: 30px; height: 30px; display: block; }
+  .hud__word {
+    font-family: var(--sc-font-display); font-weight: 700; font-size: var(--sc-t-sm);
+    letter-spacing: var(--sc-track-wide); text-transform: uppercase;
+  }
+  .hud__combo {
+    display: flex; align-items: center; gap: var(--sc-2);
+    padding: var(--sc-2) var(--sc-4);
+    background: var(--sc-surface); border: 1px solid var(--sc-hairline-strong);
+    font-family: var(--sc-font-mono);
+  }
+  .hud__combo-label {
+    font-size: var(--sc-t-xs); letter-spacing: var(--sc-track-wide);
+    color: var(--sc-ink-soft); text-transform: uppercase;
+  }
+  .hud__combo-value {
+    font-size: var(--sc-t-base); font-weight: 600; color: var(--sc-accent);
+    min-width: 2.2ch; text-align: right;
+  }
+  .hud__combo.hit { animation: hudHit 360ms var(--sc-ease-out); }
+  @keyframes hudHit {
+    0%   { box-shadow: 0 0 0 0 color-mix(in oklab, var(--sc-accent) 55%, transparent); }
+    40%  { box-shadow: 0 0 0 6px color-mix(in oklab, var(--sc-accent) 0%, transparent); }
+    100% { box-shadow: 0 0 0 0 transparent; }
+  }
+  .hud__cta {
+    font-family: var(--sc-font-display); font-weight: 600; font-size: var(--sc-t-sm);
+    letter-spacing: var(--sc-track-snug);
+    color: var(--sc-accent-ink); background: var(--sc-accent);
+    padding: var(--sc-2) var(--sc-5);
+    text-decoration: none; white-space: nowrap;
+    transition: transform var(--sc-d-fast) var(--sc-ease-out), filter var(--sc-d-fast) var(--sc-ease-out);
+  }
+  .hud__cta:hover { filter: brightness(1.08); }
+  .hud__cta:active { transform: scale(0.97); }
+  @media (max-width: 640px) {
+    .hud__combo-label { display: none; }
+    .hud__word { display: none; }
+  }
+
+  /* ------------------------------------------------------------- hero --- */
+  .hero { min-height: 100svh; display: flex; align-items: flex-end; overflow: clip; }
+  .hero__bg { position: absolute; inset: 0; margin: 0; z-index: 0; }
+  .hero__bg img { width: 100%; height: 100%; object-fit: cover; }
+  .hero__scrim {
+    position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background: linear-gradient(0deg,
+      color-mix(in oklab, var(--sc-canvas) 92%, transparent) 0%,
+      color-mix(in oklab, var(--sc-canvas) 62%, transparent) 34%,
+      color-mix(in oklab, var(--sc-canvas) 18%, transparent) 62%,
+      transparent 82%);
+  }
+  .hero__copy { position: relative; z-index: 2; width: 100%; padding-block-end: clamp(3.5rem, 10vh, 7rem); padding-top: 88px; }
+  .hero__title {
+    font-size: var(--sc-t-4xl);
+    color: var(--sc-ink);
+    max-width: 15ch;
+  }
+  @media (max-width: 700px) {
+    .hero__title { font-size: var(--sc-t-3xl); max-width: 11ch; }
+  }
+
+  /* -------------------------------------------------------- problem/turn -- */
+  .type-only { max-width: 46rem; }
+  .problem2__cities {
+    font-size: clamp(2.6rem, 3vw + 1.6rem, 5rem);
+    max-width: 11ch;
+  }
+  .problem2__cities .sc-split--line { margin-top: 0.06em; }
+  .problem2__note { margin-top: var(--sc-6); }
+
+  /* -------------------------------------------------------- feature acts -- */
+  .feature { position: relative; }
+  .feature__grid {
+    display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--sc-8);
+    align-items: center; justify-items: stretch;
+  }
+  .feature__grid--reverse .feature__media { order: 2; }
+  .feature__grid--reverse .feature__copy { order: 1; }
+  @media (max-width: 860px) {
+    .feature__grid { grid-template-columns: 1fr; gap: var(--sc-6); }
+    .feature__grid--reverse .feature__media,
+    .feature__grid--reverse .feature__copy { order: initial; }
+  }
+  .feature__media { position: relative; width: 100%; margin: 0; aspect-ratio: 4 / 3; overflow: clip; background: var(--sc-surface); }
+  .feature__media img { width: 100%; height: 100%; object-fit: cover; }
+  .feature__title { font-size: var(--sc-t-3xl); margin-top: 0; }
+  .feature__body { font-size: var(--sc-t-lg); color: var(--sc-ink-soft); max-width: 34ch; }
+  .feature__pending {
+    display: inline-flex; align-items: center; gap: var(--sc-2);
+    font-family: var(--sc-font-mono); font-size: var(--sc-t-xs);
+    letter-spacing: var(--sc-track-wide); text-transform: uppercase;
+    color: var(--sc-ink-soft); border: 1px dashed var(--sc-hairline-strong);
+    padding: var(--sc-2) var(--sc-4); margin-top: var(--sc-5);
+  }
+  .feature__pending::before { content: ""; width: 6px; height: 6px; background: var(--sc-ink-soft); }
+  .feature__placeholder {
+    aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center;
+    background: repeating-linear-gradient(135deg, var(--sc-surface) 0 14px,
+      color-mix(in oklab, var(--sc-surface) 70%, var(--sc-canvas)) 14px 28px);
+    border: 1px solid var(--sc-hairline);
+  }
+  .feature__placeholder span {
+    font-family: var(--sc-font-mono); font-size: var(--sc-t-xs);
+    letter-spacing: var(--sc-track-wide); text-transform: uppercase;
+    color: var(--sc-ink-soft);
+  }
+
+  /* --------------------------------------------------------- community --- */
+  .proof__photo { position: relative; width: 100%; margin: 0 0 var(--sc-8); aspect-ratio: 16/7; overflow: clip; }
+  .proof__photo img { width: 100%; height: 100%; object-fit: cover; }
+  .proof__title { margin-bottom: var(--sc-7); }
+  .partners { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sc-7) var(--sc-8); }
+  .partners img { height: 40px; width: auto; max-width: 140px; object-fit: contain; filter: grayscale(1) brightness(1.5); opacity: 0.72; transition: opacity var(--sc-d-base) var(--sc-ease-out), filter var(--sc-d-base) var(--sc-ease-out); }
+  .partners a:hover img, .partners img:hover { opacity: 1; filter: none; }
+
+  /* ----------------------------------------------------------- experts --- */
+  .experts__grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: var(--sc-6);
+  }
+  .expert { padding: var(--sc-6); background: var(--sc-surface); border: 1px solid var(--sc-hairline); }
+  .expert:nth-child(2n) { transform: translateY(var(--sc-4)); }
+  @media (max-width: 700px) { .expert:nth-child(2n) { transform: none; } }
+  .expert__avatar {
+    width: 54px; height: 54px; display: flex; align-items: center; justify-content: center;
+    background: color-mix(in oklab, var(--sc-accent) 16%, var(--sc-canvas));
+    color: var(--sc-accent); font-family: var(--sc-font-display); font-weight: 700;
+    font-size: var(--sc-t-lg); margin-bottom: var(--sc-4);
+  }
+  .expert__name { font-family: var(--sc-font-display); font-weight: 600; font-size: var(--sc-t-base); margin: 0; }
+  .expert__role { color: var(--sc-ink-soft); font-size: var(--sc-t-sm); margin-top: var(--sc-2); }
+
+  /* ------------------------------------------------------------- quiet --- */
+  .quiet { min-height: 58vh; display: flex; align-items: center; justify-content: center; text-align: center; }
+  .quiet__line { font-size: var(--sc-t-xl); color: var(--sc-ink-soft); font-family: var(--sc-font-display); }
+
+  /* -------------------------------------------------------------- peak --- */
+  .peak { min-height: 82vh; }
+
+  /* ---------------------------------------------------------- MAX COMBO --- */
+  .burst {
+    position: fixed; inset: 0; z-index: 90;
+    display: flex; align-items: center; justify-content: center;
+    background: color-mix(in oklab, var(--sc-canvas) 88%, transparent);
+    opacity: 0; pointer-events: none;
+    transition: opacity 420ms var(--sc-ease-out);
+  }
+  .burst.is-live { opacity: 1; }
+  .burst__ring {
+    position: absolute; width: 46vmax; height: 46vmax; border-radius: 50%;
+    background: radial-gradient(circle, color-mix(in oklab, var(--peak-magenta) 30%, transparent) 0%, transparent 68%);
+    opacity: 0; transform: scale(0.8);
+    transition: opacity 520ms var(--sc-ease-out), transform 620ms var(--sc-ease-out);
+  }
+  .burst.is-live .burst__ring { opacity: 1; transform: scale(1); }
+  .burst__label {
+    position: relative; z-index: 1; text-align: center;
+    font-family: var(--sc-font-display); font-weight: 700;
+    letter-spacing: var(--sc-track-tight);
+    font-size: clamp(2.4rem, 5vw + 1rem, 6rem);
+    color: var(--peak-magenta);
+    opacity: 0; transform: scale(0.92) translateY(10px);
+    transition: opacity 460ms var(--sc-ease-out) 80ms, transform 460ms var(--sc-ease-out) 80ms;
+  }
+  .burst.is-live .burst__label { opacity: 1; transform: none; }
+  .burst__sub {
+    display: block; margin-top: var(--sc-3); font-family: var(--sc-font-mono);
+    font-size: var(--sc-t-sm); letter-spacing: var(--sc-track-wide); color: var(--sc-ink-soft);
+    text-transform: uppercase;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .burst { transition: opacity 240ms linear; }
+    .burst__ring, .burst__label { transition: opacity 240ms linear; transform: none !important; }
+  }
+
+  /* ------------------------------------------------------------- close --- */
+  .close { min-height: 100svh; display: flex; align-items: center; }
+  .close__title { max-width: 16ch; }
+  .close__body { font-size: var(--sc-t-lg); max-width: 40ch; margin-top: var(--sc-4); }
+  .form { display: flex; gap: var(--sc-3); margin-top: var(--sc-7); max-width: 30rem; flex-wrap: wrap; }
+  .form__input {
+    flex: 1 1 14rem; background: var(--sc-surface); border: 1px solid var(--sc-hairline-strong);
+    color: var(--sc-ink); padding: var(--sc-4); font-family: var(--sc-font-text); font-size: var(--sc-t-base);
+  }
+  .form__input::placeholder { color: var(--sc-ink-soft); }
+  .form__input:focus-visible { outline: 2px solid var(--sc-accent); outline-offset: 2px; }
+  .form__submit {
+    font-family: var(--sc-font-display); font-weight: 600; letter-spacing: var(--sc-track-snug);
+    background: var(--sc-accent); color: var(--sc-accent-ink); border: none;
+    padding: var(--sc-4) var(--sc-6); cursor: pointer;
+    transition: transform var(--sc-d-fast) var(--sc-ease-out), filter var(--sc-d-fast) var(--sc-ease-out);
+  }
+  .form__submit:hover { filter: brightness(1.08); }
+  .form__submit:active { transform: scale(0.97); }
+  .form__submit:disabled { opacity: 0.6; cursor: default; }
+  .form__error { color: var(--peak-magenta); font-size: var(--sc-t-sm); margin-top: var(--sc-2); display: none; }
+  .form__error.is-visible { display: block; }
+  .form__success { display: none; align-items: center; gap: var(--sc-2); margin-top: var(--sc-5); font-family: var(--sc-font-mono); color: var(--sc-accent); }
+  .form__success.is-visible { display: flex; }
+  .close__foot {
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--sc-4);
+    margin-top: var(--sc-10); padding-top: var(--sc-6); border-top: 1px solid var(--sc-hairline);
+  }
+  .close__foot-mark { font-family: var(--sc-font-display); font-weight: 700; letter-spacing: var(--sc-track-wide); }
+  .close__foot-links { display: flex; gap: var(--sc-5); font-size: var(--sc-t-sm); color: var(--sc-ink-soft); }
+  .close__foot-links a { color: var(--sc-ink-soft); }
+  .close__foot-links a:hover { color: var(--sc-ink); }
+
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+  }
+</style>
+</head>
+<body>
+
+<span data-sc-progress></span>
+<div class="sc-grain" aria-hidden="true"></div>
+
+<header class="hud" id="hud" data-sc-verify-state="combo:0">
+  <div class="hud__inner sc-wrap">
+    <a class="hud__brand" href="#top" aria-label="Reapers home">
+      <img src="assets/logo-160.png" alt="" width="30" height="30">
+      <span class="hud__word">Reapers</span>
+    </a>
+    <div class="hud__combo" id="comboChip">
+      <span class="hud__combo-label">Combo</span>
+      <span class="hud__combo-value" id="comboValue">×0</span>
+    </div>
+    <a class="hud__cta" href="#close">Get Early Access</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- 1 · HERO -->
+  <section class="act hero" data-sc-act="flow" id="hero">
+    <figure class="hero__bg" data-sc-reveal="iris" data-sc-reveal-at="0.02 0.32">
+      <img src="assets/event-present.jpg" width="1600" height="1066"
+           alt="A Reapers community mentoring session, screen glow lighting the room">
+    </figure>
+    <div class="hero__scrim" aria-hidden="true"></div>
+    <div class="hero__copy sc-wrap">
+      <h1 class="sc-display hero__title" data-sc-cue="0 0.86 0" data-sc-kinetic="lines">Play. Connect. Create. Dominate.</h1>
+    </div>
+  </section>
+
+  <!-- 2 · PROBLEM 1: type-only -->
+  <section class="act">
+    <div class="sc-wrap act-inner sc-stack type-only" data-sc-in data-sc-stagger="70">
+      <h2 class="sc-display sc-display--lg">The scene is everywhere. And nowhere.</h2>
+      <p class="sc-body">Chat groups split across five apps. Events you hear about after they happen. Feedback that goes nowhere.</p>
+    </div>
+  </section>
+
+  <!-- 3 · PROBLEM 2: cities, reveal + kinetic -->
+  <section class="act act--dim" data-sc-act="flow">
+    <div class="sc-wrap act-inner">
+      <h2 class="sc-display problem2__cities" data-sc-cue="0 0.86 0" data-sc-kinetic="lines">Lahore. Karachi. Islamabad.</h2>
+      <p class="sc-lede problem2__note">Same scene. Different rooms.</p>
+    </div>
+  </section>
+
+  <!-- 4 · TURN: kinetic -->
+  <section class="act" data-sc-act="flow">
+    <div class="sc-wrap act-inner sc-stack type-only">
+      <h2 class="sc-display sc-display--lg" data-sc-cue="0 0.86 0" data-sc-kinetic="lines">One app. Whole scene.</h2>
+      <p class="sc-body">Chat, events, demo feedback, expert mentors, and hiring, together in one place built for the people making Pakistan's games.</p>
+    </div>
+  </section>
+
+  <!-- 5 · Chatrooms & Communities · combo x1 -->
+  <section class="act act--dim feature" id="f1" data-combo="1">
+    <div class="sc-wrap act-inner">
+      <div class="feature__grid">
+        <figure class="feature__media blade" data-sc-in>
+          <img src="assets/event-team.jpg" width="1280" height="960" alt="Reapers community members meeting up in person">
+        </figure>
+        <div class="feature__copy sc-stack" data-sc-in data-sc-stagger="70">
+          <h3 class="sc-display feature__title">Chatrooms &amp; Communities</h3>
+          <p class="feature__body">Join Pakistan's gaming groups, or start your own room.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · Events · combo x2 -->
+  <section class="act feature" id="f2" data-combo="2" data-sc-act="flow">
+    <div class="sc-wrap act-inner">
+      <div class="feature__grid feature__grid--reverse">
+        <figure class="feature__media blade" data-sc-reveal="right" data-sc-reveal-at="0.1 0.72">
+          <img src="assets/event-pgda.jpg" width="1472" height="437" alt="A Reapers community event, PGDA and partner logos visible in the venue">
+        </figure>
+        <div class="feature__copy sc-stack" data-sc-in data-sc-stagger="70">
+          <h3 class="sc-display feature__title">Events</h3>
+          <p class="feature__body">Watch parties, jams, tournaments, meetups. Know what's happening, before it happens.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 · Demo Showcase · combo x3 -->
+  <section class="act act--dim feature" id="f3" data-combo="3">
+    <div class="sc-wrap act-inner">
+      <div class="feature__grid">
+        <div class="feature__placeholder blade" data-sc-in>
+          <span>App preview coming soon</span>
+        </div>
+        <div class="feature__copy sc-stack" data-sc-in data-sc-stagger="70">
+          <h3 class="sc-display feature__title">Demo Showcase</h3>
+          <p class="feature__body">Upload gameplay clips. Get real feedback from people who actually play.</p>
+          <p class="feature__pending">Live in app, screenshots coming with launch</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 · Expert Sessions · combo x4 -->
+  <section class="act feature" id="f4" data-combo="4">
+    <div class="sc-wrap act-inner">
+      <div class="feature__grid feature__grid--reverse">
+        <figure class="feature__media blade" data-sc-in data-sc-tilt="6">
+          <img src="assets/event-session.jpg" width="918" height="567" alt="A mentor reviewing a laptop with three developers during a Reapers office-hours session">
+        </figure>
+        <div class="feature__copy sc-stack" data-sc-in data-sc-stagger="70">
+          <h3 class="sc-display feature__title">Expert Sessions</h3>
+          <p class="feature__body">10 to 15 minutes with verified mentors who've actually shipped.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 · Team Hiring · combo x5 (full) -->
+  <section class="act act--dim feature" id="f5" data-combo="5" data-sc-act="flow">
+    <div class="sc-wrap act-inner">
+      <div class="feature__grid">
+        <figure class="feature__media blade" data-sc-reveal="up" data-sc-reveal-at="0.1 0.78">
+          <img src="assets/event-indie.jpg" width="1600" height="848" alt="Six indie game developers who hosted a Reapers community meetup">
+        </figure>
+        <div class="feature__copy sc-stack" data-sc-in data-sc-stagger="70">
+          <h3 class="sc-display feature__title">Team Hiring</h3>
+          <p class="feature__body">Post a role, share a demo, find your next teammate.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 · Community proof -->
+  <section class="act" id="proof" data-sc-act="flow">
+    <div class="sc-wrap act-inner">
+      <figure class="proof__photo" data-sc-reveal="left" data-sc-reveal-at="0.06 0.6">
+        <img src="assets/event-community.jpg" width="1600" height="1066" alt="The wider Reapers and partner-community group at a shared event">
+      </figure>
+      <h2 class="sc-display sc-display--lg proof__title" data-sc-in>Built with Pakistan's gaming community.</h2>
+      <div class="partners" data-sc-in data-sc-stagger="60">
+        <img src="assets/partner-cega.png" alt="CEGA" loading="lazy">
+        <img src="assets/partner-igda.png" alt="IGDA Pakistan" loading="lazy">
+        <img src="assets/partner-pigd.png" alt="PIGD" loading="lazy">
+        <img src="assets/partner-pgda.png" alt="PGDA" loading="lazy">
+        <img src="assets/partner-pakgamedev.png" alt="Pakistan Game Dev" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 · Experts -->
+  <section class="act act--dim" id="experts" data-sc-act="flow">
+    <div class="sc-wrap act-inner">
+      <h2 class="sc-display sc-display--lg proof__title" data-sc-cue="0.06 0.88" data-sc-kinetic="lines">People who've actually shipped.</h2>
+      <div class="experts__grid" data-sc-in data-sc-stagger="60">
+        <article class="expert blade-sm" data-sc-tilt="5">
+          <div class="expert__avatar">BC</div>
+          <p class="expert__name">Bilal Cheema</p>
+          <p class="expert__role">Developing Duoshift</p>
+        </article>
+        <article class="expert blade-sm" data-sc-tilt="5">
+          <div class="expert__avatar">HK</div>
+          <p class="expert__name">Hilal Khan</p>
+          <p class="expert__role">Ex-Chair, IGDA Pakistan. Game-dev veteran</p>
+        </article>
+        <article class="expert blade-sm" data-sc-tilt="5">
+          <div class="expert__avatar">WS</div>
+          <p class="expert__name">Waqas Shafique</p>
+          <p class="expert__role">Creator of Liminal Core</p>
+        </article>
+        <article class="expert blade-sm" data-sc-tilt="5">
+          <div class="expert__avatar">AR</div>
+          <p class="expert__name">Ali Rasheed</p>
+          <p class="expert__role">Creator of Alien Market Simulator</p>
+        </article>
+        <article class="expert blade-sm" data-sc-tilt="5">
+          <div class="expert__avatar">NS</div>
+          <p class="expert__name">Nimra Sardar</p>
+          <p class="expert__role">Board member, IGDA Pakistan. Community lead</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 · QUIET: authored silence -->
+  <section class="act quiet" id="quiet">
+    <p class="quiet__line" data-sc-in>The scene is waiting.</p>
+  </section>
+
+  <!-- 13 · PEAK: chrome does the work -->
+  <section class="act peak" id="peak" aria-hidden="true"></section>
+
+  <!-- 14 · CLOSE: holds -->
+  <section class="act close" id="close" data-sc-act="flow">
+    <div class="sc-wrap act-inner">
+      <h2 class="sc-display sc-display--lg close__title" data-sc-cue="0.05" data-sc-kinetic="lines">Get in before launch.</h2>
+      <p class="close__body">Reapers is getting ready. Leave your email and be first in when it drops.</p>
+
+      <form class="form" id="earlyAccessForm" novalidate>
+        <label class="sr-only" for="email">Email address</label>
+        <input class="form__input" type="email" id="email" name="email" placeholder="you@studio.dev" autocomplete="email">
+        <button class="form__submit" type="submit" id="formSubmit">Get Early Access</button>
+      </form>
+      <p class="form__error" id="formError">Enter a valid email.</p>
+      <p class="form__success" id="formSuccess">You're on the list.</p>
+
+      <footer class="close__foot">
+        <div>
+          <p class="close__foot-mark">Reapers</p>
+          <p class="sc-body" style="margin-top: var(--sc-2)">Play. Connect. Create. Dominate.</p>
+        </div>
+        <nav class="close__foot-links">
+          <a href="https://www.instagram.com/houseofthereapers?igsi=MWN2NWdseXc5NzE4cA==">Instagram</a>
+          <a href="mailto:reapers.support@gmail.com">Email</a>
+        </nav>
+      </footer>
+    </div>
+  </section>
+
+</main>
+
+<div class="burst" id="burst" aria-hidden="true">
+  <div class="burst__ring"></div>
+  <p class="burst__label">MAX COMBO<span class="burst__sub">Reapers · early access</span></p>
+</div>
+
+<script src="scrollcraft.js"></script>
+<script>ScrollCraft.mount(document.body);</script>
+<script>
+(function () {
+  'use strict';
+
+  // ---- Combo Meter HUD: the signature move -------------------------------
+  // Cross-act accumulating state living in the fixed chrome, driven by plain
+  // scroll observation rather than any engine device. Ticks once per feature
+  // act as the visitor passes it, never resets on scroll-up (a record, not a
+  // toy), and reports its state via data-sc-verify-state / -hold so the
+  // verification harness can see a layer the engine itself does not know
+  // about.
+  var hud = document.getElementById('hud');
+  var comboChip = document.getElementById('comboChip');
+  var comboValue = document.getElementById('comboValue');
+  var burst = document.getElementById('burst');
+  var combo = 0;
+  var maxFired = false;
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function reportState() {
+    hud.setAttribute('data-sc-verify-state', 'combo:' + combo + (maxFired ? ';peak:true' : ''));
+  }
+
+  function tick(n) {
+    if (n <= combo) return;
+    combo = n;
+    comboValue.textContent = '×' + combo;
+    reportState();
+    if (!reduced) {
+      comboChip.classList.remove('hit');
+      // Force reflow so the animation can restart on consecutive ticks.
+      void comboChip.offsetWidth;
+      comboChip.classList.add('hit');
+    }
+  }
+
+  if ('IntersectionObserver' in window) {
+    var featureIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          var n = parseInt(entry.target.getAttribute('data-combo'), 10);
+          if (!isNaN(n)) tick(n);
+        }
+      });
+    }, { rootMargin: '-40% 0px -40% 0px', threshold: 0 });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-combo]'), function (el) {
+      featureIO.observe(el);
+    });
+
+    var peakEl = document.getElementById('peak');
+    var peakIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting && !maxFired) {
+          maxFired = true;
+          burst.classList.add('is-live');
+          burst.setAttribute('data-sc-verify-hold', 'true');
+          reportState();
+        } else if (!entry.isIntersecting && maxFired) {
+          burst.classList.remove('is-live');
+          burst.removeAttribute('data-sc-verify-hold');
+        }
+      });
+    }, { threshold: 0.35 });
+    peakIO.observe(peakEl);
+  }
+
+  // ---- Early access capture ----------------------------------------------
+  // No live app or store listing exists yet, so this is an honest early-access
+  // capture (local only, no backend claim), not a fabricated download.
+  var form = document.getElementById('earlyAccessForm');
+  var emailInput = document.getElementById('email');
+  var errorEl = document.getElementById('formError');
+  var successEl = document.getElementById('formSuccess');
+  var submitBtn = document.getElementById('formSubmit');
+
+  function validEmail(v) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var value = emailInput.value.trim();
+    if (!validEmail(value)) {
+      errorEl.classList.add('is-visible');
+      emailInput.setAttribute('aria-invalid', 'true');
+      return;
+    }
+    errorEl.classList.remove('is-visible');
+    emailInput.removeAttribute('aria-invalid');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+    try {
+      var list = JSON.parse(localStorage.getItem('reapers-early-access') || '[]');
+      list.push({ email: value, at: new Date().toISOString() });
+      localStorage.setItem('reapers-early-access', JSON.stringify(list));
+    } catch (err) {}
+    setTimeout(function () {
+      form.hidden = true;
+      successEl.classList.add('is-visible');
+    }, 260);
+  });
+})();
+</script>
+</body>
 </html>
