@@ -16,16 +16,19 @@
 
 /* ---------------------------------------------------------------- tokens -- */
 :root {
-  /* --- colour roles. Override these six and the page is rebranded. -------- */
-  --sc-canvas:      #08090b;   /* the page ground. Drift interpolates this.   */
-  --sc-surface:     #101217;   /* anything raised off the ground             */
-  --sc-ink:         #f4f2ef;   /* primary text                               */
-  --sc-ink-soft:    #9a9ba1;   /* secondary text. Tinted, never flat gray.   */
-  --sc-accent:      #d8ff3e;   /* ONE accent. It owns a region, not confetti. */
-  --sc-accent-ink:  #08090b;   /* text that sits on the accent               */
+  /* --- High-Energy Gaming & Cyberpunk Colour Palette ---------------------- */
+  --sc-canvas:      #06080E;   /* Deep Space Obsidian */
+  --sc-surface:     #0F1522;   /* Cyber Alloy Surface */
+  --sc-ink:         #F0F6FC;   /* Crisp Pure White */
+  --sc-ink-soft:    #8B9BB4;   /* Cool Steel Soft Text */
+  --sc-accent:      #00FF9D;   /* Hyper Emerald (Primary Accent) */
+  --sc-accent-2:    #00F0FF;   /* Electric Cyan (Secondary Energy Accent) */
+  --sc-accent-ink:  #03140C;   /* Contrast Dark Text on Emerald */
+  --peak-magenta:   #FF007F;   /* Cyber Neon Magenta / Pink */
+  --gold-accent:    #FFD700;   /* Solar Gold Boss Accent */
 
-  --sc-hairline:    color-mix(in oklab, var(--sc-ink) 12%, transparent);
-  --sc-hairline-strong: color-mix(in oklab, var(--sc-ink) 22%, transparent);
+  --sc-hairline:        color-mix(in oklab, var(--sc-accent) 18%, transparent);
+  --sc-hairline-strong: color-mix(in oklab, var(--sc-accent) 35%, transparent);
 
   /* --- type. Two families max. Display carries voice, text carries prose. - */
   --sc-font-display: "Instrument Sans", "Geist", system-ui, sans-serif;
@@ -430,3 +433,227 @@ video[data-sc-scrub].sc-has-clip { opacity: 1; }
       transparent 58%);
   }
 }
+
+/* ============================================================================
+   HIGH-ENERGY INTERACTIVE GAMING UI & COMPONENTS
+   ========================================================================== */
+
+/* --- Custom Cyber Gaming Cursor ----------------------------------------- */
+@media (hover: hover) and (pointer: fine) {
+  body.has-custom-cursor { cursor: none; }
+  body.has-custom-cursor a,
+  body.has-custom-cursor button,
+  body.has-custom-cursor input,
+  body.has-custom-cursor [role="button"],
+  body.has-custom-cursor .interactive-target { cursor: none; }
+
+  .cyber-cursor {
+    position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
+    transform: translate(-50%, -50%);
+  }
+  .cyber-cursor__dot {
+    width: 6px; height: 6px; background: var(--sc-accent); border-radius: 50%;
+    box-shadow: 0 0 10px var(--sc-accent), 0 0 20px var(--sc-accent);
+  }
+  .cyber-cursor__ring {
+    position: absolute; top: -14px; left: -14px; width: 34px; height: 34px;
+    border: 1.5px solid color-mix(in oklab, var(--sc-accent) 60%, transparent);
+    border-radius: 50%;
+    transition: transform 120ms ease-out, border-color 160ms ease-out;
+  }
+  body.cursor-hover .cyber-cursor__ring {
+    transform: scale(1.6);
+    border-color: var(--sc-accent-2);
+    box-shadow: 0 0 15px color-mix(in oklab, var(--sc-accent-2) 50%, transparent);
+  }
+}
+
+/* --- Gaming HUD Extensions ---------------------------------------------- */
+.hud__online-badge {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-family: var(--sc-font-mono); font-size: var(--sc-t-xs);
+  color: var(--sc-ink-soft); letter-spacing: var(--sc-track-wide);
+  padding: 0.3em 0.8em; background: color-mix(in oklab, var(--sc-surface) 80%, transparent);
+  border: 1px solid var(--sc-hairline);
+}
+.hud__online-dot {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--sc-accent);
+  box-shadow: 0 0 8px var(--sc-accent); animation: dotPulse 1.8s infinite;
+}
+@keyframes dotPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.6; }
+}
+.hud__audio-btn {
+  background: var(--sc-surface); border: 1px solid var(--sc-hairline-strong);
+  color: var(--sc-ink); padding: 0.4em 0.7em; font-family: var(--sc-font-mono);
+  font-size: var(--sc-t-xs); cursor: pointer; display: flex; align-items: center; gap: 0.4rem;
+  transition: border-color var(--sc-d-fast), color var(--sc-d-fast);
+}
+.hud__audio-btn:hover { border-color: var(--sc-accent); color: var(--sc-accent); }
+.hud__audio-btn.is-muted { opacity: 0.6; }
+
+/* --- Interactive Live Chatroom Simulator Widget ------------------------- */
+.chat-sim {
+  background: var(--sc-surface); border: 1px solid var(--sc-hairline-strong);
+  overflow: hidden; display: flex; flex-direction: column; height: 340px;
+}
+.chat-sim__header {
+  padding: var(--sc-3) var(--sc-4); background: color-mix(in oklab, var(--sc-surface) 140%, #000);
+  border-bottom: 1px solid var(--sc-hairline); display: flex; justify-content: space-between; align-items: center;
+}
+.chat-sim__title { font-family: var(--sc-font-mono); font-size: var(--sc-t-xs); color: var(--sc-accent); text-transform: uppercase; }
+.chat-sim__body {
+  padding: var(--sc-4); flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: var(--sc-3);
+  font-family: var(--sc-font-text); font-size: var(--sc-t-sm);
+}
+.chat-msg {
+  display: flex; gap: var(--sc-3); align-items: flex-start;
+  animation: chatPop 300ms var(--sc-ease-out);
+}
+@keyframes chatPop { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.chat-msg__tag {
+  font-family: var(--sc-font-mono); font-size: var(--sc-t-xs); font-weight: 600;
+  padding: 0.1em 0.5em; background: color-mix(in oklab, var(--sc-accent) 20%, transparent);
+  color: var(--sc-accent); border: 1px solid color-mix(in oklab, var(--sc-accent) 40%, transparent);
+  white-space: nowrap;
+}
+.chat-msg__tag.is-cyan {
+  background: color-mix(in oklab, var(--sc-accent-2) 20%, transparent);
+  color: var(--sc-accent-2); border-color: color-mix(in oklab, var(--sc-accent-2) 40%, transparent);
+}
+.chat-msg__tag.is-pink {
+  background: color-mix(in oklab, var(--peak-magenta) 20%, transparent);
+  color: var(--peak-magenta); border-color: color-mix(in oklab, var(--peak-magenta) 40%, transparent);
+}
+.chat-msg__text { color: var(--sc-ink); line-height: 1.4; }
+.chat-sim__reactions {
+  padding: var(--sc-3) var(--sc-4); border-top: 1px solid var(--sc-hairline);
+  display: flex; gap: var(--sc-2); background: color-mix(in oklab, var(--sc-surface) 120%, #000);
+}
+.react-btn {
+  background: var(--sc-surface); border: 1px solid var(--sc-hairline-strong);
+  color: var(--sc-ink-soft); padding: 0.3em 0.7em; font-size: var(--sc-t-xs);
+  font-family: var(--sc-font-mono); cursor: pointer; transition: all var(--sc-d-fast);
+}
+.react-btn:hover { border-color: var(--sc-accent); color: var(--sc-accent); transform: translateY(-2px); }
+
+/* --- Interactive Event Pass & Calendar Tabs ----------------------------- */
+.event-tabs { display: flex; gap: var(--sc-2); margin-bottom: var(--sc-5); flex-wrap: wrap; }
+.event-tab {
+  font-family: var(--sc-font-mono); font-size: var(--sc-t-xs); text-transform: uppercase;
+  padding: var(--sc-2) var(--sc-4); background: var(--sc-surface); border: 1px solid var(--sc-hairline-strong);
+  color: var(--sc-ink-soft); cursor: pointer; transition: all var(--sc-d-fast);
+}
+.event-tab.is-active, .event-tab:hover {
+  background: var(--sc-accent); color: var(--sc-accent-ink); border-color: var(--sc-accent);
+}
+.event-ticket {
+  position: relative; background: var(--sc-surface); border: 1px solid var(--sc-hairline-strong);
+  padding: var(--sc-5); display: flex; flex-direction: column; gap: var(--sc-3);
+  transition: transform var(--sc-d-base), border-color var(--sc-d-base);
+}
+.event-ticket:hover { border-color: var(--sc-accent-2); transform: translateY(-3px); }
+.event-ticket__tag {
+  align-self: flex-start; font-family: var(--sc-font-mono); font-size: var(--sc-t-xs);
+  color: var(--sc-accent-2); border: 1px solid var(--sc-accent-2); padding: 0.2em 0.6em;
+}
+.event-ticket__timer {
+  font-family: var(--sc-font-mono); font-size: var(--sc-t-sm); color: var(--gold-accent);
+  display: flex; align-items: center; gap: 0.4rem;
+}
+
+/* --- Interactive 3D Game Cartridge Showcase ----------------------------- */
+.cartridge-stage {
+  position: relative; width: 100%; aspect-ratio: 4 / 3; background: #060a12;
+  border: 1px solid var(--sc-hairline-strong); overflow: hidden; display: flex;
+  flex-direction: column; align-items: center; justify-content: center;
+}
+.cartridge-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+.cartridge-overlay {
+  position: relative; z-index: 2; text-align: center; pointer-events: auto; padding: var(--sc-4);
+  background: color-mix(in oklab, #060a12 75%, transparent); backdrop-filter: blur(8px);
+  border: 1px solid var(--sc-hairline-strong);
+}
+.cartridge-btn {
+  font-family: var(--sc-font-display); font-weight: 700; font-size: var(--sc-t-sm);
+  letter-spacing: var(--sc-track-wide); text-transform: uppercase;
+  background: var(--sc-accent); color: var(--sc-accent-ink); border: none;
+  padding: var(--sc-3) var(--sc-6); cursor: pointer; margin-top: var(--sc-3);
+  transition: transform var(--sc-d-fast), filter var(--sc-d-fast);
+}
+.cartridge-btn:hover { filter: brightness(1.15); transform: scale(1.04); }
+
+/* --- High-Tech Character Select Screen ---------------------------------- */
+.char-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: var(--sc-5);
+}
+.char-card {
+  position: relative; background: var(--sc-surface); border: 1px solid var(--sc-hairline-strong);
+  padding: var(--sc-5); display: flex; flex-direction: column; gap: var(--sc-3);
+  transition: all var(--sc-d-base) var(--sc-ease-out); cursor: pointer; overflow: hidden;
+}
+.char-card::before {
+  content: ""; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+  background: var(--sc-accent-2); opacity: 0; transition: opacity var(--sc-d-fast);
+}
+.char-card:hover {
+  border-color: var(--sc-accent); transform: translateY(-4px);
+  box-shadow: 0 10px 30px -10px color-mix(in oklab, var(--sc-accent) 40%, transparent);
+}
+.char-card:hover::before { opacity: 1; }
+.char-avatar {
+  width: 64px; height: 64px; background: color-mix(in oklab, var(--sc-accent) 15%, var(--sc-surface));
+  color: var(--sc-accent); font-family: var(--sc-font-display); font-weight: 700; font-size: var(--sc-t-xl);
+  display: flex; align-items: center; justify-content: center; border: 1px solid var(--sc-hairline-strong);
+  transition: all var(--sc-d-base);
+}
+.char-card:hover .char-avatar {
+  background: var(--sc-accent); color: var(--sc-accent-ink); transform: scale(1.08);
+}
+.char-name { font-family: var(--sc-font-display); font-weight: 700; font-size: var(--sc-t-base); margin: 0; }
+.char-role { font-size: var(--sc-t-xs); color: var(--sc-ink-soft); margin: 0; }
+.char-stat {
+  display: flex; justify-content: space-between; font-family: var(--sc-font-mono);
+  font-size: var(--sc-t-xs); color: var(--sc-ink-soft); margin-top: var(--sc-2);
+}
+.char-stat-bar { height: 4px; background: rgba(255,255,255,0.1); width: 100%; margin-top: 4px; overflow: hidden; }
+.char-stat-fill { height: 100%; background: var(--sc-accent); width: 85%; }
+
+/* --- LFG Guild & Team Hiring Widgets ------------------------------------ */
+.lfg-chips { display: flex; gap: var(--sc-2); flex-wrap: wrap; margin-bottom: var(--sc-4); }
+.lfg-chip {
+  font-family: var(--sc-font-mono); font-size: var(--sc-t-xs); padding: 0.4em 0.8em;
+  background: var(--sc-surface); border: 1px solid var(--sc-hairline-strong); color: var(--sc-ink-soft);
+  cursor: pointer; transition: all var(--sc-d-fast);
+}
+.lfg-chip.is-active, .lfg-chip:hover {
+  border-color: var(--sc-accent-2); color: var(--sc-accent-2); background: color-mix(in oklab, var(--sc-accent-2) 10%, transparent);
+}
+
+/* --- XP Rank Progress & Early Access Collector Badge ------------------- */
+.xp-bar-wrap { margin-top: var(--sc-4); margin-bottom: var(--sc-2); }
+.xp-bar-label { display: flex; justify-content: space-between; font-family: var(--sc-font-mono); font-size: var(--sc-t-xs); color: var(--sc-accent); }
+.xp-bar { height: 6px; background: rgba(255,255,255,0.1); border: 1px solid var(--sc-hairline); margin-top: 4px; }
+.xp-fill { height: 100%; background: linear-gradient(90deg, var(--sc-accent), var(--sc-accent-2)); width: 0%; transition: width 300ms ease-out; }
+
+.badge-modal {
+  position: fixed; inset: 0; z-index: 999; display: flex; align-items: center; justify-content: center;
+  background: rgba(4,6,12,0.92); backdrop-filter: blur(12px); opacity: 0; pointer-events: none;
+  transition: opacity 300ms ease-out;
+}
+.badge-modal.is-active { opacity: 1; pointer-events: auto; }
+.badge-card {
+  background: var(--sc-surface); border: 2px solid var(--sc-accent); padding: var(--sc-7);
+  text-align: center; max-width: 24rem; box-shadow: 0 0 50px color-mix(in oklab, var(--sc-accent) 40%, transparent);
+  animation: badgePop 400ms var(--sc-ease-out);
+}
+@keyframes badgePop { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.badge-icon { font-size: 3.5rem; margin-bottom: var(--sc-3); }
+.badge-title { font-family: var(--sc-font-display); font-size: var(--sc-t-xl); color: var(--sc-accent); margin: 0; }
+.badge-close {
+  margin-top: var(--sc-5); font-family: var(--sc-font-mono); font-size: var(--sc-t-xs);
+  background: var(--sc-accent); color: var(--sc-accent-ink); border: none; padding: 0.6em 1.5em;
+  cursor: pointer; font-weight: 700;
+}
+

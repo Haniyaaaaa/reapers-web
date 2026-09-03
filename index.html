@@ -45,6 +45,222 @@
   .act--dim { background: var(--sc-surface); }
   .act-inner { padding-block: clamp(3.5rem, 7vw, 6rem); }
 
+  /* -------------------------------------------------------- Section 3 Cities --- */
+  .cities-act {
+    position: relative; height: 260vh; background: #060a13;
+  }
+  .cities-act__sticky {
+    position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .cities-act__grid {
+    display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--sc-8);
+    align-items: center; justify-items: stretch; width: 100%;
+  }
+  @media (max-width: 960px) {
+    .cities-act__grid { grid-template-columns: 1fr; gap: var(--sc-5); }
+    .cities-act__right { display: none; }
+  }
+  .cities-act__left {
+    display: flex; flex-direction: column; justify-content: center; z-index: 2;
+  }
+  .cities-act__right {
+    position: relative; z-index: 2; width: 100%; aspect-ratio: 1 / 1; max-height: 480px;
+  }
+  .radar-frame {
+    position: relative; width: 100%; height: 100%; background: #080e1a;
+    border: 1px solid var(--sc-hairline-strong); display: flex; flex-direction: column;
+    box-shadow: 0 20px 50px -10px rgba(0,0,0,0.6); overflow: hidden;
+  }
+  .radar-frame__header {
+    padding: 0.6rem 1rem; background: color-mix(in oklab, var(--sc-surface) 150%, #000);
+    border-bottom: 1px solid var(--sc-hairline); display: flex; justify-content: space-between;
+    font-family: var(--sc-font-mono); font-size: 0.75rem; color: var(--sc-ink-soft);
+  }
+  .radar-frame__canvas {
+    flex: 1; width: 100%; height: 100%; display: block;
+  }
+  .radar-frame__footer {
+    padding: 0.6rem 1rem; background: color-mix(in oklab, var(--sc-surface) 150%, #000);
+    border-top: 1px solid var(--sc-hairline); font-family: var(--sc-font-mono);
+    font-size: 0.75rem; color: var(--sc-accent); text-align: center; letter-spacing: var(--sc-track-wide);
+  }
+
+  .city-title-word {
+    display: inline-block; transition: color 400ms var(--sc-ease-out), transform 400ms var(--sc-ease-out), text-shadow 400ms var(--sc-ease-out), opacity 400ms var(--sc-ease-out);
+    opacity: 0.35; margin-right: 0.3em;
+  }
+  .city-title-word.is-active {
+    opacity: 1; transform: scale(1.05);
+  }
+  .city-title-word--lhr.is-active { color: var(--sc-accent); text-shadow: 0 0 30px color-mix(in oklab, var(--sc-accent) 70%, transparent); }
+  .city-title-word--khi.is-active { color: var(--sc-accent-2); text-shadow: 0 0 30px color-mix(in oklab, var(--sc-accent-2) 70%, transparent); }
+  .city-title-word--isb.is-active { color: var(--peak-magenta); text-shadow: 0 0 30px color-mix(in oklab, var(--peak-magenta) 70%, transparent); }
+
+  /* ---------------------------------- Section 3 Orbital Revolving Glass Cards --- */
+  .spine-orbit-stage {
+    position: relative; width: 100%; height: 280px; margin-top: 1.2rem;
+    perspective: 1100px; transform-style: preserve-3d;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .cyber-spine {
+    position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+    width: 4px; height: 220px;
+    background: linear-gradient(180deg, transparent 0%, var(--sc-accent) 30%, var(--sc-accent-2) 70%, transparent 100%);
+    box-shadow: 0 0 20px var(--sc-accent); z-index: 1; pointer-events: none;
+  }
+  .cyber-spine::before {
+    content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 60px; height: 60px; border-radius: 50%;
+    border: 1px dashed var(--sc-accent); animation: spineSpin 12s linear infinite;
+  }
+  @keyframes spineSpin { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
+
+  .orbit-track {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    transform-style: preserve-3d;
+  }
+  
+  .glass-orbit-card {
+    position: absolute; left: 50%; top: 50%;
+    width: 15.5rem; padding: 1.2rem 1.4rem;
+    background: linear-gradient(135deg, rgba(16, 24, 42, 0.76) 0%, rgba(6, 10, 18, 0.90) 100%);
+    backdrop-filter: blur(24px) saturate(1.8); -webkit-backdrop-filter: blur(24px) saturate(1.8);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    margin-left: -7.75rem; margin-top: -4.2rem;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 20px 45px rgba(0, 0, 0, 0.85);
+    transition: opacity 300ms var(--sc-ease-out), border-color 300ms var(--sc-ease-out), box-shadow 300ms var(--sc-ease-out), filter 300ms var(--sc-ease-out);
+    will-change: transform, opacity;
+  }
+  .glass-orbit-card::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.09) 0%, transparent 60%);
+  }
+  .glass-orbit-card.is-active-front {
+    opacity: 1 !important; border-color: var(--city-color);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 20px 50px -10px color-mix(in oklab, var(--city-color) 70%, transparent);
+    filter: brightness(1.1);
+    z-index: 10;
+  }
+  .glass-orbit-card.is-dim-back {
+    opacity: 0.25; filter: brightness(0.45) blur(1px);
+  }
+
+  /* ----------------------------------- Interactive Video Game Demo Player --- */
+  .demo-video-stage {
+    position: relative; background: #060a12; border: 1px solid var(--sc-hairline-strong);
+    display: flex; flex-direction: column; overflow: hidden;
+    box-shadow: 0 20px 50px -10px rgba(0,0,0,0.7);
+  }
+  .demo-video-screen {
+    position: relative; width: 100%; aspect-ratio: 16 / 9; background: #000; overflow: hidden;
+  }
+  .demo-video-element {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    transition: opacity 300ms var(--sc-ease-out), filter 300ms var(--sc-ease-out);
+  }
+  .demo-video-element.is-switching {
+    opacity: 0.3; filter: blur(4px) brightness(1.8);
+  }
+  .demo-video-scanline {
+    position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(180deg, transparent 50%, rgba(0, 0, 0, 0.4) 51%);
+    background-size: 100% 4px; opacity: 0.6; z-index: 2;
+  }
+  .demo-video-badge {
+    position: absolute; top: 1rem; left: 1rem; z-index: 3;
+    font-family: var(--sc-font-mono); font-size: 0.75rem; letter-spacing: 0.1em;
+    color: var(--sc-accent); background: rgba(6, 10, 18, 0.85); backdrop-filter: blur(8px);
+    border: 1px solid var(--sc-accent); padding: 0.4em 0.8em;
+    box-shadow: 0 0 15px color-mix(in oklab, var(--sc-accent) 40%, transparent);
+  }
+  .demo-video-controls {
+    display: flex; flex-wrap: wrap; gap: 0.6rem; padding: 0.8rem 1rem;
+    background: color-mix(in oklab, var(--sc-surface) 150%, #000);
+    border-top: 1px solid var(--sc-hairline-strong); align-items: center; justify-content: space-between;
+  }
+  .demo-ch-btn {
+    font-family: var(--sc-font-mono); font-size: 0.75rem; padding: 0.5em 1em;
+    background: var(--sc-surface); border: 1px solid var(--sc-hairline-strong);
+    color: var(--sc-ink-soft); cursor: pointer; transition: all 200ms var(--sc-ease-out);
+  }
+  .demo-ch-btn.is-active, .demo-ch-btn:hover {
+    border-color: var(--sc-accent); color: var(--sc-accent);
+    background: color-mix(in oklab, var(--sc-accent) 12%, transparent);
+    box-shadow: 0 0 15px color-mix(in oklab, var(--sc-accent) 30%, transparent);
+  }
+  .demo-sound-btn {
+    font-family: var(--sc-font-mono); font-size: 0.75rem; padding: 0.5em 1em;
+    background: color-mix(in oklab, var(--sc-accent-2) 15%, transparent);
+    border: 1px solid var(--sc-accent-2); color: var(--sc-accent-2);
+    cursor: pointer; transition: all 200ms var(--sc-ease-out); margin-left: auto;
+  }
+  .demo-sound-btn:hover {
+    filter: brightness(1.2); transform: scale(1.04);
+  }
+  /* --------------------------------------------------- Mentor Dossier Modal --- */
+  .char-card {
+    position: relative; background: color-mix(in oklab, var(--sc-surface) 140%, #000);
+    border: 1px solid var(--sc-hairline-strong); padding: 1.4rem;
+    display: flex; flex-direction: column; gap: 0.8rem;
+    transition: all 300ms var(--sc-ease-out); cursor: pointer; overflow: hidden;
+  }
+  .char-card:hover {
+    border-color: var(--card-color, var(--sc-accent)); transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 15px 40px -10px color-mix(in oklab, var(--card-color, var(--sc-accent)) 50%, transparent);
+  }
+  .char-avatar-box {
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .char-avatar {
+    width: 58px; height: 58px; background: color-mix(in oklab, var(--card-color, var(--sc-accent)) 16%, #000);
+    color: var(--card-color, var(--sc-accent)); font-family: var(--sc-font-display); font-weight: 700; font-size: 1.3rem;
+    display: flex; align-items: center; justify-content: center; border: 1px solid var(--card-color, var(--sc-accent));
+    box-shadow: 0 0 20px color-mix(in oklab, var(--card-color, var(--sc-accent)) 30%, transparent);
+    transition: transform 300ms var(--sc-ease-out);
+  }
+  .char-card:hover .char-avatar {
+    transform: scale(1.1); background: var(--card-color, var(--sc-accent)); color: #000;
+  }
+  .char-class-icon {
+    font-size: 1.8rem; filter: drop-shadow(0 0 10px var(--card-color, var(--sc-accent)));
+  }
+  .char-shipped-tag {
+    font-family: var(--sc-font-mono); font-size: 0.72rem; color: var(--card-color, var(--sc-accent));
+    background: color-mix(in oklab, var(--card-color, var(--sc-accent)) 12%, transparent);
+    border: 1px solid color-mix(in oklab, var(--card-color, var(--sc-accent)) 30%, transparent);
+    padding: 0.3em 0.7em; margin-top: 0.2rem;
+  }
+  .char-inspect-prompt {
+    font-family: var(--sc-font-mono); font-size: 0.7rem; color: var(--sc-ink-soft); text-transform: uppercase;
+    letter-spacing: 0.1em; display: flex; align-items: center; gap: 0.4rem; margin-top: 0.4rem;
+    transition: color 300ms var(--sc-ease-out);
+  }
+  .char-card:hover .char-inspect-prompt {
+    color: var(--card-color, var(--sc-accent));
+  }
+
+  /* Mentor Dossier Modal */
+  .mentor-modal {
+    position: fixed; inset: 0; z-index: 100; display: flex; align-items: center; justify-content: center;
+    background: rgba(4, 6, 12, 0.94); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    opacity: 0; pointer-events: none; transition: opacity 350ms var(--sc-ease-out);
+    padding: 1.5rem;
+  }
+  .mentor-modal.is-active { opacity: 1; pointer-events: auto; }
+  .mentor-dossier-card {
+    background: #080d19; border: 2px solid var(--modal-color, var(--sc-accent));
+    padding: 2rem; max-width: 32rem; width: 100%; position: relative;
+    box-shadow: 0 0 60px color-mix(in oklab, var(--modal-color, var(--sc-accent)) 45%, transparent);
+    animation: modalPop 350ms var(--sc-ease-out);
+  }
+  @keyframes modalPop { from { transform: scale(0.88) translateY(20px); opacity: 0; } to { transform: scale(1) translateY(0); opacity: 1; } }
+  .mentor-modal-close {
+    position: absolute; top: 1rem; right: 1rem; background: transparent; border: none;
+    color: var(--sc-ink-soft); font-size: 1.4rem; cursor: pointer; transition: color 200ms;
+  }
+  .mentor-modal-close:hover { color: var(--sc-accent); }
+
   /* --------------------------------------------------------------- HUD --- */
   .hud {
     position: fixed; inset: 0 0 auto 0; z-index: var(--sc-z-chrome);
@@ -58,10 +274,10 @@
     gap: var(--sc-4); height: 64px;
   }
   .hud__brand { display: flex; align-items: center; gap: var(--sc-3); text-decoration: none; color: var(--sc-ink); }
-  .hud__brand img { width: 30px; height: 30px; display: block; }
+  .hud__brand img { width: 44px; height: 44px; display: block; filter: drop-shadow(0 0 10px color-mix(in oklab, var(--sc-accent) 70%, transparent)); }
   .hud__word {
-    font-family: var(--sc-font-display); font-weight: 700; font-size: var(--sc-t-sm);
-    letter-spacing: var(--sc-track-wide); text-transform: uppercase;
+    font-family: var(--sc-font-display); font-weight: 700; font-size: 1.25rem;
+    letter-spacing: var(--sc-track-wide); text-transform: uppercase; color: var(--sc-ink);
   }
   .hud__combo {
     display: flex; align-items: center; gap: var(--sc-2);
@@ -99,8 +315,8 @@
   }
 
   /* ------------------------------------------------------------- hero --- */
-  .hero { min-height: 100svh; display: flex; align-items: flex-end; overflow: clip; background: var(--sc-canvas); }
-  .hero__canvas { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; display: block; }
+  .hero { min-height: 100svh; display: flex; align-items: flex-end; overflow: clip; background: var(--sc-canvas); position: relative; }
+  .hero__canvas { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; display: block; cursor: crosshair; }
   .hero__scrim {
     position: absolute; inset: 0; z-index: 1; pointer-events: none;
     background: linear-gradient(0deg,
@@ -109,17 +325,122 @@
       color-mix(in oklab, var(--sc-canvas) 10%, transparent) 58%,
       transparent 78%);
   }
-  .hero__copy { position: relative; z-index: 2; width: 100%; padding-block-end: clamp(3.5rem, 10vh, 7rem); padding-top: 88px; }
+  .hero__copy { position: relative; z-index: 2; width: 100%; padding-block-end: clamp(3.5rem, 8vh, 6rem); padding-top: 88px; }
+  
+  .hero__tagline {
+    font-family: var(--sc-font-mono); font-size: var(--sc-t-xs); letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--sc-accent); margin-bottom: 0.8rem; display: inline-flex; align-items: center; gap: 0.5rem;
+  }
   .hero__title {
     font-size: var(--sc-t-4xl);
     color: var(--sc-ink);
-    max-width: 15ch;
+    max-width: 16ch;
+    margin: 0;
+    line-height: 1.08;
   }
+  .hero-word {
+    display: inline-block; cursor: pointer; transition: all 300ms var(--sc-ease-out);
+    margin-right: 0.25em; position: relative;
+  }
+  .hero-word:hover {
+    transform: translateY(-4px) scale(1.04);
+  }
+  .hero-word--play:hover { color: var(--sc-accent); text-shadow: 0 0 35px var(--sc-accent); }
+  .hero-word--connect:hover { color: var(--sc-accent-2); text-shadow: 0 0 35px var(--sc-accent-2); }
+  .hero-word--create:hover { color: var(--gold-accent); text-shadow: 0 0 35px var(--gold-accent); }
+  .hero-word--dominate:hover { color: var(--peak-magenta); text-shadow: 0 0 35px var(--peak-magenta); }
+
+  .hero__sub {
+    font-size: var(--sc-t-lg); color: var(--sc-ink-soft); max-width: 42ch; margin-top: 1rem;
+  }
+  .hero__actions {
+    display: flex; gap: 1rem; margin-top: 1.8rem; flex-wrap: wrap; align-items: center;
+  }
+  .hero__btn {
+    font-family: var(--sc-font-display); font-weight: 700; font-size: var(--sc-t-base);
+    letter-spacing: var(--sc-track-wide); text-decoration: none; padding: 0.9em 2em;
+    display: inline-flex; align-items: center; gap: 0.6rem; transition: all 300ms var(--sc-ease-out);
+    border: none; cursor: pointer;
+  }
+  .hero__btn--primary {
+    background: var(--sc-accent); color: var(--sc-accent-ink);
+    box-shadow: 0 0 30px color-mix(in oklab, var(--sc-accent) 50%, transparent);
+  }
+  .hero__btn--primary:hover {
+    filter: brightness(1.15); transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 0 45px color-mix(in oklab, var(--sc-accent) 80%, transparent);
+  }
+  .hero__btn--secondary {
+    background: color-mix(in oklab, var(--sc-surface) 120%, #000);
+    color: var(--sc-ink); border: 1px solid var(--sc-hairline-strong);
+  }
+  .hero__btn--secondary:hover {
+    border-color: var(--sc-accent-2); color: var(--sc-accent-2); transform: translateY(-2px);
+    box-shadow: 0 0 25px color-mix(in oklab, var(--sc-accent-2) 40%, transparent);
+  }
+
   @media (max-width: 700px) {
     .hero__title { font-size: var(--sc-t-3xl); max-width: 11ch; }
   }
 
-  /* -------------------------------------------------------- problem/turn -- */
+  /* -------------------------------------------------------- problem 1 --- */
+  .problem-act {
+    position: relative; overflow: hidden; background: #060911;
+    padding-block: clamp(5rem, 10vw, 9rem);
+  }
+  .problem-act__canvas {
+    position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; opacity: 0.45;
+  }
+  .parallax-badge {
+    position: absolute; z-index: 2; font-family: var(--sc-font-mono); font-size: var(--sc-t-xs);
+    letter-spacing: var(--sc-track-wide); padding: 0.45em 0.95em; background: color-mix(in oklab, var(--sc-surface) 85%, transparent);
+    border: 1px solid var(--sc-hairline-strong); backdrop-filter: blur(8px); pointer-events: none;
+    will-change: transform; transition: transform 60ms linear;
+  }
+  .parallax-badge--1 { top: 12%; left: 4%; color: var(--peak-magenta); border-color: var(--peak-magenta); box-shadow: 0 0 15px color-mix(in oklab, var(--peak-magenta) 30%, transparent); }
+  .parallax-badge--2 { bottom: 12%; right: 4%; color: var(--sc-accent-2); border-color: var(--sc-accent-2); box-shadow: 0 0 15px color-mix(in oklab, var(--sc-accent-2) 30%, transparent); }
+  .parallax-badge--3 { top: 18%; right: 8%; color: var(--sc-accent); border-color: var(--sc-accent); box-shadow: 0 0 15px color-mix(in oklab, var(--sc-accent) 30%, transparent); }
+
+  @media (max-width: 860px) {
+    .parallax-badge { display: none; }
+  }
+
+  .problem-card {
+    position: relative; z-index: 3; background: color-mix(in oklab, var(--sc-surface) 90%, transparent);
+    border: 1px solid var(--sc-hairline-strong); padding: clamp(2rem, 5vw, 4rem);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 20px 50px -15px rgba(0,0,0,0.5);
+  }
+  .problem-tag {
+    display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--sc-font-mono);
+    font-size: var(--sc-t-xs); color: var(--peak-magenta); letter-spacing: var(--sc-track-wide);
+    padding: 0.3em 0.8em; background: color-mix(in oklab, var(--peak-magenta) 12%, transparent);
+    border: 1px solid color-mix(in oklab, var(--peak-magenta) 35%, transparent); margin-bottom: 1.2rem;
+  }
+  .problem-stat-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: 1.2rem; margin-top: 2rem;
+  }
+  .problem-stat-card {
+    padding: 1.2rem; background: color-mix(in oklab, var(--sc-surface) 130%, #000);
+    border: 1px solid var(--sc-hairline-strong); transition: all var(--sc-d-base); position: relative; overflow: hidden;
+  }
+  .problem-stat-card::after {
+    content: ""; position: absolute; top: 0; left: 0; width: 3px; height: 100%;
+    background: var(--stat-color, var(--sc-accent)); opacity: 0.8;
+  }
+  .problem-stat-card:hover {
+    border-color: var(--stat-color, var(--sc-accent)); transform: translateY(-4px);
+    box-shadow: 0 10px 30px -10px color-mix(in oklab, var(--stat-color, var(--sc-accent)) 40%, transparent);
+  }
+  .problem-stat-num {
+    font-family: var(--sc-font-mono); font-size: 2.2rem; font-weight: 700; color: var(--stat-color, var(--sc-accent));
+    line-height: 1; margin-bottom: 0.4rem;
+  }
+  .problem-stat-label {
+    font-size: 0.8rem; color: var(--sc-ink-soft); text-transform: uppercase; font-family: var(--sc-font-mono);
+    letter-spacing: var(--sc-track-wide);
+  }
+
   .type-only { max-width: 46rem; }
   .problem2__cities {
     font-size: clamp(2.6rem, 3vw + 1.6rem, 5rem);
@@ -169,19 +490,22 @@
   .proof__photo { position: relative; width: 100%; margin: 0 0 var(--sc-8); aspect-ratio: 16/7; overflow: clip; }
   .proof__photo img { width: 100%; height: 100%; object-fit: cover; }
   .proof__title { margin-bottom: var(--sc-7); }
-  .partners { display: flex; flex-wrap: wrap; gap: var(--sc-5); }
+  .partners { display: flex; flex-wrap: wrap; gap: var(--sc-5); align-items: center; }
   .partners img {
     box-sizing: border-box;
-    width: clamp(9rem, 20vw, 11.5rem); height: clamp(6rem, 12vw, 7.5rem);
-    background: var(--sc-surface); border: 1px solid var(--sc-hairline);
-    padding: var(--sc-5); object-fit: contain;
-    filter: grayscale(1) brightness(2.4) contrast(1.4); opacity: 0.92;
+    width: clamp(9.5rem, 20vw, 12rem); height: clamp(5.5rem, 10vw, 7rem);
+    background: color-mix(in oklab, var(--sc-surface) 80%, #000);
+    border: 1px solid var(--sc-hairline-strong);
+    padding: var(--sc-3) var(--sc-4); object-fit: contain;
+    filter: brightness(1) contrast(1.05); opacity: 0.95;
     transition: opacity var(--sc-d-base) var(--sc-ease-out), filter var(--sc-d-base) var(--sc-ease-out),
-                transform var(--sc-d-base) var(--sc-ease-out), border-color var(--sc-d-base) var(--sc-ease-out);
+                transform var(--sc-d-base) var(--sc-ease-out), border-color var(--sc-d-base) var(--sc-ease-out),
+                box-shadow var(--sc-d-base) var(--sc-ease-out);
   }
   @media (hover: hover) and (pointer: fine) {
     .partners img:hover {
-      opacity: 1; filter: none; border-color: var(--sc-accent); transform: translateY(-3px) scale(1.04);
+      opacity: 1; filter: brightness(1.2); border-color: var(--sc-accent); transform: translateY(-4px) scale(1.06);
+      box-shadow: 0 10px 25px -8px color-mix(in oklab, var(--sc-accent) 45%, transparent);
     }
   }
 
@@ -203,43 +527,128 @@
   .expert__role { color: var(--sc-ink-soft); font-size: var(--sc-t-sm); margin-top: var(--sc-2); }
 
   /* ------------------------------------------------------------- quiet --- */
-  .quiet { min-height: 58vh; display: flex; align-items: center; justify-content: center; text-align: center; }
-  .quiet__line { font-size: var(--sc-t-xl); color: var(--sc-ink-soft); font-family: var(--sc-font-display); }
+  .quiet {
+    position: relative; height: 260vh; background: #04060b;
+  }
+  .quiet__sticky {
+    position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden;
+    display: flex; align-items: center; justify-content: center; text-align: center;
+  }
+  .quiet__canvas {
+    position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none;
+  }
+  .quiet__content {
+    position: relative; z-index: 2; width: 100%; max-width: 52rem; height: 140px;
+    padding-inline: 1.5rem; display: flex; align-items: center; justify-content: center;
+  }
+  .quiet__step {
+    font-family: var(--sc-font-display); font-size: clamp(2rem, 4.5vw + 1rem, 4.5rem);
+    font-weight: 700; line-height: 1.15; letter-spacing: var(--sc-track-tight);
+    opacity: 0; transform: translateY(24px) scale(0.92); pointer-events: none;
+    transition: opacity 450ms var(--sc-ease-out), transform 450ms var(--sc-ease-out), text-shadow 450ms var(--sc-ease-out);
+    position: absolute; width: 100%; text-wrap: balance;
+  }
+  .quiet__step.is-active {
+    opacity: 1; transform: translateY(0) scale(1); pointer-events: auto;
+  }
+  .quiet__step--1 {
+    color: var(--sc-ink); text-shadow: 0 0 25px color-mix(in oklab, var(--sc-accent) 70%, transparent);
+  }
+  .quiet__step--2 {
+    color: var(--sc-accent-2); text-shadow: 0 0 35px color-mix(in oklab, var(--sc-accent-2) 80%, transparent);
+  }
+  .quiet__step--3 {
+    color: var(--peak-magenta);
+    text-shadow: 0 0 40px color-mix(in oklab, var(--peak-magenta) 90%, transparent), 0 0 70px var(--gold-accent);
+  }
+  .quiet__progress-bar {
+    position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+    z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 0.6rem;
+    pointer-events: none;
+  }
+  .quiet__progress-track {
+    width: 160px; height: 3px; background: rgba(255, 255, 255, 0.15); border-radius: 99px; overflow: hidden;
+  }
+  .quiet__progress-fill {
+    height: 100%; width: 0%;
+    background: linear-gradient(90deg, var(--sc-accent), var(--sc-accent-2), var(--peak-magenta));
+    transition: width 80ms linear;
+  }
+  .quiet__progress-text {
+    font-family: var(--sc-font-mono); font-size: 0.75rem; color: var(--sc-ink-soft);
+    letter-spacing: var(--sc-track-wide); text-transform: uppercase;
+  }
 
   /* -------------------------------------------------------------- peak --- */
   .peak { min-height: 82vh; }
 
   /* ---------------------------------------------------------- MAX COMBO --- */
   .burst {
-    position: fixed; inset: 0; z-index: 90;
-    display: flex; align-items: center; justify-content: center;
-    background: color-mix(in oklab, var(--sc-canvas) 88%, transparent);
+    position: fixed; inset: 0; z-index: 95;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: rgba(4, 6, 12, 0.94); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
     opacity: 0; pointer-events: none;
-    transition: opacity 420ms var(--sc-ease-out);
+    transition: opacity 450ms var(--sc-ease-out);
   }
-  .burst.is-live { opacity: 1; }
+  .burst.is-live { opacity: 1; pointer-events: auto; }
+
+  .burst__rays {
+    position: absolute; width: 150vmax; height: 150vmax; border-radius: 50%;
+    background: repeating-conic-gradient(
+      from 0deg,
+      color-mix(in oklab, var(--peak-magenta) 18%, transparent) 0deg 15deg,
+      transparent 15deg 30deg
+    );
+    animation: raysRotate 25s linear infinite; opacity: 0.6; pointer-events: none;
+  }
+  @keyframes raysRotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
   .burst__ring {
-    position: absolute; width: 46vmax; height: 46vmax; border-radius: 50%;
-    background: radial-gradient(circle, color-mix(in oklab, var(--peak-magenta) 30%, transparent) 0%, transparent 68%);
-    opacity: 0; transform: scale(0.8);
+    position: absolute; width: 55vmax; height: 55vmax; border-radius: 50%;
+    background: radial-gradient(circle, color-mix(in oklab, var(--peak-magenta) 45%, transparent) 0%, color-mix(in oklab, var(--sc-accent) 20%, transparent) 40%, transparent 70%);
+    opacity: 0; transform: scale(0.6);
     transition: opacity 520ms var(--sc-ease-out), transform 620ms var(--sc-ease-out);
   }
-  .burst.is-live .burst__ring { opacity: 1; transform: scale(1); }
+  .burst.is-live .burst__ring { opacity: 1; transform: scale(1.1); }
+
+  .burst__content {
+    position: relative; z-index: 2; text-align: center; display: flex; flex-direction: column; align-items: center;
+    padding-inline: 1.5rem;
+  }
+  .burst__icon {
+    font-size: 3.5rem; filter: drop-shadow(0 0 25px var(--gold-accent));
+    animation: trophyFloat 2s ease-in-out infinite; margin-bottom: 0.5rem;
+  }
+  @keyframes trophyFloat { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-8px) scale(1.08); } }
+
   .burst__label {
     position: relative; z-index: 1; text-align: center;
     font-family: var(--sc-font-display); font-weight: 700;
-    letter-spacing: var(--sc-track-tight);
-    font-size: clamp(2.4rem, 5vw + 1rem, 6rem);
-    color: var(--peak-magenta);
-    opacity: 0; transform: scale(0.92) translateY(10px);
+    letter-spacing: -0.02em;
+    font-size: clamp(3rem, 8vw + 1rem, 7.5rem);
+    color: var(--sc-ink); margin: 0;
+    text-shadow: 0 0 25px var(--peak-magenta), 0 0 60px var(--peak-magenta), 0 0 100px var(--sc-accent);
+    opacity: 0; transform: scale(0.85) translateY(20px);
     transition: opacity 460ms var(--sc-ease-out) 80ms, transform 460ms var(--sc-ease-out) 80ms;
   }
   .burst.is-live .burst__label { opacity: 1; transform: none; }
-  .burst__sub {
-    display: block; margin-top: var(--sc-3); font-family: var(--sc-font-mono);
-    font-size: var(--sc-t-sm); letter-spacing: var(--sc-track-wide); color: var(--sc-ink-soft);
-    text-transform: uppercase;
+
+  .burst__badge {
+    font-family: var(--sc-font-mono); font-size: var(--sc-t-xs); letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--sc-accent); border: 1px solid var(--sc-accent); padding: 0.4em 1.2em;
+    background: color-mix(in oklab, var(--sc-accent) 15%, transparent);
+    box-shadow: 0 0 20px color-mix(in oklab, var(--sc-accent) 40%, transparent); margin-top: 0.8rem;
   }
+  .burst__cta {
+    margin-top: 2rem; font-family: var(--sc-font-display); font-weight: 700; font-size: var(--sc-t-base);
+    letter-spacing: var(--sc-track-wide); text-transform: uppercase;
+    background: linear-gradient(90deg, var(--sc-accent), var(--sc-accent-2));
+    color: var(--sc-accent-ink); border: none; padding: 1em 2.2em; cursor: pointer;
+    box-shadow: 0 0 30px color-mix(in oklab, var(--sc-accent) 50%, transparent);
+    transition: transform var(--sc-d-fast), filter var(--sc-d-fast);
+  }
+  .burst__cta:hover { filter: brightness(1.15); transform: scale(1.05); }
+
   @media (prefers-reduced-motion: reduce) {
     .burst { transition: opacity 240ms linear; }
     .burst__ring, .burst__label { transition: opacity 240ms linear; transform: none !important; }
@@ -416,51 +825,161 @@
 </head>
 <body>
 
+<div class="cyber-cursor" id="cyberCursor" aria-hidden="true">
+  <div class="cyber-cursor__dot"></div>
+  <div class="cyber-cursor__ring"></div>
+</div>
+
 <span data-sc-progress></span>
 <div class="sc-grain" aria-hidden="true"></div>
 
 <header class="hud" id="hud" data-sc-verify-state="combo:0">
   <div class="hud__inner sc-wrap">
     <a class="hud__brand" href="#top" aria-label="Reapers home">
-      <img src="assets/logo-160.png" alt="" width="30" height="30">
+      <img src="assets/logo-160.png" alt="" width="44" height="44">
       <span class="hud__word">Reapers</span>
     </a>
+    <div class="hud__online-badge">
+      <span class="hud__online-dot"></span>
+      <span>4,210 GAMERS ONLINE</span>
+    </div>
     <div class="hud__combo idle-pulse" id="comboChip">
       <span class="hud__combo-label">Combo</span>
       <span class="hud__combo-value" id="comboValue">×0</span>
     </div>
+    <button class="hud__audio-btn" id="audioToggleBtn" title="Toggle Gaming Sound Effects">
+      <span id="audioIcon">🔊</span> <span id="audioText">SFX ON</span>
+    </button>
     <a class="hud__cta" href="#close">Get Early Access</a>
   </div>
 </header>
 
 <main id="top">
 
-  <!-- 1 · HERO -->
+  <!-- 1 · HERO: Interactive 3D Crystal & Kinetic Opening -->
   <section class="act hero" data-sc-act="flow" id="hero">
     <canvas id="heroCanvas" class="hero__canvas" aria-hidden="true"></canvas>
     <div class="hero__scrim" aria-hidden="true"></div>
     <div class="hero__copy sc-wrap">
-      <h1 class="sc-display hero__title" data-sc-cue="0 0.86 0" data-sc-kinetic="lines">Play. Connect. Create. Dominate.</h1>
+      <div class="hero__tagline">
+        <span>⚡</span> PAKISTAN'S UNIFIED GAMING ARENA
+      </div>
+      <h1 class="sc-display hero__title">
+        <span class="hero-word hero-word--play" data-mode="play">Play.</span>
+        <span class="hero-word hero-word--connect" data-mode="connect">Connect.</span>
+        <span class="hero-word hero-word--create" data-mode="create">Create.</span>
+        <span class="hero-word hero-word--dominate" data-mode="dominate">Dominate.</span>
+      </h1>
+      <p class="hero__sub">Where developers, artists, and gamers build Pakistan's gaming legacy together.</p>
+      <div class="hero__actions">
+        <a class="hero__btn hero__btn--primary" href="#close">ENTER THE ARENA <span>→</span></a>
+        <a class="hero__btn hero__btn--secondary" href="#sectionCities">EXPLORE NETWORK</a>
+      </div>
     </div>
   </section>
 
-  <!-- 2 · PROBLEM 1: type-only -->
-  <section class="act">
-    <div class="sc-wrap act-inner sc-stack type-only" data-sc-in data-sc-stagger="70">
-      <h2 class="sc-display sc-display--lg glitch-in">The scene is everywhere. And nowhere.</h2>
-      <p class="sc-body">Chat groups split across five apps. Events you hear about after they happen. Feedback that goes nowhere.</p>
+  <!-- 2 · PROBLEM 1: Parallax visualizer & Fragment HUD -->
+  <section class="act problem-act" id="problemSection">
+    <canvas id="problemCanvas" class="problem-act__canvas"></canvas>
+    
+    <!-- Parallax Floating Fragment Badges -->
+    <div class="parallax-badge parallax-badge--1" data-parallax-speed="-0.28">⚠️ [DISCORD_FRAGMENT_01]</div>
+    <div class="parallax-badge parallax-badge--2" data-parallax-speed="0.22">💬 [WHATSAPP_FEED_02]</div>
+    <div class="parallax-badge parallax-badge--3" data-parallax-speed="-0.15">📅 [UNREGISTERED_JAM_03]</div>
+
+    <div class="sc-wrap">
+      <div class="problem-card blade" data-sc-in data-sc-stagger="70" data-sc-tilt="4">
+        <div class="problem-tag">⚡ SYSTEM STATUS: FRAGMENTATION DETECTED</div>
+        <h2 class="sc-display sc-display--lg glitch-in" style="margin-top: 0;">The scene is everywhere. And nowhere.</h2>
+        <p class="sc-body" style="font-size: var(--sc-t-lg); margin-top: 1rem;">Chat groups split across five apps. Events you hear about after they happen. Feedback that goes nowhere.</p>
+        
+        <div class="problem-stat-grid">
+          <div class="problem-stat-card" style="--stat-color: var(--peak-magenta);">
+            <div class="problem-stat-num">5+</div>
+            <div class="problem-stat-label">Split Chat Apps</div>
+          </div>
+          <div class="problem-stat-card" style="--stat-color: var(--sc-accent-2);">
+            <div class="problem-stat-num">100s</div>
+            <div class="problem-stat-label">Missed Jams</div>
+          </div>
+          <div class="problem-stat-card" style="--stat-color: var(--sc-accent);">
+            <div class="problem-stat-num">1</div>
+            <div class="problem-stat-label">Unified Arena (Reapers)</div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- 3 · PROBLEM 2: cities, reveal + kinetic -->
-  <section class="act act--dim" data-sc-act="flow">
-    <div class="sc-wrap act-inner">
-      <h2 class="sc-display problem2__cities" data-sc-cue="0 0.86 0" data-sc-kinetic="lines">Lahore. Karachi. Islamabad.</h2>
-      <p class="sc-lede problem2__note">Same scene. Different rooms.</p>
-      <div class="regions" data-sc-in data-sc-stagger="60">
-        <span class="region-chip">LHR · Lahore</span>
-        <span class="region-chip">KHI · Karachi</span>
-        <span class="region-chip">ISB · Islamabad</span>
+  <!-- 3 · PROBLEM 2: Section 3 Cities 3D Orbital Glass Cards & Spine Experience -->
+  <section class="act cities-act" id="sectionCities">
+    <div class="cities-act__sticky">
+      <div class="cities-act__grid sc-wrap">
+        
+        <!-- Left Column: Headlines & 3D Orbital Revolving Glass Cards Stage -->
+        <div class="cities-act__left">
+          <div class="problem-tag" style="background: color-mix(in oklab, var(--sc-accent) 12%, transparent); border-color: color-mix(in oklab, var(--sc-accent) 35%, transparent); color: var(--sc-accent);">
+            ⚡ 3D ORBITAL NETWORK SPINE
+          </div>
+
+          <h2 class="sc-display problem2__cities" style="max-width: 15ch;">
+            <span class="city-title-word city-title-word--lhr is-active" id="wordLhr">Lahore.</span>
+            <span class="city-title-word city-title-word--khi" id="wordKhi">Karachi.</span>
+            <span class="city-title-word city-title-word--isb" id="wordIsb">Islamabad.</span>
+          </h2>
+
+          <p class="sc-lede problem2__note" id="citiesSub" style="margin-top: 0.4rem;">
+            Same scene. Different rooms. Revolving in unity.
+          </p>
+
+          <!-- 3D Circular Revolving Glass Cards Stage -->
+          <div class="spine-orbit-stage" id="spineOrbitStage">
+            <div class="cyber-spine"></div>
+            <div class="orbit-track" id="orbitTrack">
+
+              <div class="glass-orbit-card blade is-active-front" id="orbitCardLhr" style="--city-color: var(--sc-accent);">
+                <div class="city-card-code">LHR · LAHORE</div>
+                <div class="city-card-devs">1,850+ DEVS</div>
+                <div class="city-card-sub">🟢 ORBIT NODE 01 · 14ms</div>
+              </div>
+
+              <div class="glass-orbit-card blade" id="orbitCardKhi" style="--city-color: var(--sc-accent-2);">
+                <div class="city-card-code">KHI · KARACHI</div>
+                <div class="city-card-devs">2,100+ DEVS</div>
+                <div class="city-card-sub">🔵 ORBIT NODE 02 · 18ms</div>
+              </div>
+
+              <div class="glass-orbit-card blade" id="orbitCardIsb" style="--city-color: var(--peak-magenta);">
+                <div class="city-card-code">ISB · ISLAMABAD</div>
+                <div class="city-card-devs">1,260+ DEVS</div>
+                <div class="city-card-sub">💗 ORBIT NODE 03 · 12ms</div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="cities-progress-hud" style="margin-top: 1rem;">
+            <div class="quiet__progress-track">
+              <div class="quiet__progress-fill" id="citiesProgressFill"></div>
+            </div>
+            <div class="quiet__progress-text" id="citiesProgressText" style="margin-top: 0.4rem;">SCROLL ORBIT RADAR · 0%</div>
+          </div>
+        </div>
+
+        <!-- Right Column: Framed Radar Screen -->
+        <div class="cities-act__right">
+          <div class="radar-frame blade">
+            <div class="radar-frame__header">
+              <span style="color: var(--sc-accent);">● LIVE RADAR MESH</span>
+              <span>GRID: PK-SPINE-03</span>
+            </div>
+            <canvas id="citiesCanvas" class="radar-frame__canvas"></canvas>
+            <div class="radar-frame__footer">
+              <span id="radarStatusTag">SIGNAL: LAHORE ORBIT NODE ACTIVE</span>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -484,12 +1003,36 @@
   <section class="act act--dim feature" id="f1" data-combo="1">
     <div class="sc-wrap act-inner">
       <div class="feature__grid">
-        <figure class="feature__media blade" data-sc-in data-sc-tilt="5">
-          <img src="assets/event-team.jpg" width="1280" height="960" alt="Reapers community members meeting up in person">
-        </figure>
+        <div class="chat-sim" id="chatSimWidget">
+          <div class="chat-sim__header">
+            <span class="chat-sim__title">⚡ LIVE COMMUNITY CHAT STREAM</span>
+            <span style="font-size: 0.75rem; font-family: var(--sc-font-mono); color: var(--sc-ink-soft);">ROOM: #game-dev-general</span>
+          </div>
+          <div class="chat-sim__body" id="chatSimBody">
+            <div class="chat-msg">
+              <span class="chat-msg__tag">LHR_DEV</span>
+              <span class="chat-msg__text">Anyone testing their Unreal 5.4 physics build tonight? Need feedback!</span>
+            </div>
+            <div class="chat-msg">
+              <span class="chat-msg__tag is-cyan">PIGD_PRO</span>
+              <span class="chat-msg__text">Post it in #demo-showcase! We are running a live stream review session.</span>
+            </div>
+            <div class="chat-msg">
+              <span class="chat-msg__tag is-pink">RPR_LEADER</span>
+              <span class="chat-msg__text">Registration for the PGDA Game Jam drops tomorrow at 6 PM! 🚀</span>
+            </div>
+          </div>
+          <div class="chat-sim__reactions">
+            <button class="react-btn" data-emoji="🔥">🔥 <span class="react-count">142</span></button>
+            <button class="react-btn" data-emoji="🚀">🚀 <span class="react-count">98</span></button>
+            <button class="react-btn" data-emoji="🎮">🎮 <span class="react-count">210</span></button>
+            <button class="react-btn" data-emoji="⚡">⚡ <span class="react-count">85</span></button>
+          </div>
+        </div>
+
         <div class="feature__copy sc-stack" data-sc-in data-sc-stagger="70">
           <h3 class="sc-display feature__title">Chatrooms &amp; Communities</h3>
-          <p class="feature__body">Join Pakistan's gaming groups, or start your own room.</p>
+          <p class="feature__body">Join Pakistan's gaming groups, or start your own room. Connect with developers, artists, and players in real-time.</p>
         </div>
       </div>
     </div>
@@ -499,9 +1042,21 @@
   <section class="act feature" id="f2" data-combo="2" data-sc-act="flow">
     <div class="sc-wrap act-inner">
       <div class="feature__grid feature__grid--reverse">
-        <figure class="feature__media blade" data-sc-reveal="right" data-sc-reveal-at="0.1 0.72" data-sc-tilt="5">
-          <img src="assets/event-pgda.jpg" width="1472" height="437" alt="A Reapers community event, PGDA and partner logos visible in the venue">
-        </figure>
+        <div class="event-ticket" id="eventPassWidget">
+          <div class="event-tabs">
+            <span class="event-tab is-active" data-cat="all">ALL EVENTS</span>
+            <span class="event-tab" data-cat="jam">GAME JAMS</span>
+            <span class="event-tab" data-cat="esports">TOURNAMENTS</span>
+          </div>
+          <div class="event-ticket__tag" id="eventTag">PGDA NATIONAL GAME JAM 2026</div>
+          <h4 id="eventTitle" style="font-family: var(--sc-font-display); font-size: 1.4rem; margin: 0; color: var(--sc-ink);">48-Hour Game Development Sprint</h4>
+          <p id="eventDesc" style="font-size: 0.9rem; color: var(--sc-ink-soft); margin: 0;">Compete with over 500 developers across Pakistan.</p>
+          <div class="event-ticket__timer">
+            <span>⏱️ STARTS IN:</span>
+            <strong id="eventCountdown" style="color: var(--sc-accent); font-size: 1.1rem;">02d 14h 32m 08s</strong>
+          </div>
+        </div>
+
         <div class="feature__copy sc-stack" data-sc-in data-sc-stagger="70">
           <h3 class="sc-display feature__title">Events</h3>
           <p class="feature__body">Watch parties, jams, tournaments, meetups. Know what's happening, before it happens.</p>
@@ -514,13 +1069,33 @@
   <section class="act act--dim feature" id="f3" data-combo="3">
     <div class="sc-wrap act-inner">
       <div class="feature__grid">
-        <div class="feature__placeholder blade" data-sc-in>
-          <span>App preview coming soon</span>
+        <!-- Interactive 3D Video Game Demo Arcade Player -->
+        <div class="demo-video-stage blade" id="demoVideoStage">
+          <div class="demo-video-screen">
+            <video id="demoVideoPlayer" class="demo-video-element" autoplay loop muted playsinline src="public/videos/vid-1.mp4"></video>
+            <div class="demo-video-scanline"></div>
+            <div class="demo-video-badge" id="demoChannelBadge">🔴 LIVE FEED · DEMO 01 (UNREAL 5 ACTION RPG)</div>
+          </div>
+          <div class="demo-video-controls">
+            <button class="demo-ch-btn is-active" data-src="public/videos/vid-1.mp4" data-badge="🔴 LIVE FEED · DEMO 01 (UNREAL 5 ACTION RPG)">
+              🎮 DEMO 01
+            </button>
+            <button class="demo-ch-btn" data-src="public/videos/vid-4.mp4" data-badge="🚀 LIVE FEED · DEMO 02 (SCI-FI SPACE COMBAT)">
+              🚀 DEMO 02
+            </button>
+            <button class="demo-ch-btn" data-src="public/videos/vid-6.mp4" data-badge="⚔️ LIVE FEED · DEMO 03 (CYBER BRAWLER)">
+              ⚔️ DEMO 03
+            </button>
+            <button class="demo-sound-btn" id="demoSoundBtn">
+              🔊 UNMUTE DEMO
+            </button>
+          </div>
         </div>
+
         <div class="feature__copy sc-stack" data-sc-in data-sc-stagger="70">
           <h3 class="sc-display feature__title">Demo Showcase</h3>
           <p class="feature__body">Upload gameplay clips. Get real feedback from people who actually play.</p>
-          <p class="feature__pending">Live in app, screenshots coming with launch</p>
+          <p class="feature__pending">Live in app, interactive preview enabled above</p>
         </div>
       </div>
     </div>
@@ -536,6 +1111,11 @@
         <div class="feature__copy sc-stack" data-sc-in data-sc-stagger="70">
           <h3 class="sc-display feature__title">Expert Sessions</h3>
           <p class="feature__body">10 to 15 minutes with verified mentors who've actually shipped.</p>
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem;">
+            <span style="font-family: var(--sc-font-mono); font-size: 0.75rem; border: 1px solid var(--sc-accent); color: var(--sc-accent); padding: 0.2rem 0.6rem;">#UNREAL5</span>
+            <span style="font-family: var(--sc-font-mono); font-size: 0.75rem; border: 1px solid var(--sc-accent-2); color: var(--sc-accent-2); padding: 0.2rem 0.6rem;">#UNITY</span>
+            <span style="font-family: var(--sc-font-mono); font-size: 0.75rem; border: 1px solid var(--peak-magenta); color: var(--peak-magenta); padding: 0.2rem 0.6rem;">#GAME_DESIGN</span>
+          </div>
         </div>
       </div>
     </div>
@@ -545,9 +1125,32 @@
   <section class="act act--dim feature" id="f5" data-combo="5" data-sc-act="flow">
     <div class="sc-wrap act-inner">
       <div class="feature__grid">
-        <figure class="feature__media blade" data-sc-reveal="up" data-sc-reveal-at="0.1 0.78" data-sc-tilt="5">
-          <img src="assets/event-indie.jpg" width="1600" height="848" alt="Six indie game developers who hosted a Reapers community meetup">
-        </figure>
+        <div style="background: var(--sc-surface); border: 1px solid var(--sc-hairline-strong); padding: 1.5rem;">
+          <div style="font-family: var(--sc-font-mono); font-size: 0.8rem; color: var(--sc-accent-2); text-transform: uppercase; margin-bottom: 0.8rem;">⚡ GUILD PARTY FINDER (LFG)</div>
+          <div class="lfg-chips">
+            <span class="lfg-chip is-active">ALL ROLES</span>
+            <span class="lfg-chip">3D ARTIST</span>
+            <span class="lfg-chip">UNITY DEV</span>
+            <span class="lfg-chip">SOUND DESIGNER</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+            <div style="padding: 0.8rem; background: rgba(0,0,0,0.3); border-left: 3px solid var(--sc-accent); font-size: 0.85rem;">
+              <div style="display: flex; justify-content: space-between; font-family: var(--sc-font-mono);">
+                <strong style="color: var(--sc-ink);">Cyber-Blade Studio</strong>
+                <span style="color: var(--sc-accent);">RECRUITING</span>
+              </div>
+              <p style="color: var(--sc-ink-soft); margin: 0.3rem 0 0 0;">Looking for a Senior 3D Environment Artist for PC Sci-Fi RPG.</p>
+            </div>
+            <div style="padding: 0.8rem; background: rgba(0,0,0,0.3); border-left: 3px solid var(--sc-accent-2); font-size: 0.85rem;">
+              <div style="display: flex; justify-content: space-between; font-family: var(--sc-font-mono);">
+                <strong style="color: var(--sc-ink);">Neon Pulse Games</strong>
+                <span style="color: var(--sc-accent-2);">RECRUITING</span>
+              </div>
+              <p style="color: var(--sc-ink-soft); margin: 0.3rem 0 0 0;">Seeking Gameplay Programmer for mobile multiplayer brawler.</p>
+            </div>
+          </div>
+        </div>
+
         <div class="feature__copy sc-stack" data-sc-in data-sc-stagger="70">
           <h3 class="sc-display feature__title">Team Hiring</h3>
           <p class="feature__body">Post a role, share a demo, find your next teammate.</p>
@@ -563,6 +1166,22 @@
         <img src="assets/event-community.jpg" width="1600" height="1066" alt="The wider Reapers and partner-community group at a shared event">
       </figure>
       <h2 class="sc-display sc-display--lg proof__title" data-sc-in>Built with Pakistan's gaming community.</h2>
+      
+      <div style="display: flex; gap: 2rem; margin-bottom: 2rem; flex-wrap: wrap;" data-sc-in>
+        <div>
+          <div style="font-family: var(--sc-font-display); font-weight: 700; font-size: 2.2rem; color: var(--sc-accent);">120+</div>
+          <div style="font-family: var(--sc-font-mono); font-size: 0.8rem; color: var(--sc-ink-soft);">Game Studios</div>
+        </div>
+        <div>
+          <div style="font-family: var(--sc-font-display); font-weight: 700; font-size: 2.2rem; color: var(--sc-accent-2);">5,000+</div>
+          <div style="font-family: var(--sc-font-mono); font-size: 0.8rem; color: var(--sc-ink-soft);">Active Developers</div>
+        </div>
+        <div>
+          <div style="font-family: var(--sc-font-display); font-weight: 700; font-size: 2.2rem; color: var(--peak-magenta);">50+</div>
+          <div style="font-family: var(--sc-font-mono); font-size: 0.8rem; color: var(--sc-ink-soft);">Jams Hosted</div>
+        </div>
+      </div>
+
       <div class="partners" data-sc-in data-sc-stagger="60">
         <img src="assets/partner-cega.png" alt="CEGA" loading="lazy">
         <img src="assets/partner-igda.png" alt="IGDA Pakistan" loading="lazy">
@@ -573,43 +1192,130 @@
     </div>
   </section>
 
-  <!-- 11 · Experts -->
+  <!-- 11 · Experts (Character Select Roster) -->
   <section class="act act--dim" id="experts" data-sc-act="flow">
     <div class="sc-wrap act-inner">
-      <h2 class="sc-display sc-display--lg proof__title" data-sc-cue="0.06 0.88" data-sc-kinetic="lines">People who've actually shipped.</h2>
-      <div class="experts__grid" data-sc-in data-sc-stagger="60">
-        <article class="expert blade-sm" data-sc-tilt="5">
-          <div class="expert__avatar">BC</div>
-          <p class="expert__name">Bilal Cheema</p>
-          <p class="expert__role">Developing Duoshift</p>
+      <div class="problem-tag" style="background: color-mix(in oklab, var(--sc-accent-2) 12%, transparent); border-color: color-mix(in oklab, var(--sc-accent-2) 35%, transparent); color: var(--sc-accent-2); margin-bottom: 0.8rem;">
+        ⚡ FOUNDER MENTOR ROSTER · VERIFIED SHIPPED VETERANS
+      </div>
+      <h2 class="sc-display sc-display--lg proof__title" style="margin-bottom: 0.5rem;" data-sc-cue="0.06 0.88" data-sc-kinetic="lines">People who've actually shipped.</h2>
+      <p class="sc-body" style="color: var(--sc-ink-soft); margin-bottom: 2rem;">Click any mentor card to inspect full dossier, shipped game history, and schedule 1-on-1 sessions.</p>
+
+      <div class="char-grid" data-sc-in data-sc-stagger="60">
+
+        <article class="char-card blade" data-mentor="bc" style="--card-color: var(--sc-accent);" data-sc-tilt="5">
+          <div class="char-avatar-box">
+            <div class="char-avatar">BC</div>
+            <span class="char-class-icon">🛡️</span>
+          </div>
+          <h4 class="char-name">Bilal Cheema</h4>
+          <p class="char-role">Lead Gameplay Engineer &amp; Founder</p>
+          <div class="char-shipped-tag">🎮 SHIPPED: Duoshift (Unreal 5)</div>
+          <div class="char-stat"><span>UNREAL 5.4 ENGINE XP</span><span>LVL 99</span></div>
+          <div class="char-stat-bar"><div class="char-stat-fill" style="width: 95%; background: var(--sc-accent);"></div></div>
+          <div class="char-inspect-prompt"><span>🔍 INSPECT DOSSIER</span> <span>→</span></div>
         </article>
-        <article class="expert blade-sm" data-sc-tilt="5">
-          <div class="expert__avatar">HK</div>
-          <p class="expert__name">Hilal Khan</p>
-          <p class="expert__role">Ex-Chair, IGDA Pakistan. Game-dev veteran</p>
+
+        <article class="char-card blade" data-mentor="hk" style="--card-color: var(--sc-accent-2);" data-sc-tilt="5">
+          <div class="char-avatar-box">
+            <div class="char-avatar">HK</div>
+            <span class="char-class-icon">👑</span>
+          </div>
+          <h4 class="char-name">Hilal Khan</h4>
+          <p class="char-role">Ecosystem Mentor &amp; Industry Leader</p>
+          <div class="char-shipped-tag">🏆 EX-CHAIR: IGDA Pakistan</div>
+          <div class="char-stat"><span>LEADERSHIP &amp; STRATEGY XP</span><span>LVL 100</span></div>
+          <div class="char-stat-bar"><div class="char-stat-fill" style="width: 100%; background: var(--sc-accent-2);"></div></div>
+          <div class="char-inspect-prompt"><span>🔍 INSPECT DOSSIER</span> <span>→</span></div>
         </article>
-        <article class="expert blade-sm" data-sc-tilt="5">
-          <div class="expert__avatar">WS</div>
-          <p class="expert__name">Waqas Shafique</p>
-          <p class="expert__role">Creator of Liminal Core</p>
+
+        <article class="char-card blade" data-mentor="ws" style="--card-color: var(--peak-magenta);" data-sc-tilt="5">
+          <div class="char-avatar-box">
+            <div class="char-avatar">WS</div>
+            <span class="char-class-icon">⚡</span>
+          </div>
+          <h4 class="char-name">Waqas Shafique</h4>
+          <p class="char-role">Graphics &amp; Shaders Specialist</p>
+          <div class="char-shipped-tag">🎮 SHIPPED: Liminal Core</div>
+          <div class="char-stat"><span>TECH &amp; PHYSICS XP</span><span>LVL 96</span></div>
+          <div class="char-stat-bar"><div class="char-stat-fill" style="width: 96%; background: var(--peak-magenta);"></div></div>
+          <div class="char-inspect-prompt"><span>🔍 INSPECT DOSSIER</span> <span>→</span></div>
         </article>
-        <article class="expert blade-sm" data-sc-tilt="5">
-          <div class="expert__avatar">AR</div>
-          <p class="expert__name">Ali Rasheed</p>
-          <p class="expert__role">Creator of Alien Market Simulator</p>
+
+        <article class="char-card blade" data-mentor="ar" style="--card-color: var(--gold-accent);" data-sc-tilt="5">
+          <div class="char-avatar-box">
+            <div class="char-avatar">AR</div>
+            <span class="char-class-icon">🎨</span>
+          </div>
+          <h4 class="char-name">Ali Rasheed</h4>
+          <p class="char-role">3D Environment &amp; Art Lead</p>
+          <div class="char-shipped-tag">🎮 SHIPPED: Alien Market Sim</div>
+          <div class="char-stat"><span>3D ART &amp; DESIGN XP</span><span>LVL 94</span></div>
+          <div class="char-stat-bar"><div class="char-stat-fill" style="width: 94%; background: var(--gold-accent);"></div></div>
+          <div class="char-inspect-prompt"><span>🔍 INSPECT DOSSIER</span> <span>→</span></div>
         </article>
-        <article class="expert blade-sm" data-sc-tilt="5">
-          <div class="expert__avatar">NS</div>
-          <p class="expert__name">Nimra Sardar</p>
-          <p class="expert__role">Board member, IGDA Pakistan. Community lead</p>
+
+        <article class="char-card blade" data-mentor="ns" style="--card-color: var(--sc-accent);" data-sc-tilt="5">
+          <div class="char-avatar-box">
+            <div class="char-avatar">NS</div>
+            <span class="char-class-icon">⭐</span>
+          </div>
+          <h4 class="char-name">Nimra Sardar</h4>
+          <p class="char-role">Community Director &amp; Board Member</p>
+          <div class="char-shipped-tag">⭐ BOARD MEMBER: IGDA</div>
+          <div class="char-stat"><span>COMMUNITY SUCCESS XP</span><span>LVL 98</span></div>
+          <div class="char-stat-bar"><div class="char-stat-fill" style="width: 98%; background: var(--sc-accent);"></div></div>
+          <div class="char-inspect-prompt"><span>🔍 INSPECT DOSSIER</span> <span>→</span></div>
         </article>
+
       </div>
     </div>
   </section>
 
-  <!-- 12 · QUIET: authored silence -->
+  <!-- Cyber Mentor Dossier Modal -->
+  <div class="mentor-modal" id="mentorModal">
+    <div class="mentor-dossier-card blade" id="mentorDossierCard">
+      <button class="mentor-modal-close" id="closeMentorModalBtn">&times;</button>
+      <div style="display: flex; align-items: center; gap: 1.2rem; border-bottom: 1px solid var(--sc-hairline); padding-bottom: 1.2rem;">
+        <div class="char-avatar" id="modalAvatar" style="width: 72px; height: 72px; font-size: 1.8rem;">BC</div>
+        <div>
+          <h3 id="modalName" style="font-family: var(--sc-font-display); font-size: 1.6rem; margin: 0; color: var(--sc-ink);">Bilal Cheema</h3>
+          <p id="modalRole" style="font-size: 0.85rem; color: var(--sc-ink-soft); margin-top: 0.2rem;">Lead Gameplay Engineer</p>
+        </div>
+      </div>
+      <div style="margin-top: 1.2rem; font-family: var(--sc-font-mono); font-size: 0.85rem; line-height: 1.6;">
+        <div style="color: var(--sc-accent); text-transform: uppercase; font-size: 0.75rem;">SHIPPED PORTFOLIO:</div>
+        <div id="modalShipped" style="color: var(--sc-ink); margin-top: 0.3rem;">Duoshift (Unreal Engine 5.4 PC Multiplayer)</div>
+        
+        <div style="color: var(--sc-accent-2); text-transform: uppercase; font-size: 0.75rem; margin-top: 1rem;">REAPERS MENTORSHIP FOCUS:</div>
+        <div id="modalBio" style="color: var(--sc-ink-soft); margin-top: 0.3rem;">Provides 1-on-1 code reviews, C++ architecture guidance, and performance optimization for Unreal Engine projects.</div>
+      </div>
+      <button class="cartridge-btn" id="modalBookBtn" style="width: 100%; margin-top: 1.5rem;">BOOK 1-ON-1 SESSION</button>
+    </div>
+  </div>
+
+  <!-- 12 · QUIET: Scroll-Driven Warp Sequence -->
   <section class="act quiet" id="quiet">
-    <p class="quiet__line" data-sc-in>The scene is waiting.<span class="quiet__cursor" aria-hidden="true"></span></p>
+    <div class="quiet__sticky">
+      <canvas id="quietCanvas" class="quiet__canvas"></canvas>
+      <div class="quiet__content">
+        <div class="quiet__step quiet__step--1 is-active" id="quietStep1">
+          A NEW ARENA RISES.<span class="quiet__cursor" aria-hidden="true"></span>
+        </div>
+        <div class="quiet__step quiet__step--2" id="quietStep2">
+          BUILT BY DEVELOPERS. POWERED BY PLAYERS.
+        </div>
+        <div class="quiet__step quiet__step--3" id="quietStep3">
+          ENTER THE REAPERS GUILD.<br><span style="color: var(--sc-accent);">CLAIM YOUR LEGACY.</span>
+        </div>
+      </div>
+      <div class="quiet__progress-bar">
+        <div class="quiet__progress-track">
+          <div class="quiet__progress-fill" id="quietProgressFill"></div>
+        </div>
+        <div class="quiet__progress-text" id="quietProgressText">SCROLL TO WARP · 0%</div>
+      </div>
+    </div>
   </section>
 
   <!-- 13 · PEAK: chrome does the work -->
@@ -622,12 +1328,18 @@
       <p class="close__body">Reapers is getting ready. Leave your email and be first in when it drops.</p>
 
       <form class="form" id="earlyAccessForm" novalidate>
-        <label class="sr-only" for="email">Email address</label>
-        <input class="form__input" type="email" id="email" name="email" placeholder="you@studio.dev" autocomplete="email">
+        <div style="width: 100%;">
+          <label class="sr-only" for="email">Email address</label>
+          <input class="form__input" type="email" id="email" name="email" placeholder="you@studio.dev" autocomplete="email" style="width: 100%;">
+          <div class="xp-bar-wrap">
+            <div class="xp-bar-label"><span>XP UNLOCK PROGRESS</span><span id="xpLevel">RANK 0 · RECRUIT</span></div>
+            <div class="xp-bar"><div class="xp-fill" id="xpFill"></div></div>
+          </div>
+        </div>
         <button class="form__submit" type="submit" id="formSubmit">Get Early Access</button>
       </form>
-      <p class="form__error" id="formError">Enter a valid email.</p>
-      <p class="form__success" id="formSuccess">You're on the list.</p>
+      <p class="form__error" id="formError">Enter a valid email address.</p>
+      <p class="form__success" id="formSuccess">You're on the list. Early Access Key Granted!</p>
 
       <footer class="close__foot">
         <div>
@@ -635,7 +1347,7 @@
           <p class="sc-body" style="margin-top: var(--sc-2)">Play. Connect. Create. Dominate.</p>
         </div>
         <nav class="close__foot-links">
-          <a href="https://www.instagram.com/houseofthereapers?igsi=MWN2NWdseXc5NzE4cA==">Instagram</a>
+          <a href="https://www.instagram.com/houseofthereapers?igsi=MWN2NWdseXc5NzE4cA==" target="_blank" rel="noopener">Instagram</a>
           <a href="mailto:reapers.support@gmail.com">Email</a>
         </nav>
       </footer>
@@ -645,8 +1357,25 @@
 </main>
 
 <div class="burst" id="burst" aria-hidden="true">
+  <div class="burst__rays"></div>
   <div class="burst__ring"></div>
-  <p class="burst__label">MAX COMBO<span class="burst__sub">Reapers · early access</span></p>
+  <canvas id="burstCanvas" style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1;"></canvas>
+
+  <div class="burst__content">
+    <div class="burst__icon">🏆</div>
+    <h2 class="burst__label">MAX COMBO!</h2>
+    <div class="burst__badge">⚡ 5× MULTIPLIER MAXED · FOUNDER STATUS UNLOCKED ⚡</div>
+    <button class="burst__cta" id="burstCtaBtn">CLAIM FOUNDER BADGE NOW</button>
+  </div>
+</div>
+
+<div class="badge-modal" id="badgeModal">
+  <div class="badge-card">
+    <div class="badge-icon">🎖️</div>
+    <h3 class="badge-title">EARLY ACCESS KEY GRANTED</h3>
+    <p style="font-size: 0.9rem; color: var(--sc-ink-soft); margin-top: 0.5rem;">Welcome to the Reapers Founder Roster. You have unlocked Founder Badge #4210!</p>
+    <button class="badge-close" id="closeBadgeBtn">CLAIM BADGE &amp; ENTER</button>
+  </div>
 </div>
 
 <script src="scrollcraft.js"></script>
@@ -655,16 +1384,296 @@
 (function () {
   'use strict';
 
-  // ---- Hero crystal scene: brand-matched 3D centerpiece -------------------
-  // Vanilla three.js (this build has no React runtime). Ports the shard
-  // cluster's geometry, material and colours from the brand's original
-  // (unused) react-three-fiber scene, so it reads as the real logo's
-  // teal/purple crystalline swirl rather than generic decoration. Idle
-  // rotation plus a gentle pointer-follow tilt; gated to fine pointers and
-  // off under reduced motion; degrades to a plain dark ground if WebGL is
-  // unavailable.
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---- 1b. Section 2 Parallax Floating Badges & Cyber Grid Canvas ----------
+  (function initProblemParallax() {
+    var section = document.getElementById('problemSection');
+    var canvas = document.getElementById('problemCanvas');
+    var badges = document.querySelectorAll('.parallax-badge');
+
+    if (section && badges.length && !reduced) {
+      function updateParallax() {
+        var rect = section.getBoundingClientRect();
+        var centerOffset = rect.top - (window.innerHeight / 2);
+        badges.forEach(function (badge) {
+          var speed = parseFloat(badge.getAttribute('data-parallax-speed')) || 0.2;
+          var translateY = centerOffset * speed;
+          badge.style.transform = 'translateY(' + translateY + 'px)';
+        });
+      }
+      window.addEventListener('scroll', updateParallax, { passive: true });
+      updateParallax();
+    }
+
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    function resize() {
+      canvas.width = canvas.parentElement.clientWidth;
+      canvas.height = canvas.parentElement.clientHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    var gridOffset = 0;
+    function drawGrid() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.strokeStyle = 'rgba(0, 240, 255, 0.08)';
+      ctx.lineWidth = 1;
+      gridOffset += 0.3;
+
+      var step = 40;
+      for (var x = (gridOffset % step); x < canvas.width; x += step) {
+        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
+      }
+      for (var y = 0; y < canvas.height; y += step) {
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
+      }
+      requestAnimationFrame(drawGrid);
+    }
+    drawGrid();
+  })();
+  // ---- Section 3 Dedicated Cities 3D Orbital Glass Cards & Spine ------------
+  (function initCitiesScrollRadar() {
+    var section = document.getElementById('sectionCities');
+    var canvas = document.getElementById('citiesCanvas');
+    var fill = document.getElementById('citiesProgressFill');
+    var text = document.getElementById('citiesProgressText');
+    var statusTag = document.getElementById('radarStatusTag');
+
+    var orbitCardLhr = document.getElementById('orbitCardLhr');
+    var orbitCardKhi = document.getElementById('orbitCardKhi');
+    var orbitCardIsb = document.getElementById('orbitCardIsb');
+    var wordLhr = document.getElementById('wordLhr');
+    var wordKhi = document.getElementById('wordKhi');
+    var wordIsb = document.getElementById('wordIsb');
+
+    if (!section || !canvas) return;
+
+    var ctx = canvas.getContext('2d');
+    var progress = 0;
+    var lastFrontIndex = -1;
+
+    function resize() {
+      canvas.width = canvas.parentElement.clientWidth;
+      canvas.height = canvas.parentElement.clientHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    function updateOrbitalCards() {
+      var rect = section.getBoundingClientRect();
+      var totalScroll = section.clientHeight - window.innerHeight;
+      if (totalScroll <= 0) return;
+
+      var current = -rect.top;
+      progress = Math.max(0, Math.min(1, current / totalScroll));
+
+      if (fill) fill.style.width = Math.floor(progress * 100) + '%';
+      if (text) text.textContent = 'SCROLL ORBIT RADAR · ' + Math.floor(progress * 100) + '%';
+
+      var orbitAngle = progress * 360;
+      var cards = [
+        { el: orbitCardLhr, word: wordLhr, offset: 0, tagText: 'SIGNAL: LAHORE ORBIT NODE ACTIVE (1,850 DEVS)' },
+        { el: orbitCardKhi, word: wordKhi, offset: 120, tagText: 'SIGNAL: KARACHI ORBIT NODE ACTIVE (3,950 DEVS)' },
+        { el: orbitCardIsb, word: wordIsb, offset: 240, tagText: '⚡ ALL 3 ORBIT NODES SYNCHRONIZED (5,210 DEVS)' }
+      ];
+
+      var radius = 160;
+      var frontIndex = 0;
+      var maxZ = -9999;
+
+      cards.forEach(function (c, idx) {
+        if (!c.el) return;
+        var currentDeg = (orbitAngle + c.offset) % 360;
+        var rad = (currentDeg * Math.PI) / 180;
+
+        var x = Math.sin(rad) * radius;
+        var z = Math.cos(rad) * radius;
+        var scale = 0.78 + ((z + radius) / (2 * radius)) * 0.38;
+        var opacity = 0.25 + ((z + radius) / (2 * radius)) * 0.75;
+
+        c.el.style.transform = 'translate3d(' + x.toFixed(1) + 'px, 0px, ' + z.toFixed(1) + 'px) scale(' + scale.toFixed(2) + ')';
+        c.el.style.opacity = opacity.toFixed(2);
+
+        if (z > maxZ) {
+          maxZ = z;
+          frontIndex = idx;
+        }
+      });
+
+      if (frontIndex !== lastFrontIndex) {
+        lastFrontIndex = frontIndex;
+        playZapSFX();
+      }
+
+      cards.forEach(function (c, idx) {
+        if (!c.el) return;
+        if (idx === frontIndex) {
+          c.el.classList.add('is-active-front');
+          c.el.classList.remove('is-dim-back');
+          if (c.word) c.word.classList.add('is-active');
+          if (statusTag) statusTag.textContent = c.tagText;
+        } else {
+          c.el.classList.remove('is-active-front');
+          c.el.classList.add('is-dim-back');
+          if (c.word) c.word.classList.remove('is-active');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', updateOrbitalCards, { passive: true });
+    updateOrbitalCards();
+
+    // Radar Canvas Animation
+    var angle = 0;
+    function drawRadar() {
+      ctx.fillStyle = 'rgba(15, 21, 34, 0.18)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      var cx = canvas.width / 2;
+      var cy = canvas.height / 2;
+      var radius = Math.min(canvas.width, canvas.height) * 0.38;
+
+      ctx.strokeStyle = 'rgba(0, 255, 157, 0.12)';
+      ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.arc(cx, cy, radius * 0.4, 0, Math.PI * 2); ctx.stroke();
+      ctx.beginPath(); ctx.arc(cx, cy, radius * 0.7, 0, Math.PI * 2); ctx.stroke();
+      ctx.beginPath(); ctx.arc(cx, cy, radius, 0, Math.PI * 2); ctx.stroke();
+
+      // Sweeping radar beam
+      angle += 0.02 + progress * 0.04;
+      ctx.save();
+      ctx.translate(cx, cy);
+      ctx.rotate(angle);
+      var grad = ctx.createRadialGradient(0, 0, 0, 0, 0, radius);
+      grad.addColorStop(0, 'rgba(0, 255, 157, 0.4)');
+      grad.addColorStop(1, 'transparent');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.arc(0, 0, radius, 0, 0.4);
+      ctx.fill();
+      ctx.restore();
+
+      requestAnimationFrame(drawRadar);
+    }
+    drawRadar();
+  })();
+
+  // ---- 2. Procedural Web Audio API Sound Synthesizer ----------------------
+  var audioCtx = null;
+  var soundMuted = false;
+
+  function getAudioContext() {
+    if (!audioCtx && typeof AudioContext !== 'undefined') {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if (audioCtx && audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+    return audioCtx;
+  }
+
+  function playHoverSFX() {
+    if (soundMuted) return;
+    try {
+      var ctx = getAudioContext();
+      if (!ctx) return;
+      var osc = ctx.createOscillator();
+      var gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(580, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.04);
+      gain.gain.setValueAtTime(0.04, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.04);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.04);
+    } catch (e) {}
+  }
+
+  function playComboSFX(level) {
+    if (soundMuted) return;
+    try {
+      var ctx = getAudioContext();
+      if (!ctx) return;
+      var freqs = [261.63, 329.63, 392.00, 523.25, 659.25, 783.99];
+      var freq = freqs[Math.min(level, freqs.length - 1)] || 440;
+      var osc = ctx.createOscillator();
+      var gain = ctx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(freq, ctx.currentTime);
+      gain.gain.setValueAtTime(0.12, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.25);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.25);
+    } catch (e) {}
+  }
+
+  function playZapSFX() {
+    if (soundMuted) return;
+    try {
+      var ctx = getAudioContext();
+      if (!ctx) return;
+      var osc = ctx.createOscillator();
+      var gain = ctx.createGain();
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(800, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(120, ctx.currentTime + 0.12);
+      gain.gain.setValueAtTime(0.1, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.12);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.12);
+    } catch (e) {}
+  }
+
+  function playVictorySFX() {
+    if (soundMuted) return;
+    try {
+      var ctx = getAudioContext();
+      if (!ctx) return;
+      var notes = [523.25, 659.25, 783.99, 1046.50];
+      notes.forEach(function (f, idx) {
+        var osc = ctx.createOscillator();
+        var gain = ctx.createGain();
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(f, ctx.currentTime + idx * 0.08);
+        gain.gain.setValueAtTime(0.08, ctx.currentTime + idx * 0.08);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + idx * 0.08 + 0.3);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(ctx.currentTime + idx * 0.08);
+        osc.stop(ctx.currentTime + idx * 0.08 + 0.3);
+      });
+    } catch (e) {}
+  }
+
+  // Sound Toggle Button
+  var audioBtn = document.getElementById('audioToggleBtn');
+  if (audioBtn) {
+    audioBtn.addEventListener('click', function () {
+      soundMuted = !soundMuted;
+      if (soundMuted) {
+        audioBtn.classList.add('is-muted');
+        document.getElementById('audioIcon').textContent = '🔇';
+        document.getElementById('audioText').textContent = 'SFX OFF';
+      } else {
+        audioBtn.classList.remove('is-muted');
+        document.getElementById('audioIcon').textContent = '🔊';
+        document.getElementById('audioText').textContent = 'SFX ON';
+        playZapSFX();
+      }
+    });
+  }
+
+  // ---- 3. Hero 3D Three.js Emblem with Orbiting Particle Matrix ------------
   (function initHeroScene() {
-    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var canvas = document.getElementById('heroCanvas');
     var heroSection = document.getElementById('hero');
     if (!canvas || !heroSection || !window.THREE) return;
@@ -678,41 +1687,57 @@
     var camera = new THREE.PerspectiveCamera(42, 1, 0.1, 20);
     camera.position.set(0, 0, 5.2);
 
-    scene.add(new THREE.AmbientLight(0xffffff, 0.45));
-    var keyLight = new THREE.DirectionalLight(0x17b3a3, 1.15);
+    scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+    var keyLight = new THREE.DirectionalLight(0x00ff9d, 1.4);
     keyLight.position.set(4, 3, 6);
     scene.add(keyLight);
-    var rimLight = new THREE.DirectionalLight(0x8a4a84, 0.85);
+    var rimLight = new THREE.DirectionalLight(0xff007f, 1.1);
     rimLight.position.set(-5, -2, 3);
     scene.add(rimLight);
-    var specular = new THREE.PointLight(0xffffff, 0.9, 12);
+    var specular = new THREE.PointLight(0x00f0ff, 1.2, 12);
     specular.position.set(0, 2, 4);
     scene.add(specular);
 
     var group = new THREE.Group();
     var geo = new THREE.OctahedronGeometry(1, 0);
     [
-      { pos: [0, 0.1, 0], scale: [1.15, 2.1, 0.55], color: 0x17b3a3, rot: [0.3, 0.4, 0.2] },
-      { pos: [0.9, 0.5, -0.2], scale: [0.7, 1.4, 0.35], color: 0x8a4a84, rot: [-0.4, 0.6, 0.1] },
-      { pos: [-0.8, -0.1, 0.15], scale: [0.55, 1.2, 0.3], color: 0x4f8fba, rot: [0.5, -0.3, 0.4] },
-      { pos: [0.25, -0.75, 0.35], scale: [0.45, 0.9, 0.25], color: 0x17b3a3, rot: [0.1, 1.1, -0.2] },
-      { pos: [-0.15, 1.05, -0.3], scale: [0.4, 0.85, 0.22], color: 0x8a4a84, rot: [-0.6, 0.2, 0.5] }
+      { pos: [0, 0.1, 0], scale: [1.15, 2.1, 0.55], color: 0x00ff9d, rot: [0.3, 0.4, 0.2] },
+      { pos: [0.9, 0.5, -0.2], scale: [0.7, 1.4, 0.35], color: 0xff007f, rot: [-0.4, 0.6, 0.1] },
+      { pos: [-0.8, -0.1, 0.15], scale: [0.55, 1.2, 0.3], color: 0x00f0ff, rot: [0.5, -0.3, 0.4] },
+      { pos: [0.25, -0.75, 0.35], scale: [0.45, 0.9, 0.25], color: 0x00ff9d, rot: [0.1, 1.1, -0.2] },
+      { pos: [-0.15, 1.05, -0.3], scale: [0.4, 0.85, 0.22], color: 0xffff00, rot: [-0.6, 0.2, 0.5] }
     ].forEach(function (d) {
       var mesh = new THREE.Mesh(geo, new THREE.MeshPhysicalMaterial({
-        color: d.color, roughness: 0.15, metalness: 0.5,
-        transmission: 0.22, thickness: 0.6, iridescence: 0.6, iridescenceIOR: 1.3,
-        clearcoat: 0.6, clearcoatRoughness: 0.25
+        color: d.color, roughness: 0.1, metalness: 0.7,
+        transmission: 0.3, thickness: 0.6, iridescence: 0.8, iridescenceIOR: 1.4,
+        clearcoat: 0.8, clearcoatRoughness: 0.2
       }));
       mesh.position.fromArray(d.pos);
       mesh.scale.fromArray(d.scale);
       mesh.rotation.fromArray(d.rot);
       group.add(mesh);
     });
+
+    // Orbiting particle ring
+    var particleCount = 200;
+    var particleGeo = new THREE.BufferGeometry();
+    var positions = new Float32Array(particleCount * 3);
+    for (var i = 0; i < particleCount; i++) {
+      var angle = (i / particleCount) * Math.PI * 2;
+      var radius = 2.2 + (Math.random() - 0.5) * 0.4;
+      positions[i * 3] = Math.cos(angle) * radius;
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 0.6;
+      positions[i * 3 + 2] = Math.sin(angle) * radius;
+    }
+    particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    var particleMat = new THREE.PointsMaterial({ color: 0x00ff9d, size: 0.04, transparent: true, opacity: 0.8 });
+    var particleSystem = new THREE.Points(particleGeo, particleMat);
+    group.add(particleSystem);
+
     scene.add(group);
 
     var pointer = { x: 0, y: 0 };
-    var fineHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-    if (fineHover && !reduced) {
+    if (!reduced) {
       window.addEventListener('pointermove', function (e) {
         pointer.x = (e.clientX / window.innerWidth) * 2 - 1;
         pointer.y = (e.clientY / window.innerHeight) * 2 - 1;
@@ -745,49 +1770,410 @@
       }, { threshold: 0 }).observe(heroSection);
     }
 
+    var shockwave = 0;
+    var currentSpinSpeed = 0.25;
+    var targetSpinSpeed = 0.25;
+
+    // Interactive Hero Click Shockwave Impulse
+    heroSection.addEventListener('click', function (e) {
+      if (e.target.closest('a, button')) return;
+      shockwave = 1.0;
+      playZapSFX();
+    });
+
+    // Kinetic Hover Word Listeners
+    document.querySelectorAll('.hero-word').forEach(function (word) {
+      word.addEventListener('mouseenter', function () {
+        playHoverSFX();
+        var mode = word.getAttribute('data-mode');
+        if (mode === 'play') { targetSpinSpeed = 0.75; particleMat.color.setHex(0x00ff9d); }
+        else if (mode === 'connect') { targetSpinSpeed = 1.1; particleMat.color.setHex(0x00f0ff); }
+        else if (mode === 'create') { targetSpinSpeed = 0.9; particleMat.color.setHex(0xffd700); }
+        else if (mode === 'dominate') { targetSpinSpeed = 1.5; particleMat.color.setHex(0xff007f); }
+      });
+      word.addEventListener('mouseleave', function () {
+        targetSpinSpeed = 0.25;
+        particleMat.color.setHex(0x00ff9d);
+      });
+    });
+
     var driftY = 0, driftX = 0;
     var clock = new THREE.Clock();
     (function tick() {
       requestAnimationFrame(tick);
       if (!running) return;
       var t = clock.getElapsedTime();
-      driftY += ((pointer.x * 0.35) - driftY) * 0.04;
-      driftX += ((-pointer.y * 0.2) - driftX) * 0.04;
-      group.rotation.y = t * 0.18 + driftY;
-      group.rotation.x = Math.sin(t * 0.4) * 0.12 + driftX;
-      group.position.y = Math.sin(t * 0.6) * 0.08;
+      
+      currentSpinSpeed += (targetSpinSpeed - currentSpinSpeed) * 0.08;
+      driftY += ((pointer.x * 0.6) - driftY) * 0.06;
+      driftX += ((-pointer.y * 0.4) - driftX) * 0.06;
+
+      group.rotation.y = t * currentSpinSpeed + driftY;
+      group.rotation.x = Math.sin(t * 0.4) * 0.15 + driftX;
+      group.position.y = Math.sin(t * 0.6) * 0.09;
+
+      if (shockwave > 0.01) {
+        shockwave *= 0.91;
+        particleSystem.scale.setScalar(1 + shockwave * 0.5);
+        keyLight.intensity = 1.4 + shockwave * 2.8;
+      } else {
+        shockwave = 0;
+        particleSystem.scale.setScalar(1);
+        keyLight.intensity = 1.4;
+      }
+
+      particleSystem.rotation.y = -t * (currentSpinSpeed * 1.5);
       renderFrame();
     })();
   })();
 
-  // ---- Combo Meter HUD: the signature move -------------------------------
-  // Cross-act accumulating state living in the fixed chrome, driven by plain
-  // scroll observation rather than any engine device. Ticks once per feature
-  // act as the visitor passes it, never resets on scroll-up (a record, not a
-  // toy), and reports its state via data-sc-verify-state / -hold so the
-  // verification harness can see a layer the engine itself does not know
-  // about.
+  // ---- 4. Interactive Video Game Demo Arcade Controller --------------------
+  (function initDemoVideoArcade() {
+    var video = document.getElementById('demoVideoPlayer');
+    var badge = document.getElementById('demoChannelBadge');
+    var soundBtn = document.getElementById('demoSoundBtn');
+    var chBtns = document.querySelectorAll('.demo-ch-btn');
+
+    if (!video) return;
+
+    chBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        playZapSFX();
+        chBtns.forEach(function (b) { b.classList.remove('is-active'); });
+        btn.classList.add('is-active');
+
+        var src = btn.getAttribute('data-src');
+        var badgeText = btn.getAttribute('data-badge');
+
+        if (video && src) {
+          video.classList.add('is-switching');
+          setTimeout(function () {
+            video.src = src;
+            video.play();
+            if (badge) badge.textContent = badgeText;
+            video.classList.remove('is-switching');
+          }, 150);
+        }
+      });
+    });
+
+    if (soundBtn) {
+      soundBtn.addEventListener('click', function () {
+        playZapSFX();
+        video.muted = !video.muted;
+        if (video.muted) {
+          soundBtn.textContent = '🔊 UNMUTE DEMO';
+          soundBtn.style.color = 'var(--sc-accent-2)';
+        } else {
+          soundBtn.textContent = '🔇 MUTE DEMO';
+          soundBtn.style.color = 'var(--peak-magenta)';
+        }
+      });
+    }
+  })();
+
+  // ---- 5. Scroll-Driven 3D Warp Tunnel & Multi-Stage Text Controller ------
+  (function initScrollWarpSequence() {
+    var section = document.getElementById('quiet');
+    var canvas = document.getElementById('quietCanvas');
+    var step1 = document.getElementById('quietStep1');
+    var step2 = document.getElementById('quietStep2');
+    var step3 = document.getElementById('quietStep3');
+    var fill = document.getElementById('quietProgressFill');
+    var progressText = document.getElementById('quietProgressText');
+
+    if (!section || !canvas) return;
+
+    var ctx = canvas.getContext('2d');
+    var progress = 0;
+    var currentStep = 1;
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    // Create 3D particles for warp tunnel
+    var numParticles = 250;
+    var particles = [];
+    var chars = 'REAPERS01PLAYCONNECTCREATEDOMINATE⚡🎮🚀';
+    
+    for (var i = 0; i < numParticles; i++) {
+      particles.push({
+        x: (Math.random() - 0.5) * 2000,
+        y: (Math.random() - 0.5) * 2000,
+        z: Math.random() * 1000,
+        char: chars[Math.floor(Math.random() * chars.length)],
+        size: Math.random() * 16 + 10
+      });
+    }
+
+    // Scroll listener
+    function updateScrollProgress() {
+      var rect = section.getBoundingClientRect();
+      var totalScroll = section.clientHeight - window.innerHeight;
+      if (totalScroll <= 0) return;
+
+      var current = -rect.top;
+      progress = Math.max(0, Math.min(1, current / totalScroll));
+
+      // Update progress tracker UI
+      if (fill) fill.style.width = Math.floor(progress * 100) + '%';
+      if (progressText) progressText.textContent = 'SCROLL TO WARP · ' + Math.floor(progress * 100) + '%';
+
+      // Update text step visibility
+      var newStep = 1;
+      if (progress > 0.68) newStep = 3;
+      else if (progress > 0.32) newStep = 2;
+
+      if (newStep !== currentStep) {
+        currentStep = newStep;
+        playZapSFX();
+        [step1, step2, step3].forEach(function (el, idx) {
+          if (el) {
+            if (idx + 1 === currentStep) el.classList.add('is-active');
+            else el.classList.remove('is-active');
+          }
+        });
+      }
+    }
+
+    window.addEventListener('scroll', updateScrollProgress, { passive: true });
+    updateScrollProgress();
+
+    // Warp Render Loop
+    function renderWarp() {
+      ctx.fillStyle = 'rgba(4, 6, 11, 0.22)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      var cx = canvas.width / 2;
+      var cy = canvas.height / 2;
+      var speed = 4 + progress * 24;
+
+      particles.forEach(function (p) {
+        p.z -= speed;
+        if (p.z <= 0) {
+          p.z = 1000;
+          p.x = (Math.random() - 0.5) * 2000;
+          p.y = (Math.random() - 0.5) * 2000;
+        }
+
+        var k = 300 / p.z;
+        var px = p.x * k + cx;
+        var py = p.y * k + cy;
+
+        if (px >= 0 && px <= canvas.width && py >= 0 && py <= canvas.height) {
+          var alpha = Math.min(1, (1000 - p.z) / 400);
+          ctx.font = (p.size * k) + 'px "IBM Plex Mono", monospace';
+          
+          if (progress < 0.35) ctx.fillStyle = 'rgba(0, 255, 157, ' + alpha + ')';
+          else if (progress < 0.7) ctx.fillStyle = 'rgba(0, 240, 255, ' + alpha + ')';
+          else ctx.fillStyle = 'rgba(255, 0, 127, ' + alpha + ')';
+
+          ctx.fillText(p.char, px, py);
+        }
+      });
+
+      requestAnimationFrame(renderWarp);
+    }
+    renderWarp();
+  })();
+
+  // ---- 6. Chatroom Reactions & Event Tabs ---------------------------------
+  document.querySelectorAll('.react-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      playZapSFX();
+      var countEl = btn.querySelector('.react-count');
+      if (countEl) {
+        var val = parseInt(countEl.textContent, 10) || 0;
+        countEl.textContent = val + 1;
+        btn.style.borderColor = 'var(--sc-accent)';
+        btn.style.color = 'var(--sc-accent)';
+      }
+    });
+  });
+
+  // Interactive Event Ticket Card Swapper
+  var eventData = {
+    all: {
+      tag: 'PGDA NATIONAL GAME JAM 2026',
+      title: '48-Hour Game Development Sprint',
+      desc: 'Compete with over 500 developers across Pakistan.',
+      timerSec: 226328,
+      color: 'var(--sc-accent)'
+    },
+    jam: {
+      tag: 'INDIE PROTOTYPE SHOWCASE JAM',
+      title: 'Rapid Game Mechanics Competition',
+      desc: 'Build and showcase playable mechanics live to community mentors.',
+      timerSec: 461550,
+      color: 'var(--sc-accent-2)'
+    },
+    esports: {
+      tag: 'REAPERS VALORANT ARENA 2026',
+      title: '5v5 Tactical Esports Championship',
+      desc: 'Battle Pakistan\'s top community rosters live on stream.',
+      timerSec: 156410,
+      color: 'var(--peak-magenta)'
+    }
+  };
+
+  var currentTimerSeconds = 226328;
+  var countdownEl = document.getElementById('eventCountdown');
+
+  document.querySelectorAll('.event-tab').forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      playZapSFX();
+      document.querySelectorAll('.event-tab').forEach(function (t) { t.classList.remove('is-active'); });
+      tab.classList.add('is-active');
+
+      var cat = tab.getAttribute('data-cat') || 'all';
+      var data = eventData[cat] || eventData.all;
+      var widget = document.getElementById('eventPassWidget');
+      var tagEl = document.getElementById('eventTag');
+      var titleEl = document.getElementById('eventTitle');
+      var descEl = document.getElementById('eventDesc');
+
+      if (widget) {
+        widget.classList.add('is-animating');
+        setTimeout(function () {
+          if (tagEl) { tagEl.textContent = data.tag; tagEl.style.color = data.color; }
+          if (titleEl) titleEl.textContent = data.title;
+          if (descEl) descEl.textContent = data.desc;
+          if (countdownEl) countdownEl.style.color = data.color;
+          currentTimerSeconds = data.timerSec;
+          widget.style.borderColor = data.color;
+          widget.style.boxShadow = '0 10px 30px -10px ' + data.color;
+          widget.classList.remove('is-animating');
+        }, 160);
+      }
+    });
+  });
+
+  // Countdown timer update
+  (function initTimer() {
+    if (!countdownEl) return;
+    setInterval(function () {
+      currentTimerSeconds--;
+      if (currentTimerSeconds < 0) currentTimerSeconds = 0;
+      var d = Math.floor(currentTimerSeconds / (3600 * 24));
+      var h = Math.floor((currentTimerSeconds % (3600 * 24)) / 3600);
+      var m = Math.floor((currentTimerSeconds % 3600) / 60);
+      var s = currentTimerSeconds % 60;
+      countdownEl.textContent = (d < 10 ? '0' + d : d) + 'd ' + (h < 10 ? '0' + h : h) + 'h ' + (m < 10 ? '0' + m : m) + 'm ' + (s < 10 ? '0' + s : s) + 's';
+    }, 1000);
+  })();
+
+  // ---- Cyber Mentor Dossier Modal Controller -----------------------------
+  var mentorDetails = {
+    bc: {
+      avatar: 'BC',
+      name: 'Bilal Cheema',
+      role: 'Lead Gameplay Engineer & Founder',
+      shipped: 'Duoshift (Unreal Engine 5.4 PC Multiplayer)',
+      bio: 'Provides 1-on-1 C++ architecture code reviews, network replication audits, and frame budget optimization for Unreal Engine projects.',
+      color: 'var(--sc-accent)'
+    },
+    hk: {
+      avatar: 'HK',
+      name: 'Hilal Khan',
+      role: 'Ecosystem Mentor & Industry Leader',
+      shipped: 'IGDA Pakistan Leadership & National Game Jams',
+      bio: 'Advises game studios on pitch deck strategy, studio scaling, international publisher relations, and team leadership.',
+      color: 'var(--sc-accent-2)'
+    },
+    ws: {
+      avatar: 'WS',
+      name: 'Waqas Shafique',
+      role: 'Graphics & Shaders Specialist',
+      shipped: 'Liminal Core (Custom Engine & Shaders)',
+      bio: 'Teaches HLSL/GLSL shader development, GPU rendering pipelines, dynamic lighting performance, and procedural visual effects.',
+      color: 'var(--peak-magenta)'
+    },
+    ar: {
+      avatar: 'AR',
+      name: 'Ali Rasheed',
+      role: '3D Environment & Art Lead',
+      shipped: 'Alien Market Simulator (Stylized 3D)',
+      bio: 'Reviews 3D environment art, Maya/Blender pipeline workflows, PBR texture optimization, and stylized lighting setups.',
+      color: 'var(--gold-accent)'
+    },
+    ns: {
+      avatar: 'NS',
+      name: 'Nimra Sardar',
+      role: 'Community Director & Board Member',
+      shipped: 'IGDA Community Developer Success Network',
+      bio: 'Mentors game creators on community management, Discord server growth, playtest feedback loops, and launch marketing.',
+      color: 'var(--sc-accent)'
+    }
+  };
+
+  var mentorModal = document.getElementById('mentorModal');
+  var mentorDossierCard = document.getElementById('mentorDossierCard');
+  var closeMentorModalBtn = document.getElementById('closeMentorModalBtn');
+  var modalAvatar = document.getElementById('modalAvatar');
+  var modalName = document.getElementById('modalName');
+  var modalRole = document.getElementById('modalRole');
+  var modalShipped = document.getElementById('modalShipped');
+  var modalBio = document.getElementById('modalBio');
+  var modalBookBtn = document.getElementById('modalBookBtn');
+
+  document.querySelectorAll('.char-card').forEach(function (card) {
+    card.addEventListener('click', function () {
+      playVictorySFX();
+      var mId = card.getAttribute('data-mentor') || 'bc';
+      var data = mentorDetails[mId] || mentorDetails.bc;
+
+      if (modalAvatar) { modalAvatar.textContent = data.avatar; modalAvatar.style.borderColor = data.color; modalAvatar.style.color = data.color; }
+      if (modalName) modalName.textContent = data.name;
+      if (modalRole) modalRole.textContent = data.role;
+      if (modalShipped) modalShipped.textContent = data.shipped;
+      if (modalBio) modalBio.textContent = data.bio;
+      if (mentorDossierCard) mentorDossierCard.style.setProperty('--modal-color', data.color);
+
+      if (mentorModal) mentorModal.classList.add('is-active');
+    });
+  });
+
+  if (closeMentorModalBtn && mentorModal) {
+    closeMentorModalBtn.addEventListener('click', function () {
+      playZapSFX();
+      mentorModal.classList.remove('is-active');
+    });
+  }
+
+  if (modalBookBtn && mentorModal) {
+    modalBookBtn.addEventListener('click', function () {
+      playZapSFX();
+      mentorModal.classList.remove('is-active');
+      var closeSec = document.getElementById('close');
+      if (closeSec) closeSec.scrollIntoView({ behavior: 'smooth' });
+    });
+  }
+
+  // ---- 7. Combo Meter HUD & Burst -----------------------------------------
   var hud = document.getElementById('hud');
   var comboChip = document.getElementById('comboChip');
   var comboValue = document.getElementById('comboValue');
   var burst = document.getElementById('burst');
   var combo = 0;
   var maxFired = false;
-  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function reportState() {
     hud.setAttribute('data-sc-verify-state', 'combo:' + combo + (maxFired ? ';peak:true' : ''));
   }
 
-  function tick(n) {
+  function tickCombo(n) {
     if (n <= combo) return;
     combo = n;
     comboValue.textContent = '×' + combo;
     comboChip.classList.remove('idle-pulse');
     reportState();
+    playComboSFX(combo);
     if (!reduced) {
       comboChip.classList.remove('hit');
-      // Force reflow so the animation can restart on consecutive ticks.
       void comboChip.offsetWidth;
       comboChip.classList.add('hit');
     }
@@ -798,13 +2184,77 @@
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           var n = parseInt(entry.target.getAttribute('data-combo'), 10);
-          if (!isNaN(n)) tick(n);
+          if (!isNaN(n)) tickCombo(n);
         }
       });
     }, { rootMargin: '-40% 0px -40% 0px', threshold: 0 });
     Array.prototype.forEach.call(document.querySelectorAll('[data-combo]'), function (el) {
       featureIO.observe(el);
     });
+
+    // Burst Canvas Particle Cannon
+    var burstCanvas = document.getElementById('burstCanvas');
+    var burstParticles = [];
+    var fireBurstParticles = function () {};
+
+    if (burstCanvas) {
+      var bCtx = burstCanvas.getContext('2d');
+      function resizeBurst() {
+        burstCanvas.width = window.innerWidth;
+        burstCanvas.height = window.innerHeight;
+      }
+      resizeBurst();
+      window.addEventListener('resize', resizeBurst);
+
+      fireBurstParticles = function () {
+        burstParticles = [];
+        var colors = ['#00ff9d', '#00f0ff', '#ff007f', '#ffd700', '#ffffff'];
+        var cx = burstCanvas.width / 2;
+        var cy = burstCanvas.height / 2;
+
+        for (var i = 0; i < 140; i++) {
+          var angle = Math.random() * Math.PI * 2;
+          var speed = Math.random() * 12 + 4;
+          burstParticles.push({
+            x: cx, y: cy,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            radius: Math.random() * 5 + 2,
+            alpha: 1
+          });
+        }
+      };
+
+      function loopBurst() {
+        bCtx.clearRect(0, 0, burstCanvas.width, burstCanvas.height);
+        burstParticles.forEach(function (p) {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.alpha -= 0.012;
+          if (p.alpha > 0) {
+            bCtx.fillStyle = p.color;
+            bCtx.globalAlpha = p.alpha;
+            bCtx.beginPath();
+            bCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            bCtx.fill();
+          }
+        });
+        bCtx.globalAlpha = 1;
+        requestAnimationFrame(loopBurst);
+      }
+      loopBurst();
+    }
+
+    var burstCtaBtn = document.getElementById('burstCtaBtn');
+    if (burstCtaBtn) {
+      burstCtaBtn.addEventListener('click', function () {
+        playZapSFX();
+        burst.classList.remove('is-live');
+        var closeSec = document.getElementById('close');
+        if (closeSec) closeSec.scrollIntoView({ behavior: 'smooth' });
+      });
+    }
 
     var peakEl = document.getElementById('peak');
     var peakIO = new IntersectionObserver(function (entries) {
@@ -814,7 +2264,9 @@
           burst.classList.add('is-live');
           burst.setAttribute('data-sc-verify-hold', 'true');
           reportState();
+          playVictorySFX();
           if (!reduced) {
+            fireBurstParticles();
             document.body.classList.add('sc-shake');
             setTimeout(function () { document.body.classList.remove('sc-shake'); }, 400);
           }
@@ -827,14 +2279,25 @@
     peakIO.observe(peakEl);
   }
 
-  // ---- Early access capture ----------------------------------------------
-  // No live app or store listing exists yet, so this is an honest early-access
-  // capture (local only, no backend claim), not a fabricated download.
+  // ---- 8. Early Access Form & XP Rank Unlock ------------------------------
   var form = document.getElementById('earlyAccessForm');
   var emailInput = document.getElementById('email');
   var errorEl = document.getElementById('formError');
   var successEl = document.getElementById('formSuccess');
   var submitBtn = document.getElementById('formSubmit');
+  var xpFill = document.getElementById('xpFill');
+  var xpLevel = document.getElementById('xpLevel');
+  var badgeModal = document.getElementById('badgeModal');
+  var closeBadgeBtn = document.getElementById('closeBadgeBtn');
+
+  emailInput.addEventListener('input', function () {
+    var len = emailInput.value.trim().length;
+    var pct = Math.min(100, Math.floor((len / 15) * 100));
+    xpFill.style.width = pct + '%';
+    if (pct < 30) xpLevel.textContent = 'RANK 0 · RECRUIT';
+    else if (pct < 70) xpLevel.textContent = 'RANK 1 · GUILD MEMBER';
+    else xpLevel.textContent = 'RANK 2 · FOUNDER READY!';
+  });
 
   function validEmail(v) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
@@ -852,17 +2315,28 @@
     emailInput.removeAttribute('aria-invalid');
     submitBtn.classList.add('pulse');
     submitBtn.disabled = true;
-    submitBtn.textContent = 'Sending…';
+    submitBtn.textContent = 'Unlocking Access…';
+    playVictorySFX();
+
     try {
       var list = JSON.parse(localStorage.getItem('reapers-early-access') || '[]');
       list.push({ email: value, at: new Date().toISOString() });
       localStorage.setItem('reapers-early-access', JSON.stringify(list));
     } catch (err) {}
+
     setTimeout(function () {
       form.hidden = true;
       successEl.classList.add('is-visible');
-    }, 260);
+      badgeModal.classList.add('is-active');
+    }, 400);
   });
+
+  if (closeBadgeBtn) {
+    closeBadgeBtn.addEventListener('click', function () {
+      badgeModal.classList.remove('is-active');
+      playZapSFX();
+    });
+  }
 })();
 </script>
 </body>
