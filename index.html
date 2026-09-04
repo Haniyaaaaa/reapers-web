@@ -44,65 +44,43 @@
     position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden;
     display: flex; align-items: center; justify-content: center;
   }
-  .cities-act__grid {
-    display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--sc-8);
-    align-items: center; justify-items: stretch; width: 100%;
+  .cities-act__container {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; width: 100%; max-width: 960px; margin: 0 auto; z-index: 2;
   }
-  @media (max-width: 960px) {
-    .cities-act__grid { grid-template-columns: 1fr; gap: var(--sc-5); }
-    .cities-act__right { display: none; }
+  .cities-act__header {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    max-width: 680px; margin: 0 auto;
   }
-  .cities-act__left {
-    display: flex; flex-direction: column; justify-content: center; z-index: 2;
+  .problem2__cities {
+    font-size: clamp(2rem, 3.8vw, 3.6rem); font-weight: 700; margin: 0.3rem 0;
   }
-  .cities-act__right {
-    position: relative; z-index: 2; width: 100%; aspect-ratio: 1 / 1; max-height: 480px;
-  }
-  .radar-frame {
-    position: relative; width: 100%; height: 100%; background: var(--sc-surface);
-    border: 1px solid var(--sc-hairline-strong); display: flex; flex-direction: column;
-    box-shadow: 0 20px 50px -10px rgba(0,0,0,0.15); overflow: hidden;
-  }
-  .radar-frame__header {
-    padding: 0.6rem 1rem; background: color-mix(in oklab, var(--sc-surface) 90%, var(--sc-canvas));
-    border-bottom: 1px solid var(--sc-hairline); display: flex; justify-content: space-between;
-    font-family: var(--sc-font-mono); font-size: 0.75rem; color: var(--sc-ink-soft);
-  }
-  .radar-frame__canvas {
-    flex: 1; width: 100%; height: 100%; display: block; background: var(--sc-surface);
-  }
-  .radar-frame__footer {
-    padding: 0.6rem 1rem; background: color-mix(in oklab, var(--sc-surface) 90%, var(--sc-canvas));
-    border-top: 1px solid var(--sc-hairline); font-family: var(--sc-font-mono);
-    font-size: 0.75rem; color: var(--sc-accent); text-align: center; letter-spacing: var(--sc-track-wide);
-  }
-
   .city-title-word {
-    display: inline-block; transition: color 400ms var(--sc-ease-out), transform 400ms var(--sc-ease-out), text-shadow 400ms var(--sc-ease-out), opacity 400ms var(--sc-ease-out);
-    opacity: 0.45; color: var(--sc-ink-soft); margin-right: 0.3em;
+    display: inline-block; transition: all 400ms var(--sc-ease-out);
+    opacity: 0.45; color: var(--sc-ink-soft); margin: 0 0.15em;
   }
   .city-title-word.is-active {
-    opacity: 1; transform: scale(1.05); color: var(--sc-ink);
+    opacity: 1; transform: scale(1.06); color: var(--sc-ink);
   }
-  .city-title-word--lhr.is-active { color: var(--sc-accent); text-shadow: 0 0 20px color-mix(in oklab, var(--sc-accent) 50%, transparent); }
-  .city-title-word--khi.is-active { color: var(--sc-accent-2); text-shadow: 0 0 20px color-mix(in oklab, var(--sc-accent-2) 50%, transparent); }
-  .city-title-word--isb.is-active { color: var(--peak-magenta); text-shadow: 0 0 20px color-mix(in oklab, var(--peak-magenta) 50%, transparent); }
+  .city-title-word--lhr.is-active { color: var(--sc-accent); text-shadow: 0 0 24px color-mix(in oklab, var(--sc-accent) 55%, transparent); }
+  .city-title-word--khi.is-active { color: var(--sc-accent-2); text-shadow: 0 0 24px color-mix(in oklab, var(--sc-accent-2) 55%, transparent); }
+  .city-title-word--isb.is-active { color: var(--peak-magenta); text-shadow: 0 0 24px color-mix(in oklab, var(--peak-magenta) 55%, transparent); }
 
   /* ---------------------------------- Section 3 Orbital Revolving Glass Cards --- */
   .spine-orbit-stage {
-    position: relative; width: 100%; height: 280px; margin-top: 1.2rem;
+    position: relative; width: 100%; max-width: 720px; height: 250px; margin-top: 1rem;
     perspective: 1100px; transform-style: preserve-3d;
     display: flex; align-items: center; justify-content: center;
   }
   .cyber-spine {
     position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
-    width: 4px; height: 220px;
+    width: 4px; height: 200px;
     background: linear-gradient(180deg, transparent 0%, var(--sc-accent) 30%, var(--sc-accent-2) 70%, transparent 100%);
     box-shadow: 0 0 20px var(--sc-accent); z-index: 1; pointer-events: none;
   }
   .cyber-spine::before {
     content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    width: 60px; height: 60px; border-radius: 50%;
+    width: 54px; height: 54px; border-radius: 50%;
     border: 1px dashed var(--sc-accent); animation: spineSpin 12s linear infinite;
   }
   @keyframes spineSpin { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
@@ -114,12 +92,12 @@
   
   .glass-orbit-card {
     position: absolute; left: 50%; top: 50%;
-    width: 15.5rem; padding: 1.2rem 1.4rem;
+    width: 15rem; padding: 1.1rem 1.3rem;
     background: var(--sc-surface);
     backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
     border: 1px solid var(--sc-hairline-strong);
     color: var(--sc-ink);
-    margin-left: -7.75rem; margin-top: -4.2rem;
+    margin-left: -7.5rem; margin-top: -4rem;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
     transition: opacity 300ms var(--sc-ease-out), border-color 300ms var(--sc-ease-out), box-shadow 300ms var(--sc-ease-out), filter 300ms var(--sc-ease-out);
     will-change: transform, opacity;
@@ -130,11 +108,46 @@
   }
   .glass-orbit-card.is-active-front {
     opacity: 1 !important; border-color: var(--city-color);
-    box-shadow: 0 15px 40px -10px color-mix(in oklab, var(--city-color) 40%, transparent);
+    box-shadow: 0 15px 40px -10px color-mix(in oklab, var(--city-color) 45%, transparent);
     z-index: 10;
   }
   .glass-orbit-card.is-dim-back {
     opacity: 0.35; filter: blur(1px);
+  }
+
+  .city-nodes-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+    width: 100%; max-width: 820px; margin-top: 1.2rem;
+  }
+  .city-node-card {
+    background: var(--sc-surface); border: 1px solid var(--sc-hairline-strong);
+    padding: 0.8rem 1rem; text-align: left; transition: all 300ms var(--sc-ease-out);
+  }
+  .city-node-card.is-active {
+    border-color: var(--node-color);
+    box-shadow: 0 0 20px color-mix(in oklab, var(--node-color) 35%, transparent);
+    transform: translateY(-2px);
+  }
+  .city-node-header {
+    display: flex; align-items: center; gap: 0.4rem; font-family: var(--sc-font-mono);
+    font-size: 0.72rem; letter-spacing: var(--sc-track-wide); color: var(--sc-ink-soft);
+  }
+  .city-node-devs {
+    font-family: var(--sc-font-display); font-weight: 700; font-size: 1.1rem;
+    color: var(--sc-ink); margin-top: 0.2rem;
+  }
+  .city-node-ping {
+    font-family: var(--sc-font-mono); font-size: 0.65rem; color: var(--node-color);
+    letter-spacing: 0.05em; margin-top: 0.25rem;
+  }
+
+  .cities-progress-hud {
+    width: 100%; max-width: 480px; margin-top: 1.2rem; text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    .city-nodes-grid { grid-template-columns: 1fr; gap: 0.6rem; max-width: 340px; }
+    .spine-orbit-stage { height: 220px; }
   }
 
   /* ----------------------------------- Interactive Video Game Demo Player --- */
@@ -579,23 +592,61 @@
   .proof__photo { position: relative; width: 100%; margin: 0 0 var(--sc-8); aspect-ratio: 16/7; overflow: clip; }
   .proof__photo img { width: 100%; height: 100%; object-fit: cover; }
   .proof__title { margin-bottom: var(--sc-7); }
-  .partners { display: flex; flex-wrap: wrap; gap: var(--sc-5); align-items: center; }
-  .partners img {
-    box-sizing: border-box;
-    width: clamp(9.5rem, 20vw, 12rem); height: clamp(5.5rem, 10vw, 7rem);
-    background: var(--sc-surface);
-    border: 1px solid var(--sc-hairline-strong);
-    padding: var(--sc-3) var(--sc-4); object-fit: contain;
-    filter: brightness(1) contrast(1.05); opacity: 0.95;
-    transition: opacity var(--sc-d-base) var(--sc-ease-out), filter var(--sc-d-base) var(--sc-ease-out),
-                transform var(--sc-d-base) var(--sc-ease-out), border-color var(--sc-d-base) var(--sc-ease-out),
-                box-shadow var(--sc-d-base) var(--sc-ease-out);
+  /* ------------------------------- Community Partner Logos in Section 5 --- */
+  .community-logos-showcase {
+    display: flex; flex-direction: column; gap: 0.8rem; margin-top: 1.8rem; width: 100%;
   }
-  @media (hover: hover) and (pointer: fine) {
-    .partners img:hover {
-      opacity: 1; filter: brightness(1.1); border-color: var(--sc-accent); transform: translateY(-4px) scale(1.06);
-      box-shadow: 0 10px 25px -8px color-mix(in oklab, var(--sc-accent) 45%, transparent);
-    }
+  .community-logos-label {
+    font-family: var(--sc-font-mono); font-size: 0.75rem; letter-spacing: var(--sc-track-wide);
+    color: var(--sc-accent); text-transform: uppercase; display: flex; align-items: center; gap: 0.4rem;
+  }
+  .community-logos-grid {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.85rem; width: 100%;
+  }
+  .community-logo-card {
+    background: color-mix(in oklab, var(--sc-surface) 95%, #000);
+    border: 1px solid var(--sc-hairline-strong);
+    padding: 1.1rem 0.6rem 0.8rem 0.6rem; display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+    min-height: 118px; border-radius: var(--sc-r-md); transition: all 250ms var(--sc-ease-out);
+    cursor: pointer; position: relative; overflow: hidden; text-decoration: none;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  }
+  .community-logo-card img {
+    height: 54px; width: 92%; object-fit: contain;
+    filter: brightness(1.25) contrast(1.1) drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+    transition: transform 250ms var(--sc-ease-out), filter 250ms var(--sc-ease-out);
+    mix-blend-mode: screen;
+  }
+  /* Specially scale & boost IGDA Pakistan logo so text is crisp and large */
+  .community-logo-card img.logo-igda {
+    transform: scale(1.45);
+    filter: brightness(1.7) contrast(1.25) drop-shadow(0 0 10px rgba(0, 255, 157, 0.3));
+  }
+  .community-logo-title {
+    font-family: var(--sc-font-mono); font-size: 0.7rem; color: var(--sc-ink-soft);
+    letter-spacing: 0.02em; font-weight: 700; text-align: center; line-height: 1.15;
+    transition: color 250ms var(--sc-ease-out); margin-top: 0.4rem;
+  }
+  .community-logo-card:hover {
+    border-color: var(--sc-accent); transform: translateY(-4px);
+    box-shadow: 0 12px 30px color-mix(in oklab, var(--sc-accent) 40%, transparent);
+    background: var(--sc-surface);
+  }
+  .community-logo-card:hover img {
+    transform: scale(1.15);
+  }
+  .community-logo-card:hover img.logo-igda {
+    transform: scale(1.6);
+  }
+  .community-logo-card:hover .community-logo-title {
+    color: var(--sc-accent);
+  }
+
+  @media (max-width: 860px) {
+    .community-logos-grid { grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
+  }
+  @media (max-width: 480px) {
+    .community-logos-grid { grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
   }
 
   /* ----------------------------------------------------------- experts --- */
@@ -928,15 +979,7 @@
       <img src="assets/logo-160.png" alt="" width="44" height="44">
       <span class="hud__word">Reapers</span>
     </a>
-    <div class="hud__online-badge">
-      <span class="hud__online-dot"></span>
-      <span class="hud__online-count">4,210</span>
-      <span class="hud__online-label"> GAMERS ONLINE</span>
-    </div>
-    <div class="hud__combo idle-pulse" id="comboChip">
-      <span class="hud__combo-label">Combo</span>
-      <span class="hud__combo-value" id="comboValue">×0</span>
-    </div>
+
     <button class="hud__audio-btn" id="audioToggleBtn" title="Toggle Gaming Sound Effects">
       <span id="audioIcon">🔊</span> <span id="audioText">SFX ON</span>
     </button>
@@ -1006,15 +1049,9 @@
   <!-- 3 · PROBLEM 1: Parallax visualizer & Fragment HUD -->
   <section class="act problem-act" id="problemSection">
     <canvas id="problemCanvas" class="problem-act__canvas"></canvas>
-    
-    <!-- Parallax Floating Fragment Badges -->
-    <div class="parallax-badge parallax-badge--1" data-parallax-speed="-0.28">⚠️ [DISCORD_FRAGMENT_01]</div>
-    <div class="parallax-badge parallax-badge--2" data-parallax-speed="0.22">💬 [WHATSAPP_FEED_02]</div>
-    <div class="parallax-badge parallax-badge--3" data-parallax-speed="-0.15">📅 [UNREGISTERED_JAM_03]</div>
 
     <div class="sc-wrap">
       <div class="problem-card blade" data-sc-in data-sc-stagger="70" data-sc-tilt="4">
-        <div class="problem-tag">⚡ SYSTEM STATUS: FRAGMENTATION DETECTED</div>
         <h2 class="sc-display sc-display--lg glitch-in" style="margin-top: 0;">The scene is everywhere. And nowhere.</h2>
         <p class="sc-body" style="font-size: var(--sc-t-lg); margin-top: 1rem;">Chat groups split across five apps. Events you hear about after they happen. Feedback that goes nowhere.</p>
         
@@ -1039,70 +1076,87 @@
   <!-- 3 · PROBLEM 2: Section 3 Cities 3D Orbital Glass Cards & Spine Experience -->
   <section class="act cities-act" id="sectionCities">
     <div class="cities-act__sticky">
-      <div class="cities-act__grid sc-wrap">
+      <div class="cities-act__container sc-wrap">
         
-        <!-- Left Column: Headlines & 3D Orbital Revolving Glass Cards Stage -->
-        <div class="cities-act__left">
-          <div class="problem-tag" style="background: color-mix(in oklab, var(--sc-accent) 12%, transparent); border-color: color-mix(in oklab, var(--sc-accent) 35%, transparent); color: var(--sc-accent);">
+        <!-- Centered Header & Headlines -->
+        <div class="cities-act__header">
+          <div class="problem-tag" style="background: color-mix(in oklab, var(--sc-accent) 12%, transparent); border-color: color-mix(in oklab, var(--sc-accent) 35%, transparent); color: var(--sc-accent); margin: 0 auto 0.6rem auto;">
             ⚡ 3D ORBITAL NETWORK SPINE
           </div>
 
-          <h2 class="sc-display problem2__cities" style="max-width: 15ch;">
+          <h2 class="sc-display problem2__cities">
             <span class="city-title-word city-title-word--lhr is-active" id="wordLhr">Lahore.</span>
             <span class="city-title-word city-title-word--khi" id="wordKhi">Karachi.</span>
             <span class="city-title-word city-title-word--isb" id="wordIsb">Islamabad.</span>
           </h2>
 
-          <p class="sc-lede problem2__note" id="citiesSub" style="margin-top: 0.4rem;">
+          <p class="sc-lede problem2__note" id="citiesSub" style="margin-top: 0.3rem;">
             Same scene. Different rooms. Revolving in unity.
           </p>
+        </div>
 
-          <!-- 3D Circular Revolving Glass Cards Stage -->
-          <div class="spine-orbit-stage" id="spineOrbitStage">
-            <div class="cyber-spine"></div>
-            <div class="orbit-track" id="orbitTrack">
+        <!-- 3D Circular Revolving Glass Cards Stage -->
+        <div class="spine-orbit-stage" id="spineOrbitStage">
+          <div class="cyber-spine"></div>
+          <div class="orbit-track" id="orbitTrack">
 
-              <div class="glass-orbit-card blade is-active-front" id="orbitCardLhr" style="--city-color: var(--sc-accent);">
-                <div class="city-card-code">LHR · LAHORE</div>
-                <div class="city-card-devs">1,850+ DEVS</div>
-                <div class="city-card-sub">🟢 ORBIT NODE 01 · 14ms</div>
-              </div>
-
-              <div class="glass-orbit-card blade" id="orbitCardKhi" style="--city-color: var(--sc-accent-2);">
-                <div class="city-card-code">KHI · KARACHI</div>
-                <div class="city-card-devs">2,100+ DEVS</div>
-                <div class="city-card-sub">🔵 ORBIT NODE 02 · 18ms</div>
-              </div>
-
-              <div class="glass-orbit-card blade" id="orbitCardIsb" style="--city-color: var(--peak-magenta);">
-                <div class="city-card-code">ISB · ISLAMABAD</div>
-                <div class="city-card-devs">1,260+ DEVS</div>
-                <div class="city-card-sub">💗 ORBIT NODE 03 · 12ms</div>
-              </div>
-
+            <div class="glass-orbit-card blade is-active-front" id="orbitCardLhr" style="--city-color: var(--sc-accent);">
+              <div class="city-card-code">LHR · LAHORE</div>
+              <div class="city-card-devs">1,850+ DEVS</div>
+              <div class="city-card-sub">🟢 ORBIT NODE 01 · 14ms</div>
             </div>
-          </div>
 
-          <div class="cities-progress-hud" style="margin-top: 1rem;">
-            <div class="quiet__progress-track">
-              <div class="quiet__progress-fill" id="citiesProgressFill"></div>
+            <div class="glass-orbit-card blade" id="orbitCardKhi" style="--city-color: var(--sc-accent-2);">
+              <div class="city-card-code">KHI · KARACHI</div>
+              <div class="city-card-devs">2,100+ DEVS</div>
+              <div class="city-card-sub">🔵 ORBIT NODE 02 · 18ms</div>
             </div>
-            <div class="quiet__progress-text" id="citiesProgressText" style="margin-top: 0.4rem;">SCROLL ORBIT RADAR · 0%</div>
+
+            <div class="glass-orbit-card blade" id="orbitCardIsb" style="--city-color: var(--peak-magenta);">
+              <div class="city-card-code">ISB · ISLAMABAD</div>
+              <div class="city-card-devs">1,260+ DEVS</div>
+              <div class="city-card-sub">💗 ORBIT NODE 03 · 12ms</div>
+            </div>
+
           </div>
         </div>
 
-        <!-- Right Column: Framed Radar Screen -->
-        <div class="cities-act__right">
-          <div class="radar-frame blade">
-            <div class="radar-frame__header">
-              <span style="color: var(--sc-accent);">● LIVE RADAR MESH</span>
-              <span>GRID: PK-SPINE-03</span>
+        <!-- 3-Column Live City Node Status Grid -->
+        <div class="city-nodes-grid" id="cityNodesGrid">
+          <div class="city-node-card blade is-active" id="nodeCardLhr" style="--node-color: var(--sc-accent);">
+            <div class="city-node-header">
+              <span class="city-node-dot">🟢</span>
+              <span class="city-node-code">LHR · LAHORE</span>
             </div>
-            <canvas id="citiesCanvas" class="radar-frame__canvas"></canvas>
-            <div class="radar-frame__footer">
-              <span id="radarStatusTag">SIGNAL: LAHORE ORBIT NODE ACTIVE</span>
-            </div>
+            <div class="city-node-devs">1,850+ DEVS</div>
+            <div class="city-node-ping">LATENCY: 14ms · ACTIVE NODE</div>
           </div>
+
+          <div class="city-node-card blade" id="nodeCardKhi" style="--node-color: var(--sc-accent-2);">
+            <div class="city-node-header">
+              <span class="city-node-dot">🔵</span>
+              <span class="city-node-code">KHI · KARACHI</span>
+            </div>
+            <div class="city-node-devs">2,100+ DEVS</div>
+            <div class="city-node-ping">LATENCY: 18ms · ACTIVE NODE</div>
+          </div>
+
+          <div class="city-node-card blade" id="nodeCardIsb" style="--node-color: var(--peak-magenta);">
+            <div class="city-node-header">
+              <span class="city-node-dot">💗</span>
+              <span class="city-node-code">ISB · ISLAMABAD</span>
+            </div>
+            <div class="city-node-devs">1,260+ DEVS</div>
+            <div class="city-node-ping">LATENCY: 12ms · ACTIVE NODE</div>
+          </div>
+        </div>
+
+        <!-- Centered Progress HUD -->
+        <div class="cities-progress-hud">
+          <div class="quiet__progress-track">
+            <div class="quiet__progress-fill" id="citiesProgressFill"></div>
+          </div>
+          <div class="quiet__progress-text" id="citiesProgressText" style="margin-top: 0.4rem;">SCROLL ORBIT SPINE · 0%</div>
         </div>
 
       </div>
@@ -1158,6 +1212,33 @@
         <div class="feature__copy sc-stack" data-sc-in data-sc-stagger="70">
           <h3 class="sc-display feature__title">Chatrooms &amp; Communities</h3>
           <p class="feature__body">Join Pakistan's gaming groups, or start your own room. Connect with developers, artists, and players in real-time.</p>
+
+          <!-- Partnered Gaming Guilds & Community Logos -->
+          <div class="community-logos-showcase">
+            <div class="community-logos-label">⚡ PARTNERED GAMING GUILDS &amp; COMMUNITIES</div>
+            <div class="community-logos-grid">
+              <div class="community-logo-card blade" title="CCGA - Computer &amp; Game Guild">
+                <img src="assets/partner-cega.png" alt="CCGA Logo" loading="lazy">
+                <span class="community-logo-title">CCGA</span>
+              </div>
+              <div class="community-logo-card blade" title="IGDA Pakistan">
+                <img src="assets/partner-igda.png" class="logo-igda" alt="IGDA Pakistan Logo" loading="lazy">
+                <span class="community-logo-title">IGDA PAKISTAN</span>
+              </div>
+              <div class="community-logo-card blade" title="PIGD - Pakistan Games Dev Guild">
+                <img src="assets/partner-pigd.png" alt="PIGD Logo" loading="lazy">
+                <span class="community-logo-title">PIGD</span>
+              </div>
+              <div class="community-logo-card blade" title="PGDA - Game Developers Association">
+                <img src="assets/partner-pgda.png" alt="PGDA Logo" loading="lazy">
+                <span class="community-logo-title">PGDA</span>
+              </div>
+              <div class="community-logo-card blade" title="Pakistan Game Devs Community">
+                <img src="assets/partner-pakgamedev.png" alt="Pak Game Devs Logo" loading="lazy">
+                <span class="community-logo-title">PAK GAME DEVS</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1373,13 +1454,7 @@
         </div>
       </div>
 
-      <div class="partners" data-sc-in data-sc-stagger="60">
-        <img src="assets/partner-cega.png" alt="CEGA" loading="lazy">
-        <img src="assets/partner-igda.png" alt="IGDA Pakistan" loading="lazy">
-        <img src="assets/partner-pigd.png" alt="PIGD" loading="lazy">
-        <img src="assets/partner-pgda.png" alt="PGDA" loading="lazy">
-        <img src="assets/partner-pakgamedev.png" alt="Pakistan Game Dev" loading="lazy">
-      </div>
+
     </div>
   </section>
 
@@ -1400,10 +1475,7 @@
         <div style="width: 100%;">
           <label class="sr-only" for="email">Email address</label>
           <input class="form__input" type="email" id="email" name="email" placeholder="you@studio.dev" autocomplete="email" style="width: 100%;">
-          <div class="xp-bar-wrap">
-            <div class="xp-bar-label"><span>XP UNLOCK PROGRESS</span><span id="xpLevel">RANK 0 · RECRUIT</span></div>
-            <div class="xp-bar"><div class="xp-fill" id="xpFill"></div></div>
-          </div>
+
         </div>
         <button class="form__submit" type="submit" id="formSubmit">Download App</button>
       </form>
@@ -1434,27 +1506,7 @@
 
 </main>
 
-<div class="burst" id="burst" aria-hidden="true">
-  <div class="burst__rays"></div>
-  <div class="burst__ring"></div>
-  <canvas id="burstCanvas" style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1;"></canvas>
 
-  <div class="burst__content">
-    <div class="burst__icon">🏆</div>
-    <h2 class="burst__label">MAX COMBO!</h2>
-    <div class="burst__badge">⚡ 5× MULTIPLIER MAXED · FOUNDER STATUS UNLOCKED ⚡</div>
-    <button class="burst__cta" id="burstCtaBtn">CLAIM FOUNDER BADGE NOW</button>
-  </div>
-</div>
-
-<div class="badge-modal" id="badgeModal">
-  <div class="badge-card">
-    <div class="badge-icon">🎖️</div>
-    <h3 class="badge-title">EARLY ACCESS KEY GRANTED</h3>
-    <p style="font-size: 0.9rem; color: var(--sc-ink-soft); margin-top: 0.5rem;">Welcome to the Reapers Founder Roster. You have unlocked Founder Badge #4210!</p>
-    <button class="badge-close" id="closeBadgeBtn">CLAIM BADGE &amp; ENTER</button>
-  </div>
-</div>
 
 <script src="scrollcraft.js"></script>
 <script>ScrollCraft.mount(document.body);</script>
@@ -1550,30 +1602,25 @@
   // ---- Section 3 Dedicated Cities 3D Orbital Glass Cards & Spine ------------
   (function initCitiesScrollRadar() {
     var section = document.getElementById('sectionCities');
-    var canvas = document.getElementById('citiesCanvas');
     var fill = document.getElementById('citiesProgressFill');
     var text = document.getElementById('citiesProgressText');
-    var statusTag = document.getElementById('radarStatusTag');
 
     var orbitCardLhr = document.getElementById('orbitCardLhr');
     var orbitCardKhi = document.getElementById('orbitCardKhi');
     var orbitCardIsb = document.getElementById('orbitCardIsb');
+    
+    var nodeCardLhr = document.getElementById('nodeCardLhr');
+    var nodeCardKhi = document.getElementById('nodeCardKhi');
+    var nodeCardIsb = document.getElementById('nodeCardIsb');
+
     var wordLhr = document.getElementById('wordLhr');
     var wordKhi = document.getElementById('wordKhi');
     var wordIsb = document.getElementById('wordIsb');
 
-    if (!section || !canvas) return;
+    if (!section) return;
 
-    var ctx = canvas.getContext('2d');
     var progress = 0;
     var lastFrontIndex = -1;
-
-    function resize() {
-      canvas.width = canvas.parentElement.clientWidth;
-      canvas.height = canvas.parentElement.clientHeight;
-    }
-    resize();
-    window.addEventListener('resize', resize);
 
     function updateOrbitalCards() {
       var rect = section.getBoundingClientRect();
@@ -1584,16 +1631,16 @@
       progress = Math.max(0, Math.min(1, current / totalScroll));
 
       if (fill) fill.style.width = Math.floor(progress * 100) + '%';
-      if (text) text.textContent = 'SCROLL ORBIT RADAR · ' + Math.floor(progress * 100) + '%';
+      if (text) text.textContent = 'SCROLL ORBIT SPINE · ' + Math.floor(progress * 100) + '%';
 
       var orbitAngle = progress * 360;
       var cards = [
-        { el: orbitCardLhr, word: wordLhr, offset: 0, tagText: 'SIGNAL: LAHORE ORBIT NODE ACTIVE (1,850 DEVS)' },
-        { el: orbitCardKhi, word: wordKhi, offset: 120, tagText: 'SIGNAL: KARACHI ORBIT NODE ACTIVE (3,950 DEVS)' },
-        { el: orbitCardIsb, word: wordIsb, offset: 240, tagText: '⚡ ALL 3 ORBIT NODES SYNCHRONIZED (5,210 DEVS)' }
+        { el: orbitCardLhr, word: wordLhr, node: nodeCardLhr, offset: 0 },
+        { el: orbitCardKhi, word: wordKhi, node: nodeCardKhi, offset: 120 },
+        { el: orbitCardIsb, word: wordIsb, node: nodeCardIsb, offset: 240 }
       ];
 
-      var radius = 160;
+      var radius = 170;
       var frontIndex = 0;
       var maxZ = -9999;
 
@@ -1627,53 +1674,18 @@
           c.el.classList.add('is-active-front');
           c.el.classList.remove('is-dim-back');
           if (c.word) c.word.classList.add('is-active');
-          if (statusTag) statusTag.textContent = c.tagText;
+          if (c.node) c.node.classList.add('is-active');
         } else {
           c.el.classList.remove('is-active-front');
           c.el.classList.add('is-dim-back');
           if (c.word) c.word.classList.remove('is-active');
+          if (c.node) c.node.classList.remove('is-active');
         }
       });
     }
 
     window.addEventListener('scroll', updateOrbitalCards, { passive: true });
     updateOrbitalCards();
-
-    // Radar Canvas Animation
-    var angle = 0;
-    function drawRadar() {
-      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      ctx.fillStyle = isDark ? 'rgba(15, 21, 34, 0.18)' : 'rgba(255, 255, 255, 0.22)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      var cx = canvas.width / 2;
-      var cy = canvas.height / 2;
-      var radius = Math.min(canvas.width, canvas.height) * 0.38;
-
-      ctx.strokeStyle = isDark ? 'rgba(0, 255, 157, 0.12)' : 'rgba(0, 168, 89, 0.22)';
-      ctx.lineWidth = 1;
-      ctx.beginPath(); ctx.arc(cx, cy, radius * 0.4, 0, Math.PI * 2); ctx.stroke();
-      ctx.beginPath(); ctx.arc(cx, cy, radius * 0.7, 0, Math.PI * 2); ctx.stroke();
-      ctx.beginPath(); ctx.arc(cx, cy, radius, 0, Math.PI * 2); ctx.stroke();
-
-      // Sweeping radar beam
-      angle += 0.02 + progress * 0.04;
-      ctx.save();
-      ctx.translate(cx, cy);
-      ctx.rotate(angle);
-      var grad = ctx.createRadialGradient(0, 0, 0, 0, 0, radius);
-      grad.addColorStop(0, 'rgba(0, 255, 157, 0.4)');
-      grad.addColorStop(1, 'transparent');
-      ctx.fillStyle = grad;
-      ctx.beginPath();
-      ctx.moveTo(0, 0);
-      ctx.arc(0, 0, radius, 0, 0.4);
-      ctx.fill();
-      ctx.restore();
-
-      requestAnimationFrame(drawRadar);
-    }
-    drawRadar();
   })();
 
   // ---- 2. Procedural Web Audio API Sound Synthesizer ----------------------
@@ -2395,11 +2407,11 @@
   function tickCombo(n) {
     if (n <= combo) return;
     combo = n;
-    comboValue.textContent = '×' + combo;
-    comboChip.classList.remove('idle-pulse');
+    if (comboValue) comboValue.textContent = '×' + combo;
+    if (comboChip) comboChip.classList.remove('idle-pulse');
     reportState();
     playComboSFX(combo);
-    if (!reduced) {
+    if (!reduced && comboChip) {
       comboChip.classList.remove('hit');
       void comboChip.offsetWidth;
       comboChip.classList.add('hit');
@@ -2484,29 +2496,34 @@
     }
 
     var peakEl = document.getElementById('peak');
-    var peakIO = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting && !maxFired) {
-          maxFired = true;
-          burst.classList.add('is-live');
-          burst.setAttribute('data-sc-verify-hold', 'true');
-          reportState();
-          playVictorySFX();
-          if (!reduced) {
-            fireBurstParticles();
-            document.body.classList.add('sc-shake');
-            setTimeout(function () { document.body.classList.remove('sc-shake'); }, 400);
+    var peakEl = document.getElementById('peak');
+    if (peakEl) {
+      var peakIO = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting && !maxFired) {
+            maxFired = true;
+            if (burst) {
+              burst.classList.add('is-live');
+              burst.setAttribute('data-sc-verify-hold', 'true');
+            }
+            reportState();
+            playVictorySFX();
+            if (!reduced) {
+              fireBurstParticles();
+              document.body.classList.add('sc-shake');
+              setTimeout(function () { document.body.classList.remove('sc-shake'); }, 400);
+            }
+          } else if (!entry.isIntersecting && maxFired && burst) {
+            burst.classList.remove('is-live');
+            burst.removeAttribute('data-sc-verify-hold');
           }
-        } else if (!entry.isIntersecting && maxFired) {
-          burst.classList.remove('is-live');
-          burst.removeAttribute('data-sc-verify-hold');
-        }
-      });
-    }, { threshold: 0.35 });
-    peakIO.observe(peakEl);
+        });
+      }, { threshold: 0.35 });
+      peakIO.observe(peakEl);
+    }
   }
 
-  // ---- 8. Early Access Form & XP Rank Unlock ------------------------------
+  // ---- 8. Early Access Form -------------------------------------------------
   var form = document.getElementById('earlyAccessForm');
   var emailInput = document.getElementById('email');
   var errorEl = document.getElementById('formError');
@@ -2517,50 +2534,54 @@
   var badgeModal = document.getElementById('badgeModal');
   var closeBadgeBtn = document.getElementById('closeBadgeBtn');
 
-  emailInput.addEventListener('input', function () {
-    var len = emailInput.value.trim().length;
-    var pct = Math.min(100, Math.floor((len / 15) * 100));
-    xpFill.style.width = pct + '%';
-    if (pct < 30) xpLevel.textContent = 'RANK 0 · RECRUIT';
-    else if (pct < 70) xpLevel.textContent = 'RANK 1 · GUILD MEMBER';
-    else xpLevel.textContent = 'RANK 2 · FOUNDER READY!';
-  });
+  if (emailInput && xpFill && xpLevel) {
+    emailInput.addEventListener('input', function () {
+      var len = emailInput.value.trim().length;
+      var pct = Math.min(100, Math.floor((len / 15) * 100));
+      xpFill.style.width = pct + '%';
+      if (pct < 30) xpLevel.textContent = 'RANK 0 · RECRUIT';
+      else if (pct < 70) xpLevel.textContent = 'RANK 1 · GUILD MEMBER';
+      else xpLevel.textContent = 'RANK 2 · FOUNDER READY!';
+    });
+  }
 
   function validEmail(v) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
   }
 
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var value = emailInput.value.trim();
-    if (!validEmail(value)) {
-      errorEl.classList.add('is-visible');
-      emailInput.setAttribute('aria-invalid', 'true');
-      return;
-    }
-    errorEl.classList.remove('is-visible');
-    emailInput.removeAttribute('aria-invalid');
-    submitBtn.classList.add('pulse');
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Unlocking Access…';
-    playVictorySFX();
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var value = emailInput.value.trim();
+      if (!validEmail(value)) {
+        errorEl.classList.add('is-visible');
+        emailInput.setAttribute('aria-invalid', 'true');
+        return;
+      }
+      errorEl.classList.remove('is-visible');
+      emailInput.removeAttribute('aria-invalid');
+      submitBtn.classList.add('pulse');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Unlocking Access…';
+      playVictorySFX();
 
-    try {
-      var list = JSON.parse(localStorage.getItem('reapers-early-access') || '[]');
-      list.push({ email: value, at: new Date().toISOString() });
-      localStorage.setItem('reapers-early-access', JSON.stringify(list));
-    } catch (err) {}
+      try {
+        var list = JSON.parse(localStorage.getItem('reapers-early-access') || '[]');
+        list.push({ email: value, at: new Date().toISOString() });
+        localStorage.setItem('reapers-early-access', JSON.stringify(list));
+      } catch (err) {}
 
-    setTimeout(function () {
-      form.hidden = true;
-      successEl.classList.add('is-visible');
-      badgeModal.classList.add('is-active');
-    }, 400);
-  });
+      setTimeout(function () {
+        form.hidden = true;
+        if (successEl) successEl.classList.add('is-visible');
+        if (badgeModal) badgeModal.classList.add('is-active');
+      }, 400);
+    });
+  }
 
   if (closeBadgeBtn) {
     closeBadgeBtn.addEventListener('click', function () {
-      badgeModal.classList.remove('is-active');
+      if (badgeModal) badgeModal.classList.remove('is-active');
       playZapSFX();
     });
   }
