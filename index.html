@@ -642,6 +642,23 @@
     color: var(--sc-accent);
   }
 
+  /* --- LIGHT MODE SPECIFIC LOGO CONTRAST FIXES ----------------------------- */
+  :root[data-theme="light"] .community-logo-card {
+    background: #0B111E;
+    border-color: rgba(15, 23, 42, 0.2);
+  }
+  :root[data-theme="light"] .community-logo-card .community-logo-title {
+    color: #94A3B8;
+  }
+  :root[data-theme="light"] .community-logo-card:hover {
+    border-color: var(--sc-accent);
+    background: #0F172A;
+    box-shadow: 0 12px 30px rgba(0, 168, 89, 0.25);
+  }
+  :root[data-theme="light"] .community-logo-card:hover .community-logo-title {
+    color: var(--sc-accent);
+  }
+
   @media (max-width: 860px) {
     .community-logos-grid { grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
   }
