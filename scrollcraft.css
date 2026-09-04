@@ -15,20 +15,57 @@
    ========================================================================== */
 
 /* ---------------------------------------------------------------- tokens -- */
-:root {
-  /* --- High-Energy Gaming & Cyberpunk Colour Palette ---------------------- */
-  --sc-canvas:      #06080E;   /* Deep Space Obsidian */
-  --sc-surface:     #0F1522;   /* Cyber Alloy Surface */
-  --sc-ink:         #F0F6FC;   /* Crisp Pure White */
-  --sc-ink-soft:    #8B9BB4;   /* Cool Steel Soft Text */
-  --sc-accent:      #00FF9D;   /* Hyper Emerald (Primary Accent) */
-  --sc-accent-2:    #00F0FF;   /* Electric Cyan (Secondary Energy Accent) */
-  --sc-accent-ink:  #03140C;   /* Contrast Dark Text on Emerald */
-  --peak-magenta:   #FF007F;   /* Cyber Neon Magenta / Pink */
-  --gold-accent:    #FFD700;   /* Solar Gold Boss Accent */
+:root, :root[data-theme="dark"] {
+  /* --- High-Energy Gaming & Cyberpunk Dark Palette (DEFAULT) ---------------- */
+  --sc-canvas:          #06080E;   /* Deep Space Obsidian */
+  --sc-surface:         #0F1522;   /* Cyber Alloy Surface */
+  --sc-ink:             #F0F6FC;   /* Crisp Pure White */
+  --sc-ink-soft:        #8B9BB4;   /* Cool Steel Soft Text */
+  --sc-accent:          #00FF9D;   /* Hyper Emerald (Primary Accent) */
+  --sc-accent-2:        #00F0FF;   /* Electric Cyan (Secondary Energy Accent) */
+  --sc-accent-ink:      #03140C;   /* Contrast Dark Text on Emerald */
+  --peak-magenta:       #FF007F;   /* Cyber Neon Magenta / Pink */
+  --gold-accent:        #FFD700;   /* Solar Gold Boss Accent */
 
   --sc-hairline:        color-mix(in oklab, var(--sc-accent) 18%, transparent);
   --sc-hairline-strong: color-mix(in oklab, var(--sc-accent) 35%, transparent);
+
+  --sc-shadow-color:    220 40% 2%;
+  --sc-e1: 0 1px 2px hsl(var(--sc-shadow-color) / 0.28),
+           0 2px 6px -1px hsl(var(--sc-shadow-color) / 0.20);
+  --sc-e2: 0 2px 4px hsl(var(--sc-shadow-color) / 0.24),
+           0 8px 18px -4px hsl(var(--sc-shadow-color) / 0.30);
+  --sc-e3: 0 4px 8px hsl(var(--sc-shadow-color) / 0.22),
+           0 18px 40px -8px hsl(var(--sc-shadow-color) / 0.38),
+           0 48px 90px -24px hsl(var(--sc-shadow-color) / 0.30);
+
+  --sc-edge: inset 0 1px 0 color-mix(in oklab, var(--sc-ink) 10%, transparent);
+}
+
+:root[data-theme="light"] {
+  /* --- High-Energy Cyber Light Palette ------------------------------------- */
+  --sc-canvas:          #F0F3F9;   /* High-Tech Crisp Light Grey */
+  --sc-surface:         #FFFFFF;   /* Pure White Card Surface */
+  --sc-ink:             #0F172A;   /* Obsidian Deep Charcoal Text */
+  --sc-ink-soft:        #475569;   /* Slate Steel Subtitle Prose */
+  --sc-accent:          #00A859;   /* High-Contrast Emerald Green */
+  --sc-accent-2:        #0077FF;   /* Electric Sapphire Cyan */
+  --sc-accent-ink:      #FFFFFF;   /* Crisp White on Emerald Buttons */
+  --peak-magenta:       #D9006C;   /* Deep Electric Neon Pink */
+  --gold-accent:        #D97706;   /* Solar Amber Boss Accent */
+
+  --sc-hairline:        rgba(0, 168, 89, 0.22);
+  --sc-hairline-strong: rgba(15, 23, 42, 0.16);
+
+  --sc-shadow-color:    215 25% 15%;
+  --sc-e1: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --sc-e2: 0 4px 16px rgba(0, 0, 0, 0.10);
+  --sc-e3: 0 12px 32px rgba(0, 0, 0, 0.14);
+
+  --sc-edge: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+:root {
 
   /* --- type. Two families max. Display carries voice, text carries prose. - */
   --sc-font-display: "Instrument Sans", "Geist", system-ui, sans-serif;
@@ -474,23 +511,24 @@ video[data-sc-scrub].sc-has-clip { opacity: 1; }
   font-family: var(--sc-font-mono); font-size: var(--sc-t-xs);
   color: var(--sc-ink-soft); letter-spacing: var(--sc-track-wide);
   padding: 0.3em 0.8em; background: color-mix(in oklab, var(--sc-surface) 80%, transparent);
-  border: 1px solid var(--sc-hairline);
+  border: 1px solid var(--sc-hairline); white-space: nowrap; flex-shrink: 0;
 }
 .hud__online-dot {
   width: 7px; height: 7px; border-radius: 50%; background: var(--sc-accent);
-  box-shadow: 0 0 8px var(--sc-accent); animation: dotPulse 1.8s infinite;
+  box-shadow: 0 0 8px var(--sc-accent); animation: dotPulse 1.8s infinite; flex-shrink: 0;
 }
 @keyframes dotPulse {
   0%, 100% { transform: scale(1); opacity: 1; }
   50% { transform: scale(1.4); opacity: 0.6; }
 }
-.hud__audio-btn {
+.hud__audio-btn, .hud__theme-btn {
   background: var(--sc-surface); border: 1px solid var(--sc-hairline-strong);
   color: var(--sc-ink); padding: 0.4em 0.7em; font-family: var(--sc-font-mono);
   font-size: var(--sc-t-xs); cursor: pointer; display: flex; align-items: center; gap: 0.4rem;
-  transition: border-color var(--sc-d-fast), color var(--sc-d-fast);
+  transition: border-color var(--sc-d-fast), color var(--sc-d-fast), background var(--sc-d-fast);
+  white-space: nowrap; flex-shrink: 0;
 }
-.hud__audio-btn:hover { border-color: var(--sc-accent); color: var(--sc-accent); }
+.hud__audio-btn:hover, .hud__theme-btn:hover { border-color: var(--sc-accent); color: var(--sc-accent); }
 .hud__audio-btn.is-muted { opacity: 0.6; }
 
 /* --- Interactive Live Chatroom Simulator Widget ------------------------- */
@@ -499,7 +537,7 @@ video[data-sc-scrub].sc-has-clip { opacity: 1; }
   overflow: hidden; display: flex; flex-direction: column; height: 340px;
 }
 .chat-sim__header {
-  padding: var(--sc-3) var(--sc-4); background: color-mix(in oklab, var(--sc-surface) 140%, #000);
+  padding: var(--sc-3) var(--sc-4); background: color-mix(in oklab, var(--sc-surface) 90%, var(--sc-canvas));
   border-bottom: 1px solid var(--sc-hairline); display: flex; justify-content: space-between; align-items: center;
 }
 .chat-sim__title { font-family: var(--sc-font-mono); font-size: var(--sc-t-xs); color: var(--sc-accent); text-transform: uppercase; }
@@ -529,7 +567,7 @@ video[data-sc-scrub].sc-has-clip { opacity: 1; }
 .chat-msg__text { color: var(--sc-ink); line-height: 1.4; }
 .chat-sim__reactions {
   padding: var(--sc-3) var(--sc-4); border-top: 1px solid var(--sc-hairline);
-  display: flex; gap: var(--sc-2); background: color-mix(in oklab, var(--sc-surface) 120%, #000);
+  display: flex; gap: var(--sc-2); background: color-mix(in oklab, var(--sc-surface) 90%, var(--sc-canvas));
 }
 .react-btn {
   background: var(--sc-surface); border: 1px solid var(--sc-hairline-strong);
