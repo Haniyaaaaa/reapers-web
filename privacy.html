@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy Policy · Reapers Gaming Arena</title>
+  <meta name="description" content="Reapers Privacy Policy — Learn how we collect, protect, and handle your data on Pakistan's premier gaming and developer platform.">
+  <link rel="icon" href="assets/logo-160.png" type="image/png">
+
+  <!-- Typography: Chakra Petch (Display), Outfit (Prose), IBM Plex Mono (Code/Labels) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700;800&family=Outfit:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="scrollcraft.css">
+
+  <style>
+    /* Custom Aesthetic Legal Styles */
+    body {
+      background-color: var(--sc-canvas);
+      color: var(--sc-ink);
+      font-family: var(--sc-font-text);
+      line-height: var(--sc-leading-body);
+    }
+    .legal-hero {
+      padding-top: clamp(6rem, 12vh, 9rem);
+      padding-bottom: 2rem;
+      text-align: center;
+      position: relative;
+    }
+    .legal-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--sc-font-mono);
+      font-size: var(--sc-t-xs);
+      letter-spacing: var(--sc-track-wide);
+      color: var(--sc-accent);
+      background: color-mix(in oklab, var(--sc-accent) 12%, transparent);
+      border: 1px solid color-mix(in oklab, var(--sc-accent) 35%, transparent);
+      padding: 0.4em 1em;
+      margin-bottom: 1rem;
+    }
+    .legal-title {
+      font-family: var(--sc-font-display);
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 800;
+      letter-spacing: var(--sc-track-snug);
+      text-transform: uppercase;
+      margin: 0;
+      color: var(--sc-ink);
+    }
+    .legal-meta-card {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+      font-family: var(--sc-font-mono);
+      font-size: var(--sc-t-xs);
+      color: var(--sc-ink-soft);
+      border-block: 1px solid var(--sc-hairline);
+      padding-block: 0.8rem;
+    }
+    .legal-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .legal-meta-item span {
+      color: var(--sc-accent-2);
+    }
+
+    /* Table of Contents Pills */
+    .toc-bar {
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding-bottom: 0.8rem;
+      margin-block: 2rem 1.5rem;
+      scrollbar-width: thin;
+    }
+    .toc-pill {
+      font-family: var(--sc-font-mono);
+      font-size: 0.72rem;
+      color: var(--sc-ink-soft);
+      background: var(--sc-surface);
+      border: 1px solid var(--sc-hairline-strong);
+      padding: 0.4em 0.8em;
+      white-space: nowrap;
+      text-decoration: none;
+      transition: all 200ms var(--sc-ease-out);
+    }
+    .toc-pill:hover {
+      border-color: var(--sc-accent);
+      color: var(--sc-accent);
+      transform: translateY(-2px);
+    }
+
+    /* Main Legal Document Card */
+    .legal-card {
+      background: var(--sc-surface);
+      border: 1px solid var(--sc-hairline-strong);
+      padding: clamp(1.5rem, 4vw, 3.5rem);
+      margin-bottom: 4rem;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+      position: relative;
+    }
+    .legal-section {
+      margin-bottom: 3rem;
+      scroll-margin-top: 80px;
+    }
+    .legal-heading {
+      font-family: var(--sc-font-display);
+      font-size: clamp(1.4rem, 2.8vw, 2rem);
+      font-weight: 700;
+      color: var(--sc-ink);
+      margin-top: 0;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      border-bottom: 1px solid var(--sc-hairline);
+      padding-bottom: 0.5rem;
+    }
+    .legal-num {
+      font-family: var(--sc-font-mono);
+      color: var(--sc-accent);
+    }
+    .legal-subheading {
+      font-family: var(--sc-font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--sc-accent-2);
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+    .legal-p {
+      color: var(--sc-ink-soft);
+      font-size: var(--sc-t-base);
+      margin-bottom: 1rem;
+    }
+
+    /* Item Grid / Callout Cards */
+    .item-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+      margin-block: 1rem 1.5rem;
+    }
+    .item-card {
+      background: color-mix(in oklab, var(--sc-surface) 92%, var(--sc-canvas));
+      border: 1px solid var(--sc-hairline);
+      padding: 1rem 1.2rem;
+      border-left: 3px solid var(--sc-accent);
+    }
+    .item-card--cyan {
+      border-left-color: var(--sc-accent-2);
+    }
+    .item-card--magenta {
+      border-left-color: var(--peak-magenta);
+    }
+    .item-card-title {
+      font-family: var(--sc-font-mono);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--sc-ink);
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+    .item-card-desc {
+      font-size: 0.9rem;
+      color: var(--sc-ink-soft);
+      margin: 0;
+    }
+
+    /* Alert Banner */
+    .legal-alert {
+      background: color-mix(in oklab, var(--sc-accent) 10%, var(--sc-surface));
+      border: 1px solid var(--sc-accent);
+      padding: 1rem 1.25rem;
+      margin-block: 1.5rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+    }
+    .legal-alert-icon {
+      font-size: 1.2rem;
+    }
+    .legal-alert-text {
+      font-family: var(--sc-font-mono);
+      font-size: 0.85rem;
+      color: var(--sc-ink);
+      margin: 0;
+    }
+
+    /* Contact Card */
+    .contact-card {
+      background: color-mix(in oklab, var(--sc-surface) 95%, var(--sc-canvas));
+      border: 1px solid var(--sc-hairline-strong);
+      padding: 1.5rem;
+      margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      font-family: var(--sc-font-mono);
+    }
+    .contact-row {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 0.9rem;
+    }
+    .contact-row a {
+      color: var(--sc-accent);
+      text-decoration: none;
+    }
+    .contact-row a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fixed HUD Navigation Header -->
+  <header class="hud" id="hud">
+    <div class="hud__inner sc-wrap">
+      <a class="hud__brand" href="index.html#top" aria-label="Reapers home">
+        <img src="assets/logo-160.png" alt="Reapers Logo" width="44" height="44">
+        <span class="hud__word">Reapers</span>
+      </a>
+
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <button class="hud__audio-btn" id="audioToggleBtn" title="Toggle Sound Effects">
+          <span id="audioIcon">🔊</span> <span id="audioText">SFX ON</span>
+        </button>
+        <button class="hud__theme-btn" id="themeToggleBtn" title="Toggle Light / Dark Theme">
+          <span id="themeIcon">☀️</span> <span id="themeText">LIGHT</span>
+        </button>
+        <a class="hud__cta" href="index.html#close">Download App</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Legal Hero Section -->
+    <section class="legal-hero sc-wrap">
+      <div class="legal-badge">🔒 REAPERS DATA PROTECTION &amp; PRIVACY</div>
+      <h1 class="legal-title">Privacy Policy</h1>
+      <p class="sc-body" style="max-width: 64ch; margin: 0.8rem auto 0 auto;">
+        Your privacy matters to us. This policy outlines how Reapers collects, uses, protects, and handles your information on our website and mobile application.
+      </p>
+
+      <div class="legal-meta-card">
+        <div class="legal-meta-item">EFFECTIVE DATE: <span>SEPTEMBER 2026</span></div>
+        <div class="legal-meta-item">LAST UPDATED: <span>SEPTEMBER 2026</span></div>
+        <div class="legal-meta-item">JURISDICTION: <span>PAKISTAN</span></div>
+      </div>
+
+      <!-- Quick TOC Navigation Pills -->
+      <div class="toc-bar">
+        <a href="#sec1" class="toc-pill">01. Information Collected</a>
+        <a href="#sec2" class="toc-pill">02. How We Use Data</a>
+        <a href="#sec3" class="toc-pill">03. Data Sharing</a>
+        <a href="#sec4" class="toc-pill">04. Data Retention</a>
+        <a href="#sec5" class="toc-pill">05. Your Rights</a>
+        <a href="#sec6" class="toc-pill">06. Data Security</a>
+        <a href="#sec7" class="toc-pill">07. Children's Privacy</a>
+        <a href="#sec8" class="toc-pill">08. International Users</a>
+        <a href="#sec9" class="toc-pill">09. Policy Updates</a>
+        <a href="#sec10" class="toc-pill">10. Contact Us</a>
+      </div>
+    </section>
+
+    <!-- Main Legal Document Container -->
+    <div class="sc-wrap">
+      <div class="legal-card blade">
+        
+        <p class="legal-p" style="font-size: 1.05rem;">
+          Reapers (<strong>"Reapers," "we," "us," or "our"</strong>) operates the website <strong>reapers.pk</strong> and the Reapers mobile application (collectively, the <strong>"Service"</strong>), a community and networking platform for gamers and game developers. This Privacy Policy explains what information we collect, how we use it, and the choices you have.
+        </p>
+        <p class="legal-p">
+          By using the Service, you agree to the collection and use of information in accordance with this policy.
+        </p>
+
+        <!-- SECTION 1 -->
+        <section class="legal-section" id="sec1">
+          <h2 class="legal-heading"><span class="legal-num">01.</span> Information We Collect</h2>
+          
+          <h3 class="legal-subheading">1.1 Information You Provide</h3>
+          <div class="item-grid">
+            <div class="item-card">
+              <div class="item-card-title">👤 Account Information</div>
+              <p class="item-card-desc">Username, first name, last name, email address, phone number, and password.</p>
+            </div>
+            <div class="item-card item-card--cyan">
+              <div class="item-card-title">🖼️ Profile Information</div>
+              <p class="item-card-desc">Profile picture, bio, role(s) (Gamer, Developer, Expert), skill tags, favorite games/genres, portfolio links, website, and LinkedIn profile.</p>
+            </div>
+            <div class="item-card item-card--magenta">
+              <div class="item-card-title">💬 Content You Post</div>
+              <p class="item-card-desc">Chatroom and direct messages, event listings, game demo videos and thumbnails, demo reviews and ratings, team/skill-matchmaking requests, and any uploaded content.</p>
+            </div>
+            <div class="item-card">
+              <div class="item-card-title">🎓 Expert Application Data</div>
+              <p class="item-card-desc">Credentials, portfolio, specialty tags, and availability if you apply to become a verified Expert.</p>
+            </div>
+            <div class="item-card item-card--cyan">
+              <div class="item-card-title">📅 Booking Information</div>
+              <p class="item-card-desc">Session bookings with Experts, including scheduling details and call logs.</p>
+            </div>
+            <div class="item-card item-card--magenta">
+              <div class="item-card-title">📩 Communications</div>
+              <p class="item-card-desc">Information you provide when contacting us for support, inquiries, or platform feedback.</p>
+            </div>
+          </div>
+
+          <h3 class="legal-subheading">1.2 Information Collected Automatically</h3>
+          <div class="item-grid">
+            <div class="item-card">
+              <div class="item-card-title">📱 Device &amp; Usage Data</div>
+              <p class="item-card-desc">Device type, operating system, app version, IP address, and general usage patterns (pages/screens visited, features used, session duration).</p>
+            </div>
+            <div class="item-card item-card--cyan">
+              <div class="item-card-title">📊 Log Data</div>
+              <p class="item-card-desc">Crash reports and error logs, used strictly to maintain and improve platform stability and performance.</p>
+            </div>
+          </div>
+
+          <h3 class="legal-subheading">1.3 Information from Third Parties</h3>
+          <p class="legal-p">
+            If you sign up or log in using third-party authenticators (such as Google or Apple), we receive basic profile information (e.g., name, email address) from that provider as authorized by your permissions.
+          </p>
+        </section>
+
+        <!-- SECTION 2 -->
+        <section class="legal-section" id="sec2">
+          <h2 class="legal-heading"><span class="legal-num">02.</span> How We Use Your Information</h2>
+          <p class="legal-p">We use the information we collect to:</p>
+          <ul style="color: var(--sc-ink-soft); font-size: var(--sc-t-base); line-height: 1.8; margin-bottom: 1rem; padding-left: 1.2rem;">
+            <li>Create and manage your account and profile.</li>
+            <li>Provide core features: chatrooms, direct messaging, event discovery and posting, demo uploads and reviews, expert booking and video sessions, and team/skill matchmaking.</li>
+            <li>Facilitate connections between users (e.g., team requests, expert bookings).</li>
+            <li>Send service-related notifications (e.g., event reminders, booking confirmations, new messages, review notifications) via push notification and/or email.</li>
+            <li>Maintain the safety and integrity of the Service, including content moderation and enforcement of our Terms &amp; Conditions.</li>
+            <li>Analyze usage to improve features and performance.</li>
+            <li>Respond to support requests and communicate with you about the Service.</li>
+            <li>Comply with legal obligations.</li>
+          </ul>
+
+          <div class="legal-alert">
+            <div class="legal-alert-icon">🛡️</div>
+            <p class="legal-alert-text">
+              <strong>COMMUNITY PRIVACY GUARANTEE:</strong> We do not sell your personal information to third parties under any circumstances.
+            </p>
+          </div>
+        </section>
+
+        <!-- SECTION 3 -->
+        <section class="legal-section" id="sec3">
+          <h2 class="legal-heading"><span class="legal-num">03.</span> How We Share Your Information</h2>
+          
+          <div class="item-grid">
+            <div class="item-card">
+              <div class="item-card-title">🌐 With Other Users</div>
+              <p class="item-card-desc">Your profile information, posted content (demos, events, chatroom messages), and reviews are visible to other users as intended by the relevant feature — this is a community platform, and much of what you post is designed to be seen by others.</p>
+            </div>
+            <div class="item-card item-card--cyan">
+              <div class="item-card-title">⚙️ Service Providers</div>
+              <p class="item-card-desc">We share information with trusted third-party providers who help us operate the Service, including cloud hosting and database services, video-calling infrastructure for Expert sessions, push notification services, and analytics/crash-reporting tools.</p>
+            </div>
+            <div class="item-card item-card--magenta">
+              <div class="item-card-title">⚖️ Legal Requirements</div>
+              <p class="item-card-desc">We may disclose information if required by law, regulation, legal process, or governmental request, or to protect the rights, property, or safety of Reapers, our users, or the public.</p>
+            </div>
+            <div class="item-card">
+              <div class="item-card-title">🔄 Business Transfers</div>
+              <p class="item-card-desc">If Reapers is involved in a merger, acquisition, or sale of assets, your information may be transferred as part of that transaction.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 4 -->
+        <section class="legal-section" id="sec4">
+          <h2 class="legal-heading"><span class="legal-num">04.</span> Data Retention</h2>
+          <p class="legal-p">
+            We retain your information for as long as your account is active or as needed to provide the Service. If you delete your account, we will delete or anonymize your personal information within a reasonable period, except where retention is required for legal, security, or fraud-prevention purposes.
+          </p>
+        </section>
+
+        <!-- SECTION 5 -->
+        <section class="legal-section" id="sec5">
+          <h2 class="legal-heading"><span class="legal-num">05.</span> Your Rights and Choices</h2>
+          <div class="item-grid">
+            <div class="item-card">
+              <div class="item-card-title">✏️ Access and Update</div>
+              <p class="item-card-desc">You can view and edit most of your profile information directly within the app.</p>
+            </div>
+            <div class="item-card item-card--magenta">
+              <div class="item-card-title">🗑️ Delete Your Account</div>
+              <p class="item-card-desc">You may request account deletion at any time by contacting us at the support details below.</p>
+            </div>
+            <div class="item-card item-card--cyan">
+              <div class="item-card-title">🔔 Notification Preferences</div>
+              <p class="item-card-desc">You can manage push notification categories directly in the app's Settings.</p>
+            </div>
+            <div class="item-card">
+              <div class="item-card-title">❌ Content Removal</div>
+              <p class="item-card-desc">You may delete demos, event posts, or messages you have posted, subject to platform moderation records retained for safety purposes.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 6 -->
+        <section class="legal-section" id="sec6">
+          <h2 class="legal-heading"><span class="legal-num">06.</span> Data Security</h2>
+          <p class="legal-p">
+            We use reasonable administrative, technical, and physical safeguards to protect your information, including encryption of data in transit and at rest where applicable. However, no method of transmission or storage is 100% secure, and we cannot guarantee absolute security.
+          </p>
+        </section>
+
+        <!-- SECTION 7 -->
+        <section class="legal-section" id="sec7">
+          <h2 class="legal-heading"><span class="legal-num">07.</span> Children's Privacy</h2>
+          <p class="legal-p">
+            Reapers is not directed at children under the age of 13 (or the minimum age required in your jurisdiction), and we do not knowingly collect personal information from children under that age. If we become aware that we have collected such information, we will take steps to delete it promptly.
+          </p>
+        </section>
+
+        <!-- SECTION 8 -->
+        <section class="legal-section" id="sec8">
+          <h2 class="legal-heading"><span class="legal-num">08.</span> International Users</h2>
+          <p class="legal-p">
+            Reapers is based in Pakistan. If you access the Service from outside Pakistan, your information may be processed and stored in Pakistan or other countries where our service providers operate, which may have different data protection laws than your home country.
+          </p>
+        </section>
+
+        <!-- SECTION 9 -->
+        <section class="legal-section" id="sec9">
+          <h2 class="legal-heading"><span class="legal-num">09.</span> Changes to This Policy</h2>
+          <p class="legal-p">
+            We may update this Privacy Policy from time to time. We will notify users of material changes by posting the updated policy on this page and updating the "Last Updated" date above. Continued use of the Service after changes take effect constitutes acceptance of the revised policy.
+          </p>
+        </section>
+
+        <!-- SECTION 10 -->
+        <section class="legal-section" id="sec10" style="margin-bottom: 0;">
+          <h2 class="legal-heading"><span class="legal-num">10.</span> Contact Us</h2>
+          <p class="legal-p">
+            If you have questions about this Privacy Policy or how your information is handled, contact us at:
+          </p>
+
+          <div class="contact-card blade">
+            <div class="contact-row">
+              <span style="color: var(--sc-accent);">✉️ EMAIL:</span>
+              <a href="mailto:reapers.support@gmail.com">reapers.support@gmail.com</a>
+            </div>
+            <div class="contact-row">
+              <span style="color: var(--sc-accent-2);">📍 LOCATION:</span>
+              <span style="color: var(--sc-ink);">Lahore, Pakistan</span>
+            </div>
+            <div class="contact-row">
+              <span style="color: var(--peak-magenta);">🌐 WEBSITE:</span>
+              <a href="https://reapers.pk" target="_blank" rel="noopener">reapers.pk</a>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="close__foot sc-wrap" style="display: flex; flex-direction: column; width: 100%; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--sc-hairline);">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; width: 100%;">
+      <div>
+        <p class="close__foot-mark" style="font-size: 1.2rem; font-weight: 700; font-family: var(--sc-font-display);">Reapers</p>
+        <p class="sc-body" style="margin-top: 0.3rem; color: var(--sc-ink-soft);">Play. Connect. Create. Dominate.</p>
+      </div>
+      <nav class="close__foot-links" style="display: flex; gap: 1.2rem; flex-wrap: wrap;">
+        <a href="services.html">Services</a>
+        <a href="privacy.html" style="color: var(--sc-accent);">Privacy Policy</a>
+        <a href="terms.html">Terms &amp; Conditions</a>
+        <a href="https://www.instagram.com/houseofthereapers?igsi=MWN2NWdseXc5NzE4cA==" target="_blank" rel="noopener">Instagram</a>
+        <a href="mailto:reapers.support@gmail.com">Email</a>
+      </nav>
+    </div>
+
+    <!-- Giant REAPERS Footer Banner -->
+    <div class="footer-giant-brand" style="width: 100%; text-align: center; overflow: hidden; margin-top: clamp(2.5rem, 5vw, 5rem); padding-top: 1rem; border-top: 1px solid var(--sc-hairline);">
+      <div class="footer-giant-title" style="font-family: var(--sc-font-display); font-weight: 900; font-size: clamp(4.5rem, 18vw, 17rem); line-height: 0.82; letter-spacing: -0.04em; text-transform: uppercase; color: var(--sc-ink); opacity: 0.95; user-select: none; margin: 0; padding-bottom: 0.1em; width: 100%;">
+        REAPERS
+      </div>
+    </div>
+  </footer>
+
+  <script src="scrollcraft.js"></script>
+  <script>
+    (function () {
+      'use strict';
+      // Theme Switcher Controller
+      var savedTheme = localStorage.getItem('reapers-theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+
+      var themeBtn = document.getElementById('themeToggleBtn');
+      var themeIcon = document.getElementById('themeIcon');
+      var themeText = document.getElementById('themeText');
+
+      function updateThemeUI(theme) {
+        if (themeIcon && themeText) {
+          if (theme === 'light') {
+            themeIcon.textContent = '☀️';
+            themeText.textContent = 'LIGHT';
+          } else {
+            themeIcon.textContent = '🌙';
+            themeText.textContent = 'DARK';
+          }
+        }
+      }
+      updateThemeUI(savedTheme);
+
+      if (themeBtn) {
+        themeBtn.addEventListener('click', function () {
+          var current = document.documentElement.getAttribute('data-theme') || 'light';
+          var nextTheme = (current === 'light') ? 'dark' : 'light';
+          document.documentElement.setAttribute('data-theme', nextTheme);
+          localStorage.setItem('reapers-theme', nextTheme);
+          updateThemeUI(nextTheme);
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

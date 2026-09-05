@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Terms &amp; Conditions · Reapers Gaming Arena</title>
+  <meta name="description" content="Reapers Terms &amp; Conditions — Rules, guidelines, and legal terms governing your use of Pakistan's premier gaming and developer platform.">
+  <link rel="icon" href="assets/logo-160.png" type="image/png">
+
+  <!-- Typography: Chakra Petch (Display), Outfit (Prose), IBM Plex Mono (Code/Labels) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700;800&family=Outfit:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="scrollcraft.css">
+
+  <style>
+    /* Custom Aesthetic Legal Styles */
+    body {
+      background-color: var(--sc-canvas);
+      color: var(--sc-ink);
+      font-family: var(--sc-font-text);
+      line-height: var(--sc-leading-body);
+    }
+    .legal-hero {
+      padding-top: clamp(6rem, 12vh, 9rem);
+      padding-bottom: 2rem;
+      text-align: center;
+      position: relative;
+    }
+    .legal-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--sc-font-mono);
+      font-size: var(--sc-t-xs);
+      letter-spacing: var(--sc-track-wide);
+      color: var(--sc-accent);
+      background: color-mix(in oklab, var(--sc-accent) 12%, transparent);
+      border: 1px solid color-mix(in oklab, var(--sc-accent) 35%, transparent);
+      padding: 0.4em 1em;
+      margin-bottom: 1rem;
+    }
+    .legal-title {
+      font-family: var(--sc-font-display);
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 800;
+      letter-spacing: var(--sc-track-snug);
+      text-transform: uppercase;
+      margin: 0;
+      color: var(--sc-ink);
+    }
+    .legal-meta-card {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+      font-family: var(--sc-font-mono);
+      font-size: var(--sc-t-xs);
+      color: var(--sc-ink-soft);
+      border-block: 1px solid var(--sc-hairline);
+      padding-block: 0.8rem;
+    }
+    .legal-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .legal-meta-item span {
+      color: var(--sc-accent-2);
+    }
+
+    /* Table of Contents Pills */
+    .toc-bar {
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding-bottom: 0.8rem;
+      margin-block: 2rem 1.5rem;
+      scrollbar-width: thin;
+    }
+    .toc-pill {
+      font-family: var(--sc-font-mono);
+      font-size: 0.72rem;
+      color: var(--sc-ink-soft);
+      background: var(--sc-surface);
+      border: 1px solid var(--sc-hairline-strong);
+      padding: 0.4em 0.8em;
+      white-space: nowrap;
+      text-decoration: none;
+      transition: all 200ms var(--sc-ease-out);
+    }
+    .toc-pill:hover {
+      border-color: var(--sc-accent);
+      color: var(--sc-accent);
+      transform: translateY(-2px);
+    }
+
+    /* Main Legal Document Card */
+    .legal-card {
+      background: var(--sc-surface);
+      border: 1px solid var(--sc-hairline-strong);
+      padding: clamp(1.5rem, 4vw, 3.5rem);
+      margin-bottom: 4rem;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+      position: relative;
+    }
+    .legal-section {
+      margin-bottom: 3rem;
+      scroll-margin-top: 80px;
+    }
+    .legal-heading {
+      font-family: var(--sc-font-display);
+      font-size: clamp(1.4rem, 2.8vw, 2rem);
+      font-weight: 700;
+      color: var(--sc-ink);
+      margin-top: 0;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      border-bottom: 1px solid var(--sc-hairline);
+      padding-bottom: 0.5rem;
+    }
+    .legal-num {
+      font-family: var(--sc-font-mono);
+      color: var(--sc-accent);
+    }
+    .legal-subheading {
+      font-family: var(--sc-font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--sc-accent-2);
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+    .legal-p {
+      color: var(--sc-ink-soft);
+      font-size: var(--sc-t-base);
+      margin-bottom: 1rem;
+    }
+
+    /* Item Grid / Callout Cards */
+    .item-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+      margin-block: 1rem 1.5rem;
+    }
+    .item-card {
+      background: color-mix(in oklab, var(--sc-surface) 92%, var(--sc-canvas));
+      border: 1px solid var(--sc-hairline);
+      padding: 1rem 1.2rem;
+      border-left: 3px solid var(--sc-accent);
+    }
+    .item-card--cyan {
+      border-left-color: var(--sc-accent-2);
+    }
+    .item-card--magenta {
+      border-left-color: var(--peak-magenta);
+    }
+    .item-card-title {
+      font-family: var(--sc-font-mono);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--sc-ink);
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+    .item-card-desc {
+      font-size: 0.9rem;
+      color: var(--sc-ink-soft);
+      margin: 0;
+    }
+
+    /* Alert Banner */
+    .legal-alert {
+      background: color-mix(in oklab, var(--sc-accent) 10%, var(--sc-surface));
+      border: 1px solid var(--sc-accent);
+      padding: 1rem 1.25rem;
+      margin-block: 1.5rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+    }
+    .legal-alert-icon {
+      font-size: 1.2rem;
+    }
+    .legal-alert-text {
+      font-family: var(--sc-font-mono);
+      font-size: 0.85rem;
+      color: var(--sc-ink);
+      margin: 0;
+    }
+
+    /* Contact Card */
+    .contact-card {
+      background: color-mix(in oklab, var(--sc-surface) 95%, var(--sc-canvas));
+      border: 1px solid var(--sc-hairline-strong);
+      padding: 1.5rem;
+      margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      font-family: var(--sc-font-mono);
+    }
+    .contact-row {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 0.9rem;
+    }
+    .contact-row a {
+      color: var(--sc-accent);
+      text-decoration: none;
+    }
+    .contact-row a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fixed HUD Navigation Header -->
+  <header class="hud" id="hud">
+    <div class="hud__inner sc-wrap">
+      <a class="hud__brand" href="index.html#top" aria-label="Reapers home">
+        <img src="assets/logo-160.png" alt="Reapers Logo" width="44" height="44">
+        <span class="hud__word">Reapers</span>
+      </a>
+
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <button class="hud__audio-btn" id="audioToggleBtn" title="Toggle Sound Effects">
+          <span id="audioIcon">🔊</span> <span id="audioText">SFX ON</span>
+        </button>
+        <button class="hud__theme-btn" id="themeToggleBtn" title="Toggle Light / Dark Theme">
+          <span id="themeIcon">☀️</span> <span id="themeText">LIGHT</span>
+        </button>
+        <a class="hud__cta" href="index.html#close">Download App</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Legal Hero Section -->
+    <section class="legal-hero sc-wrap">
+      <div class="legal-badge">📜 REAPERS TERMS OF SERVICE &amp; COMMUNITY AGREEMENT</div>
+      <h1 class="legal-title">Terms &amp; Conditions</h1>
+      <p class="sc-body" style="max-width: 64ch; margin: 0.8rem auto 0 auto;">
+        Welcome to Reapers. Please read these Terms and Conditions carefully before using our platform, mobile application, and community services.
+      </p>
+
+      <div class="legal-meta-card">
+        <div class="legal-meta-item">EFFECTIVE DATE: <span>SEPTEMBER 2026</span></div>
+        <div class="legal-meta-item">LAST UPDATED: <span>SEPTEMBER 2026</span></div>
+        <div class="legal-meta-item">JURISDICTION: <span>PAKISTAN</span></div>
+      </div>
+
+      <!-- Quick TOC Navigation Pills -->
+      <div class="toc-bar">
+        <a href="#sec1" class="toc-pill">01. Eligibility</a>
+        <a href="#sec2" class="toc-pill">02. Account Registration</a>
+        <a href="#sec3" class="toc-pill">03. Description of Service</a>
+        <a href="#sec4" class="toc-pill">04. User Conduct</a>
+        <a href="#sec5" class="toc-pill">05. User-Generated Content</a>
+        <a href="#sec6" class="toc-pill">06. Events</a>
+        <a href="#sec7" class="toc-pill">07. Expert Sessions</a>
+        <a href="#sec8" class="toc-pill">08. Team Matchmaking</a>
+        <a href="#sec9" class="toc-pill">09. Intellectual Property</a>
+        <a href="#sec10" class="toc-pill">10. Disclaimers</a>
+        <a href="#sec11" class="toc-pill">11. Limitation of Liability</a>
+        <a href="#sec12" class="toc-pill">12. Termination</a>
+        <a href="#sec13" class="toc-pill">13. Changes to Terms</a>
+        <a href="#sec14" class="toc-pill">14. Governing Law</a>
+        <a href="#sec15" class="toc-pill">15. Contact Us</a>
+      </div>
+    </section>
+
+    <!-- Main Legal Document Container -->
+    <div class="sc-wrap">
+      <div class="legal-card blade">
+        
+        <p class="legal-p" style="font-size: 1.05rem;">
+          These Terms and Conditions (<strong>"Terms"</strong>) govern your access to and use of the website <strong>reapers.pk</strong> and the Reapers mobile application (collectively, the <strong>"Service"</strong>), operated by Reapers (<strong>"Reapers," "we," "us," or "our"</strong>).
+        </p>
+        <p class="legal-p">
+          By downloading, accessing, or using the Service, you agree to be bound by these Terms. If you do not agree to these Terms, you may not access or use the Service.
+        </p>
+
+        <!-- SECTION 1 -->
+        <section class="legal-section" id="sec1">
+          <h2 class="legal-heading"><span class="legal-num">01.</span> Eligibility</h2>
+          <p class="legal-p">
+            You must be at least 13 years of age (or the minimum age required in your country to consent to data processing) to use the Service. If you are under 18 (or the legal age of majority in your jurisdiction), you represent that you have reviewed these Terms with your parent or legal guardian and that they agree to these Terms on your behalf.
+          </p>
+        </section>
+
+        <!-- SECTION 2 -->
+        <section class="legal-section" id="sec2">
+          <h2 class="legal-heading"><span class="legal-num">02.</span> Account Registration &amp; Security</h2>
+          <p class="legal-p">
+            To access most features of the Service, you must create an account. You agree to:
+          </p>
+          <ul style="color: var(--sc-ink-soft); font-size: var(--sc-t-base); line-height: 1.8; margin-bottom: 1rem; padding-left: 1.2rem;">
+            <li>Provide accurate, current, and complete information during registration.</li>
+            <li>Maintain and promptly update your account information.</li>
+            <li>Maintain the confidentiality of your login credentials.</li>
+            <li>Accept full responsibility for all activities that occur under your account.</li>
+            <li>Notify us immediately at <a href="mailto:reapers.support@gmail.com" style="color: var(--sc-accent);">reapers.support@gmail.com</a> of any unauthorized use or security breach.</li>
+          </ul>
+        </section>
+
+        <!-- SECTION 3 -->
+        <section class="legal-section" id="sec3">
+          <h2 class="legal-heading"><span class="legal-num">03.</span> Description of Service</h2>
+          <p class="legal-p">Reapers provides a platform for gamers and game developers, including but not limited to:</p>
+
+          <div class="item-grid">
+            <div class="item-card">
+              <div class="item-card-title">💬 Chatrooms &amp; Communities</div>
+              <p class="item-card-desc">Public and private chat spaces for gaming communities, clans, and developer discussions.</p>
+            </div>
+            <div class="item-card item-card--cyan">
+              <div class="item-card-title">🎮 Game Demos &amp; Reviews</div>
+              <p class="item-card-desc">Uploading, viewing, rating, and reviewing game demo videos and projects.</p>
+            </div>
+            <div class="item-card item-card--magenta">
+              <div class="item-card-title">📅 Events Discovery</div>
+              <p class="item-card-desc">Listing and discovering gaming tournaments, esports competitions, and developer workshops.</p>
+            </div>
+            <div class="item-card">
+              <div class="item-card-title">🎓 Expert Sessions</div>
+              <p class="item-card-desc">Booking 10-15 minute guidance and mentorship video sessions with verified industry experts.</p>
+            </div>
+            <div class="item-card item-card--cyan">
+              <div class="item-card-title">🤝 Team &amp; Skill Matchmaking</div>
+              <p class="item-card-desc">Connecting gamers and developers for esports teams, game jams, and joint projects.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 4 -->
+        <section class="legal-section" id="sec4">
+          <h2 class="legal-heading"><span class="legal-num">04.</span> User Conduct &amp; Community Code</h2>
+          <p class="legal-p">You agree NOT to engage in any of the following prohibited activities:</p>
+
+          <div class="item-grid">
+            <div class="item-card item-card--magenta">
+              <div class="item-card-title">🚫 Toxic Behavior &amp; Harassment</div>
+              <p class="item-card-desc">Harassing, abusing, threatening, defaming, or intimidating any user or group based on race, gender, nationality, or gaming background.</p>
+            </div>
+            <div class="item-card">
+              <div class="item-card-title">⚠️ Illegal Content</div>
+              <p class="item-card-desc">Posting unlawful, fraudulent, obscene, sexually explicit, or infringing content.</p>
+            </div>
+            <div class="item-card item-card--cyan">
+              <div class="item-card-title">🤖 Spam &amp; Bots</div>
+              <p class="item-card-desc">Sending unsolicited advertising, promotional materials, spam, automated messages, or bot interactions.</p>
+            </div>
+            <div class="item-card item-card--magenta">
+              <div class="item-card-title">🔒 System Manipulation</div>
+              <p class="item-card-desc">Impersonating any person or entity, probing network vulnerabilities, exploiting bugs, spreading malware, or scraping data.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 5 -->
+        <section class="legal-section" id="sec5">
+          <h2 class="legal-heading"><span class="legal-num">05.</span> User-Generated Content (UGC)</h2>
+          
+          <h3 class="legal-subheading">5.1 Ownership &amp; License</h3>
+          <p class="legal-p">
+            You retain ownership of all content you upload, post, or display on or through the Service (including game demos, text messages, profile images, and event details).
+          </p>
+          <p class="legal-p">
+            By submitting content, you grant Reapers a non-exclusive, worldwide, royalty-free, transferable license to use, host, store, reproduce, display, and distribute your content solely for the purpose of operating, promoting, and improving the Service.
+          </p>
+
+          <h3 class="legal-subheading">5.2 Content Moderation &amp; Removal</h3>
+          <p class="legal-p">
+            We reserve the right (but have no obligation) to review, monitor, flag, or remove any user-generated content that violates these Terms or is otherwise harmful to the community, without prior notice.
+          </p>
+        </section>
+
+        <!-- SECTION 6 -->
+        <section class="legal-section" id="sec6">
+          <h2 class="legal-heading"><span class="legal-num">06.</span> Events &amp; Tournaments</h2>
+          <p class="legal-p">
+            Reapers allows users and organizers to list and host gaming events, tournaments, and meetups. Reapers does not organize, sponsor, or host user-created events unless explicitly designated. We are not responsible for event cancellations, prize fulfillment, rules enforcement, or safety at third-party or user-hosted events.
+          </p>
+        </section>
+
+        <!-- SECTION 7 -->
+        <section class="legal-section" id="sec7">
+          <h2 class="legal-heading"><span class="legal-num">07.</span> Expert Sessions &amp; Mentorship</h2>
+          <p class="legal-p">
+            Expert sessions (10-15 minute guidance calls) are provided for informational, educational, and networking purposes only. Recommendations made by Experts do not constitute formal legal, financial, or employment advice, nor do they guarantee career or project success.
+          </p>
+
+          <div class="legal-alert">
+            <div class="legal-alert-icon">💡</div>
+            <p class="legal-alert-text">
+              <strong>EXPERT DISCLAIMER:</strong> Experts are independent platform members. Reapers is not liable for agreements or disputes arising between users and experts outside of the platform.
+            </p>
+          </div>
+        </section>
+
+        <!-- SECTION 8 -->
+        <section class="legal-section" id="sec8">
+          <h2 class="legal-heading"><span class="legal-num">08.</span> Team &amp; Skill Matchmaking</h2>
+          <p class="legal-p">
+            The team matchmaking feature is a discovery tool to connect players and developers with similar interests. Reapers does not guarantee team compatibility, performance in competitive games, or formal business contracts between match-made partners.
+          </p>
+        </section>
+
+        <!-- SECTION 9 -->
+        <section class="legal-section" id="sec9">
+          <h2 class="legal-heading"><span class="legal-num">09.</span> Intellectual Property</h2>
+          <p class="legal-p">
+            The Service, including its design, logos, trademarks, code, icons, UI elements, and branding assets (excluding user content) are the exclusive property of Reapers and are protected by copyright, trademark, and other intellectual property laws of Pakistan and international treaties.
+          </p>
+        </section>
+
+        <!-- SECTION 10 -->
+        <section class="legal-section" id="sec10">
+          <h2 class="legal-heading"><span class="legal-num">10.</span> Disclaimers</h2>
+          <p class="legal-p">
+            THE SERVICE IS PROVIDED ON AN <strong>"AS IS"</strong> AND <strong>"AS AVAILABLE"</strong> BASIS WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED. TO THE FULLEST EXTENT PERMISSIBLE UNDER APPLICABLE LAW, REAPERS DISCLAIMS ALL WARRANTIES, INCLUDING IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
+          </p>
+        </section>
+
+        <!-- SECTION 11 -->
+        <section class="legal-section" id="sec11">
+          <h2 class="legal-heading"><span class="legal-num">11.</span> Limitation of Liability</h2>
+          <p class="legal-p">
+            TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, REAPERS AND ITS OFFICERS, DIRECTORS, EMPLOYEES, AND AGENTS SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNATIVE DAMAGES, OR ANY LOSS OF PROFITS, DATA, USE, GOODWILL, OR OTHER INTANGIBLE LOSSES RESULTING FROM YOUR ACCESS TO OR USE OF (OR INABILITY TO ACCESS OR USE) THE SERVICE.
+          </p>
+        </section>
+
+        <!-- SECTION 12 -->
+        <section class="legal-section" id="sec12">
+          <h2 class="legal-heading"><span class="legal-num">12.</span> Termination</h2>
+          <p class="legal-p">
+            We reserve the right to suspend, disable, or terminate your account or access to the Service at our sole discretion, without prior notice or liability, for conduct that violates these Terms or is harmful to other users, Reapers, or third parties. You may terminate your account at any time by contacting support.
+          </p>
+        </section>
+
+        <!-- SECTION 13 -->
+        <section class="legal-section" id="sec13">
+          <h2 class="legal-heading"><span class="legal-num">13.</span> Changes to These Terms</h2>
+          <p class="legal-p">
+            We may update these Terms from time to time. We will notify you of material changes by updating the "Last Updated" date at the top of this page. Your continued use of the Service after any changes take effect constitutes your acceptance of the updated Terms.
+          </p>
+        </section>
+
+        <!-- SECTION 14 -->
+        <section class="legal-section" id="sec14">
+          <h2 class="legal-heading"><span class="legal-num">14.</span> Governing Law &amp; Jurisdiction</h2>
+          <p class="legal-p">
+            These Terms shall be governed by, construed, and enforced in accordance with the laws of the <strong>Islamic Republic of Pakistan</strong>, without regard to its conflict of law principles. Any dispute arising out of or relating to these Terms or the Service shall be subject to the exclusive jurisdiction of the courts located in Lahore, Pakistan.
+          </p>
+        </section>
+
+        <!-- SECTION 15 -->
+        <section class="legal-section" id="sec15" style="margin-bottom: 0;">
+          <h2 class="legal-heading"><span class="legal-num">15.</span> Contact Us</h2>
+          <p class="legal-p">
+            If you have questions, concerns, or legal notices regarding these Terms, please contact us at:
+          </p>
+
+          <div class="contact-card blade">
+            <div class="contact-row">
+              <span style="color: var(--sc-accent);">✉️ EMAIL:</span>
+              <a href="mailto:reapers.support@gmail.com">reapers.support@gmail.com</a>
+            </div>
+            <div class="contact-row">
+              <span style="color: var(--sc-accent-2);">📍 LOCATION:</span>
+              <span style="color: var(--sc-ink);">Lahore, Pakistan</span>
+            </div>
+            <div class="contact-row">
+              <span style="color: var(--peak-magenta);">🌐 WEBSITE:</span>
+              <a href="https://reapers.pk" target="_blank" rel="noopener">reapers.pk</a>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="close__foot sc-wrap" style="display: flex; flex-direction: column; width: 100%; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--sc-hairline);">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; width: 100%;">
+      <div>
+        <p class="close__foot-mark" style="font-size: 1.2rem; font-weight: 700; font-family: var(--sc-font-display);">Reapers</p>
+        <p class="sc-body" style="margin-top: 0.3rem; color: var(--sc-ink-soft);">Play. Connect. Create. Dominate.</p>
+      </div>
+      <nav class="close__foot-links" style="display: flex; gap: 1.2rem; flex-wrap: wrap;">
+        <a href="services.html">Services</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html" style="color: var(--sc-accent);">Terms &amp; Conditions</a>
+        <a href="https://www.instagram.com/houseofthereapers?igsi=MWN2NWdseXc5NzE4cA==" target="_blank" rel="noopener">Instagram</a>
+        <a href="mailto:reapers.support@gmail.com">Email</a>
+      </nav>
+    </div>
+
+    <!-- Giant REAPERS Footer Banner -->
+    <div class="footer-giant-brand" style="width: 100%; text-align: center; overflow: hidden; margin-top: clamp(2.5rem, 5vw, 5rem); padding-top: 1rem; border-top: 1px solid var(--sc-hairline);">
+      <div class="footer-giant-title" style="font-family: var(--sc-font-display); font-weight: 900; font-size: clamp(4.5rem, 18vw, 17rem); line-height: 0.82; letter-spacing: -0.04em; text-transform: uppercase; color: var(--sc-ink); opacity: 0.95; user-select: none; margin: 0; padding-bottom: 0.1em; width: 100%;">
+        REAPERS
+      </div>
+    </div>
+  </footer>
+
+  <script src="scrollcraft.js"></script>
+  <script>
+    (function () {
+      'use strict';
+      // Theme Switcher Controller
+      var savedTheme = localStorage.getItem('reapers-theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+
+      var themeBtn = document.getElementById('themeToggleBtn');
+      var themeIcon = document.getElementById('themeIcon');
+      var themeText = document.getElementById('themeText');
+
+      function updateThemeUI(theme) {
+        if (themeIcon && themeText) {
+          if (theme === 'light') {
+            themeIcon.textContent = '☀️';
+            themeText.textContent = 'LIGHT';
+          } else {
+            themeIcon.textContent = '🌙';
+            themeText.textContent = 'DARK';
+          }
+        }
+      }
+      updateThemeUI(savedTheme);
+
+      if (themeBtn) {
+        themeBtn.addEventListener('click', function () {
+          var current = document.documentElement.getAttribute('data-theme') || 'light';
+          var nextTheme = (current === 'light') ? 'dark' : 'light';
+          document.documentElement.setAttribute('data-theme', nextTheme);
+          localStorage.setItem('reapers-theme', nextTheme);
+          updateThemeUI(nextTheme);
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
