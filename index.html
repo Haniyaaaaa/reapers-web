@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Reapers: Play. Connect. Create. Dominate.</title>
 <meta name="description" content="Reapers is the community home for Pakistan's gaming and game-dev scene: chatrooms, events, demo feedback, expert sessions and hiring, in one app.">
-<link rel="icon" href="assets/logo-160.png">
+<link rel="icon" href="assets/logo-160.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Outfit:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -993,7 +993,7 @@
 <header class="hud" id="hud" data-sc-verify-state="combo:0">
   <div class="hud__inner sc-wrap">
     <a class="hud__brand" href="#top" aria-label="Reapers home">
-      <img src="assets/logo-160.png" alt="" width="44" height="44">
+      <img src="assets/logo-160.webp" alt="" width="44" height="44">
       <span class="hud__word">Reapers</span>
     </a>
 
@@ -1012,8 +1012,8 @@
   <!-- 1 · HERO: Cinematic Hero Image Slider Opening -->
   <section class="act hero" data-sc-act="flow" id="hero">
     <div class="hero__bg-slider" id="heroBgSlider">
-      <img src="public/community/hero.jpeg" class="hero__bg-img is-active" id="heroImg1" alt="Reapers Community Arena 1">
-      <img src="public/community/hero-2.jpeg" class="hero__bg-img" id="heroImg2" alt="Reapers Community Arena 2">
+      <img src="public/community/hero.webp" class="hero__bg-img is-active" id="heroImg1" alt="Reapers Community Arena 1">
+      <img src="public/community/hero-2.webp" class="hero__bg-img" id="heroImg2" alt="Reapers Community Arena 2">
       <div class="hero__bg-overlay"></div>
       <div class="hero__bg-grid"></div>
     </div>
@@ -1063,130 +1063,37 @@
 
   <div class="section-divider-glow"></div>
 
-  <!-- 3 · PROBLEM 1: Parallax visualizer & Fragment HUD -->
-  <section class="act problem-act" id="problemSection">
-    <canvas id="problemCanvas" class="problem-act__canvas"></canvas>
-
-    <div class="sc-wrap">
-      <div class="problem-card blade" data-sc-in data-sc-stagger="70" data-sc-tilt="4">
-        <h2 class="sc-display sc-display--lg glitch-in" style="margin-top: 0;">The scene is everywhere. And nowhere.</h2>
-        <p class="sc-body" style="font-size: var(--sc-t-lg); margin-top: 1rem;">Chat groups split across five apps. Events you hear about after they happen. Feedback that goes nowhere.</p>
-        
-        <div class="problem-stat-grid">
-          <div class="problem-stat-card" style="--stat-color: var(--peak-magenta);">
-            <div class="problem-stat-num">5+</div>
-            <div class="problem-stat-label">Split Chat Apps</div>
-          </div>
-          <div class="problem-stat-card" style="--stat-color: var(--sc-accent-2);">
-            <div class="problem-stat-num">100s</div>
-            <div class="problem-stat-label">Missed Jams</div>
-          </div>
-          <div class="problem-stat-card" style="--stat-color: var(--sc-accent);">
-            <div class="problem-stat-num">1</div>
-            <div class="problem-stat-label">Unified Arena (Reapers)</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 3 · PROBLEM 2: Section 3 Cities 3D Orbital Glass Cards & Spine Experience -->
-  <section class="act cities-act" id="sectionCities">
-    <div class="cities-act__sticky">
-      <div class="cities-act__container sc-wrap">
-        
-        <!-- Centered Header & Headlines -->
-        <div class="cities-act__header">
-          <div class="problem-tag" style="background: color-mix(in oklab, var(--sc-accent) 12%, transparent); border-color: color-mix(in oklab, var(--sc-accent) 35%, transparent); color: var(--sc-accent); margin: 0 auto 0.6rem auto;">
-            ⚡ 3D ORBITAL NETWORK SPINE
-          </div>
-
-          <h2 class="sc-display problem2__cities">
-            <span class="city-title-word city-title-word--lhr is-active" id="wordLhr">Lahore.</span>
-            <span class="city-title-word city-title-word--khi" id="wordKhi">Karachi.</span>
-            <span class="city-title-word city-title-word--isb" id="wordIsb">Islamabad.</span>
-          </h2>
-
-          <p class="sc-lede problem2__note" id="citiesSub" style="margin-top: 0.3rem;">
-            Same scene. Different rooms. Revolving in unity.
-          </p>
-        </div>
-
-        <!-- 3D Circular Revolving Glass Cards Stage -->
-        <div class="spine-orbit-stage" id="spineOrbitStage">
-          <div class="cyber-spine"></div>
-          <div class="orbit-track" id="orbitTrack">
-
-            <div class="glass-orbit-card blade is-active-front" id="orbitCardLhr" style="--city-color: var(--sc-accent);">
-              <div class="city-card-code">LHR · LAHORE</div>
-              <div class="city-card-devs">1,850+ DEVS</div>
-              <div class="city-card-sub">🟢 ORBIT NODE 01 · 14ms</div>
-            </div>
-
-            <div class="glass-orbit-card blade" id="orbitCardKhi" style="--city-color: var(--sc-accent-2);">
-              <div class="city-card-code">KHI · KARACHI</div>
-              <div class="city-card-devs">2,100+ DEVS</div>
-              <div class="city-card-sub">🔵 ORBIT NODE 02 · 18ms</div>
-            </div>
-
-            <div class="glass-orbit-card blade" id="orbitCardIsb" style="--city-color: var(--peak-magenta);">
-              <div class="city-card-code">ISB · ISLAMABAD</div>
-              <div class="city-card-devs">1,260+ DEVS</div>
-              <div class="city-card-sub">💗 ORBIT NODE 03 · 12ms</div>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- 3-Column Live City Node Status Grid -->
-        <div class="city-nodes-grid" id="cityNodesGrid">
-          <div class="city-node-card blade is-active" id="nodeCardLhr" style="--node-color: var(--sc-accent);">
-            <div class="city-node-header">
-              <span class="city-node-dot">🟢</span>
-              <span class="city-node-code">LHR · LAHORE</span>
-            </div>
-            <div class="city-node-devs">1,850+ DEVS</div>
-            <div class="city-node-ping">LATENCY: 14ms · ACTIVE NODE</div>
-          </div>
-
-          <div class="city-node-card blade" id="nodeCardKhi" style="--node-color: var(--sc-accent-2);">
-            <div class="city-node-header">
-              <span class="city-node-dot">🔵</span>
-              <span class="city-node-code">KHI · KARACHI</span>
-            </div>
-            <div class="city-node-devs">2,100+ DEVS</div>
-            <div class="city-node-ping">LATENCY: 18ms · ACTIVE NODE</div>
-          </div>
-
-          <div class="city-node-card blade" id="nodeCardIsb" style="--node-color: var(--peak-magenta);">
-            <div class="city-node-header">
-              <span class="city-node-dot">💗</span>
-              <span class="city-node-code">ISB · ISLAMABAD</span>
-            </div>
-            <div class="city-node-devs">1,260+ DEVS</div>
-            <div class="city-node-ping">LATENCY: 12ms · ACTIVE NODE</div>
-          </div>
-        </div>
-
-        <!-- Centered Progress HUD -->
-        <div class="cities-progress-hud">
-          <div class="quiet__progress-track">
-            <div class="quiet__progress-fill" id="citiesProgressFill"></div>
-          </div>
-          <div class="quiet__progress-text" id="citiesProgressText" style="margin-top: 0.4rem;">SCROLL ORBIT SPINE · 0%</div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
   <!-- 4 · TURN: kinetic + reveal -->
   <section class="act" data-sc-act="flow">
     <div class="sc-wrap act-inner">
       <div class="feature__grid feature__grid--reverse">
-        <figure class="feature__media blade" data-sc-reveal="iris" data-sc-reveal-at="0.08 0.55" data-sc-tilt="5">
-          <img src="assets/event-present.jpg" width="1600" height="1066" alt="A Reapers community mentoring session, screen glow lighting the room">
-        </figure>
+        
+        <!-- Interactive Cyber Events Photo Carousel -->
+        <div class="cyber-carousel blade" id="eventsCarouselWidget">
+          <div class="cyber-carousel__stage">
+            <div class="cyber-carousel__hud" id="eventsCarouselHud">📸 EVENTS GALLERY · 01 / 05</div>
+            
+            <img src="Pics/Pics/Events/lahoremeetup2026_7.webp" class="cyber-carousel__img is-active" alt="Lahore Meetup 2026 Community Event">
+            <img src="Pics/Pics/Events/DSC_0025.webp" class="cyber-carousel__img" alt="Reapers Game Developers Gathering">
+            <img src="Pics/Pics/Events/WhatsApp Image 2026-09-04 at 1.13.50 PM.webp" class="cyber-carousel__img" alt="National Game Jam Stage">
+            <img src="Pics/Pics/Events/WhatsApp Image 2026-09-04 at 1.13.50 PM (1).webp" class="cyber-carousel__img" alt="Reapers Esports Tournament">
+            <img src="Pics/Pics/Events/WhatsApp Image 2026-09-04 at 1.13.51 PM (1).webp" class="cyber-carousel__img" alt="Community Networking Party">
+
+            <div class="cyber-carousel__nav">
+              <button class="cyber-carousel__btn events-prev-btn" aria-label="Previous photo">❮</button>
+              <button class="cyber-carousel__btn events-next-btn" aria-label="Next photo">❯</button>
+            </div>
+          </div>
+
+          <div class="cyber-carousel__thumbs">
+            <div class="cyber-carousel__thumb is-active"><img src="Pics/Pics/Events/lahoremeetup2026_7.webp" alt="Thumb 1"></div>
+            <div class="cyber-carousel__thumb"><img src="Pics/Pics/Events/DSC_0025.webp" alt="Thumb 2"></div>
+            <div class="cyber-carousel__thumb"><img src="Pics/Pics/Events/WhatsApp Image 2026-09-04 at 1.13.50 PM.webp" alt="Thumb 3"></div>
+            <div class="cyber-carousel__thumb"><img src="Pics/Pics/Events/WhatsApp Image 2026-09-04 at 1.13.50 PM (1).webp" alt="Thumb 4"></div>
+            <div class="cyber-carousel__thumb"><img src="Pics/Pics/Events/WhatsApp Image 2026-09-04 at 1.13.51 PM (1).webp" alt="Thumb 5"></div>
+          </div>
+        </div>
+
         <div class="feature__copy sc-stack">
           <h2 class="sc-display sc-display--lg" data-sc-cue="0 0.86 0" data-sc-kinetic="lines">One app. Whole scene.</h2>
           <p class="sc-body">Chat, events, demo feedback, expert mentors, and hiring, together in one place built for the people making Pakistan's games.</p>
@@ -1224,6 +1131,10 @@
             <button class="react-btn" data-emoji="🎮">🎮 <span class="react-count">210</span></button>
             <button class="react-btn" data-emoji="⚡">⚡ <span class="react-count">85</span></button>
           </div>
+          <form class="chat-sim__input-bar" id="chatSimForm" style="display: flex; gap: 0.5rem; margin-top: 0.8rem; padding-top: 0.8rem; border-top: 1px solid var(--sc-hairline);">
+            <input type="text" id="chatSimInput" placeholder="Send a message to #game-dev-general..." style="flex: 1; background: var(--sc-surface); border: 1px solid var(--sc-hairline-strong); color: var(--sc-ink); font-family: var(--sc-font-mono); font-size: 0.8rem; padding: 0.4rem 0.8rem; border-radius: 4px;" required>
+            <button type="submit" style="background: var(--sc-accent); color: var(--sc-accent-ink); border: none; font-family: var(--sc-font-mono); font-size: 0.8rem; font-weight: 700; padding: 0.4rem 1rem; cursor: pointer; border-radius: 4px; text-transform: uppercase;">SEND</button>
+          </form>
         </div>
 
         <div class="feature__copy sc-stack" data-sc-in data-sc-stagger="70">
@@ -1234,24 +1145,24 @@
           <div class="community-logos-showcase">
             <div class="community-logos-label">⚡ PARTNERED GAMING GUILDS &amp; COMMUNITIES</div>
             <div class="community-logos-grid">
-              <div class="community-logo-card blade" title="CCGA - Computer &amp; Game Guild">
-                <img src="assets/partner-cega.png" alt="CCGA Logo" loading="lazy">
-                <span class="community-logo-title">CCGA</span>
+              <div class="community-logo-card blade" title="CEGA - Computer &amp; Game Guild">
+                <img src="assets/partner-cega.webp" alt="CEGA Logo" loading="lazy">
+                <span class="community-logo-title">CEGA</span>
               </div>
               <div class="community-logo-card blade" title="IGDA Pakistan">
-                <img src="assets/partner-igda.png" class="logo-igda" alt="IGDA Pakistan Logo" loading="lazy">
+                <img src="assets/partner-igda.webp" class="logo-igda" alt="IGDA Pakistan Logo" loading="lazy">
                 <span class="community-logo-title">IGDA PAKISTAN</span>
               </div>
               <div class="community-logo-card blade" title="PIGD - Pakistan Games Dev Guild">
-                <img src="assets/partner-pigd.png" alt="PIGD Logo" loading="lazy">
+                <img src="assets/partner-pigd.webp" alt="PIGD Logo" loading="lazy">
                 <span class="community-logo-title">PIGD</span>
               </div>
               <div class="community-logo-card blade" title="PGDA - Game Developers Association">
-                <img src="assets/partner-pgda.png" alt="PGDA Logo" loading="lazy">
+                <img src="assets/partner-pgda.webp" alt="PGDA Logo" loading="lazy">
                 <span class="community-logo-title">PGDA</span>
               </div>
               <div class="community-logo-card blade" title="Pakistan Game Devs Community">
-                <img src="assets/partner-pakgamedev.png" alt="Pak Game Devs Logo" loading="lazy">
+                <img src="assets/partner-pakgamedev.webp" alt="Pak Game Devs Logo" loading="lazy">
                 <span class="community-logo-title">PAK GAME DEVS</span>
               </div>
             </div>
@@ -1261,116 +1172,7 @@
     </div>
   </section>
 
-  <!-- 6 · Events · combo x2 -->
-  <section class="act feature" id="f2" data-combo="2" data-sc-act="flow">
-    <div class="sc-wrap act-inner">
-      <div class="feature__grid feature__grid--reverse">
-        
-        <!-- Interactive Cyber Events Photo Carousel -->
-        <div class="cyber-carousel blade" id="eventsCarouselWidget">
-          <div class="cyber-carousel__stage">
-            <div class="cyber-carousel__hud" id="eventsCarouselHud">📸 REAPERS EVENTS GALLERY · 01 / 05</div>
-            
-            <img src="Pics/Pics/Events/lahoremeetup2026_7.png" class="cyber-carousel__img is-active" alt="Lahore Meetup 2026 Community Event">
-            <img src="Pics/Pics/Events/DSC_0025.JPG" class="cyber-carousel__img" alt="Reapers Game Developers Gathering">
-            <img src="Pics/Pics/Events/WhatsApp Image 2026-09-04 at 1.13.50 PM.jpeg" class="cyber-carousel__img" alt="National Game Jam Stage">
-            <img src="Pics/Pics/Events/WhatsApp Image 2026-09-04 at 1.13.50 PM (1).jpeg" class="cyber-carousel__img" alt="Reapers Esports Tournament">
-            <img src="Pics/Pics/Events/WhatsApp Image 2026-09-04 at 1.13.51 PM (1).jpeg" class="cyber-carousel__img" alt="Community Networking Party">
-
-            <div class="cyber-carousel__nav">
-              <button class="cyber-carousel__btn events-prev-btn" aria-label="Previous photo">❮</button>
-              <button class="cyber-carousel__btn events-next-btn" aria-label="Next photo">❯</button>
-            </div>
-          </div>
-
-          <div class="cyber-carousel__thumbs">
-            <div class="cyber-carousel__thumb is-active"><img src="Pics/Pics/Events/lahoremeetup2026_7.png" alt="Thumb 1"></div>
-            <div class="cyber-carousel__thumb"><img src="Pics/Pics/Events/DSC_0025.JPG" alt="Thumb 2"></div>
-            <div class="cyber-carousel__thumb"><img src="Pics/Pics/Events/WhatsApp Image 2026-09-04 at 1.13.50 PM.jpeg" alt="Thumb 3"></div>
-            <div class="cyber-carousel__thumb"><img src="Pics/Pics/Events/WhatsApp Image 2026-09-04 at 1.13.50 PM (1).jpeg" alt="Thumb 4"></div>
-            <div class="cyber-carousel__thumb"><img src="Pics/Pics/Events/WhatsApp Image 2026-09-04 at 1.13.51 PM (1).jpeg" alt="Thumb 5"></div>
-          </div>
-        </div>
-
-        <div class="feature__copy sc-stack" data-sc-in data-sc-stagger="70">
-          <h3 class="sc-display feature__title">Events &amp; Team Hiring</h3>
-          <p class="feature__body">Watch parties, jams, tournaments, meetups, and team recruitment. Post a role, share a demo, find your next teammate.</p>
-
-          <!-- Single Unified Cyber HUD Console Card (Events & Team Hiring) -->
-          <div class="cyber-console-card" style="margin-top: 1rem; background: var(--sc-surface); color: var(--sc-ink); border: 1px solid var(--sc-hairline-strong); padding: 1.25rem; box-shadow: 0 10px 30px rgba(0,0,0,0.12); backdrop-filter: blur(12px); border-radius: 4px;">
-            
-            <!-- Top HUD Mode Selector Bar -->
-            <div class="cyber-hud-mode-bar" style="display: flex; gap: 0.5rem; margin-bottom: 1.2rem; border-bottom: 1px solid var(--sc-hairline); padding-bottom: 0.8rem;">
-              <button class="cyber-hud-mode-btn is-active" id="hudModeEventsBtn" data-target="cyberHudEventsPanel" style="flex: 1; padding: 0.5rem 0.8rem; font-family: var(--sc-font-mono); font-size: 0.78rem; text-transform: uppercase; background: var(--sc-accent); color: var(--sc-accent-ink); border: 1px solid var(--sc-accent); cursor: pointer; font-weight: 700; transition: all 0.2s;">
-                🗓️ UPCOMING EVENTS
-              </button>
-              <button class="cyber-hud-mode-btn" id="hudModeLfgBtn" data-target="cyberHudLfgPanel" style="flex: 1; padding: 0.5rem 0.8rem; font-family: var(--sc-font-mono); font-size: 0.78rem; text-transform: uppercase; background: transparent; color: var(--sc-ink-soft); border: 1px solid var(--sc-hairline-strong); cursor: pointer; font-weight: 700; transition: all 0.2s;">
-                ⚡ TEAM HIRING (LFG)
-              </button>
-            </div>
-
-            <!-- PANEL A: UPCOMING EVENTS -->
-            <div class="cyber-hud-panel is-active" id="cyberHudEventsPanel" style="display: block;">
-              <div class="event-tabs" style="display: flex; gap: 0.4rem; margin-bottom: 1rem; flex-wrap: wrap;">
-                <span class="event-tab is-active" data-cat="all">ALL EVENTS</span>
-                <span class="event-tab" data-cat="jam">GAME JAMS</span>
-                <span class="event-tab" data-cat="esports">TOURNAMENTS</span>
-              </div>
-              <div class="event-ticket-spotlight" id="eventPassWidget" style="background: color-mix(in oklab, var(--sc-surface) 90%, var(--sc-canvas)); border: 1px solid var(--sc-hairline-strong); padding: 1rem; transition: all 0.3s ease;">
-                <div class="event-ticket__tag" id="eventTag" style="display: inline-block; font-family: var(--sc-font-mono); font-size: 0.75rem; color: var(--sc-accent-2); border: 1px solid var(--sc-accent-2); padding: 0.2em 0.6em; margin-bottom: 0.5rem;">PGDA NATIONAL GAME JAM 2026</div>
-                <h4 id="eventTitle" style="font-family: var(--sc-font-display); font-size: 1.15rem; margin: 0 0 0.3rem 0; color: var(--sc-ink);">48-Hour Game Development Sprint</h4>
-                <p id="eventDesc" style="font-size: 0.85rem; color: var(--sc-ink-soft); margin: 0 0 0.8rem 0; line-height: 1.4;">Compete with over 500 developers across Pakistan in rapid prototyping and game design.</p>
-                <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 0.6rem; border-top: 1px solid var(--sc-hairline); font-family: var(--sc-font-mono); font-size: 0.75rem;">
-                  <span style="color: var(--sc-accent);">📍 LAHORE &amp; ONLINE</span>
-                  <a href="https://discord.gg/reapers" target="_blank" style="color: var(--sc-accent-2); text-decoration: none; font-weight: 700;">RSVP ON DISCORD →</a>
-                </div>
-              </div>
-            </div>
-
-            <!-- PANEL B: TEAM HIRING / GUILD LFG -->
-            <div class="cyber-hud-panel" id="cyberHudLfgPanel" style="display: none;">
-              <div class="lfg-chips" style="display: flex; gap: 0.4rem; margin-bottom: 1rem; flex-wrap: wrap;">
-                <span class="lfg-chip is-active" data-lfg="all" style="font-family: var(--sc-font-mono); font-size: 0.72rem; text-transform: uppercase; padding: 0.2rem 0.6rem; background: var(--sc-accent); color: var(--sc-accent-ink); border: 1px solid var(--sc-accent); cursor: pointer;">ALL ROLES</span>
-                <span class="lfg-chip" data-lfg="3d" style="font-family: var(--sc-font-mono); font-size: 0.72rem; text-transform: uppercase; padding: 0.2rem 0.6rem; background: color-mix(in oklab, var(--sc-surface) 90%, var(--sc-canvas)); color: var(--sc-ink-soft); border: 1px solid var(--sc-hairline-strong); cursor: pointer;">3D ARTIST</span>
-                <span class="lfg-chip" data-lfg="dev" style="font-family: var(--sc-font-mono); font-size: 0.72rem; text-transform: uppercase; padding: 0.2rem 0.6rem; background: color-mix(in oklab, var(--sc-surface) 90%, var(--sc-canvas)); color: var(--sc-ink-soft); border: 1px solid var(--sc-hairline-strong); cursor: pointer;">UNITY DEV</span>
-                <span class="lfg-chip" data-lfg="sound" style="font-family: var(--sc-font-mono); font-size: 0.72rem; text-transform: uppercase; padding: 0.2rem 0.6rem; background: color-mix(in oklab, var(--sc-surface) 90%, var(--sc-canvas)); color: var(--sc-ink-soft); border: 1px solid var(--sc-hairline-strong); cursor: pointer;">SOUND DESIGNER</span>
-              </div>
-              <div class="lfg-list" style="display: flex; flex-direction: column; gap: 0.6rem;">
-                <div class="lfg-item" data-role="3d" style="padding: 0.6rem 0.8rem; background: color-mix(in oklab, var(--sc-surface) 90%, var(--sc-canvas)); border-left: 3px solid var(--sc-accent); font-size: 0.82rem;">
-                  <div style="display: flex; justify-content: space-between; font-family: var(--sc-font-mono);">
-                    <strong style="color: var(--sc-ink);">Cyber-Blade Studio</strong>
-                    <span style="color: var(--sc-accent); font-size: 0.72rem; font-weight: 700;">RECRUITING</span>
-                  </div>
-                  <p style="color: var(--sc-ink-soft); margin: 0.2rem 0 0 0;">Senior 3D Environment Artist for PC Sci-Fi RPG.</p>
-                </div>
-                <div class="lfg-item" data-role="dev" style="padding: 0.6rem 0.8rem; background: color-mix(in oklab, var(--sc-surface) 90%, var(--sc-canvas)); border-left: 3px solid var(--sc-accent-2); font-size: 0.82rem;">
-                  <div style="display: flex; justify-content: space-between; font-family: var(--sc-font-mono);">
-                    <strong style="color: var(--sc-ink);">Neon Pulse Games</strong>
-                    <span style="color: var(--sc-accent-2); font-size: 0.72rem; font-weight: 700;">RECRUITING</span>
-                  </div>
-                  <p style="color: var(--sc-ink-soft); margin: 0.2rem 0 0 0;">Gameplay Programmer for mobile multiplayer brawler.</p>
-                </div>
-                <div class="lfg-item" data-role="sound" style="padding: 0.6rem 0.8rem; background: color-mix(in oklab, var(--sc-surface) 90%, var(--sc-canvas)); border-left: 3px solid #ffaa00; font-size: 0.82rem;">
-                  <div style="display: flex; justify-content: space-between; font-family: var(--sc-font-mono);">
-                    <strong style="color: var(--sc-ink);">Apex Forge Interactive</strong>
-                    <span style="color: #ffaa00; font-size: 0.72rem; font-weight: 700;">URGENT</span>
-                  </div>
-                  <p style="color: var(--sc-ink-soft); margin: 0.2rem 0 0 0;">Sound Designer &amp; Composer for Tactical FPS demo.</p>
-                </div>
-              </div>
-              <div style="margin-top: 0.8rem; text-align: right;">
-                <a href="https://discord.gg/reapers" target="_blank" style="font-family: var(--sc-font-mono); font-size: 0.75rem; color: var(--sc-accent); text-decoration: none; font-weight: 700;">+ POST OPEN ROLE IN GUILD DISCORD</a>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- 7 · Demo Showcase · combo x3 -->
+  <!-- 7 · Demo Showcase & Team Hiring · combo x3 -->
   <section class="act act--dim feature" id="f3" data-combo="3">
     <div class="sc-wrap act-inner">
       <div class="feature__grid">
@@ -1398,9 +1200,48 @@
         </div>
 
         <div class="feature__copy sc-stack" data-sc-in data-sc-stagger="70">
-          <h3 class="sc-display feature__title">Demo Showcase</h3>
-          <p class="feature__body">Upload gameplay clips. Get real feedback from people who actually play.</p>
-          <p class="feature__pending">Live in app, interactive preview enabled above</p>
+          <h3 class="sc-display feature__title">Demo Showcase &amp; Team Hiring</h3>
+          <p class="feature__body">Watch indie gameplay demo clips, get community feedback, and connect together with developers to hire or join a team.</p>
+
+          <!-- Integrated Team Hiring & Matchmaking Console Widget -->
+          <div class="cyber-console-card" style="margin-top: 1rem; background: var(--sc-surface); color: var(--sc-ink); border: 1px solid var(--sc-hairline-strong); padding: 1.1rem; box-shadow: 0 10px 30px rgba(0,0,0,0.12); border-radius: 4px;">
+            <div style="font-family: var(--sc-font-mono); font-size: 0.75rem; color: var(--sc-accent); letter-spacing: 0.05em; font-weight: 700; margin-bottom: 0.75rem; text-transform: uppercase;">
+              ⚡ TEAM HIRING &amp; MATCHMAKING (LFG)
+            </div>
+            <div class="lfg-chips" style="display: flex; gap: 0.4rem; margin-bottom: 0.8rem; flex-wrap: wrap;">
+              <span class="lfg-chip is-active" data-lfg="all" style="font-family: var(--sc-font-mono); font-size: 0.72rem; text-transform: uppercase; padding: 0.2rem 0.6rem; background: var(--sc-accent); color: var(--sc-accent-ink); border: 1px solid var(--sc-accent); cursor: pointer;">ALL ROLES</span>
+              <span class="lfg-chip" data-lfg="3d" style="font-family: var(--sc-font-mono); font-size: 0.72rem; text-transform: uppercase; padding: 0.2rem 0.6rem; background: color-mix(in oklab, var(--sc-surface) 90%, var(--sc-canvas)); color: var(--sc-ink-soft); border: 1px solid var(--sc-hairline-strong); cursor: pointer;">3D ARTIST</span>
+              <span class="lfg-chip" data-lfg="dev" style="font-family: var(--sc-font-mono); font-size: 0.72rem; text-transform: uppercase; padding: 0.2rem 0.6rem; background: color-mix(in oklab, var(--sc-surface) 90%, var(--sc-canvas)); color: var(--sc-ink-soft); border: 1px solid var(--sc-hairline-strong); cursor: pointer;">UNITY DEV</span>
+              <span class="lfg-chip" data-lfg="sound" style="font-family: var(--sc-font-mono); font-size: 0.72rem; text-transform: uppercase; padding: 0.2rem 0.6rem; background: color-mix(in oklab, var(--sc-surface) 90%, var(--sc-canvas)); color: var(--sc-ink-soft); border: 1px solid var(--sc-hairline-strong); cursor: pointer;">SOUND DESIGNER</span>
+            </div>
+            <div class="lfg-list" style="display: flex; flex-direction: column; gap: 0.5rem;">
+              <div class="lfg-item" data-role="3d" style="padding: 0.5rem 0.7rem; background: color-mix(in oklab, var(--sc-surface) 90%, var(--sc-canvas)); border-left: 3px solid var(--sc-accent); font-size: 0.8rem;">
+                <div style="display: flex; justify-content: space-between; font-family: var(--sc-font-mono);">
+                  <strong style="color: var(--sc-ink);">Cyber-Blade Studio</strong>
+                  <span style="color: var(--sc-accent); font-size: 0.7rem; font-weight: 700;">RECRUITING</span>
+                </div>
+                <p style="color: var(--sc-ink-soft); margin: 0.15rem 0 0 0;">Senior 3D Environment Artist for PC Sci-Fi RPG.</p>
+              </div>
+              <div class="lfg-item" data-role="dev" style="padding: 0.5rem 0.7rem; background: color-mix(in oklab, var(--sc-surface) 90%, var(--sc-canvas)); border-left: 3px solid var(--sc-accent-2); font-size: 0.8rem;">
+                <div style="display: flex; justify-content: space-between; font-family: var(--sc-font-mono);">
+                  <strong style="color: var(--sc-ink);">Neon Pulse Games</strong>
+                  <span style="color: var(--sc-accent-2); font-size: 0.7rem; font-weight: 700;">RECRUITING</span>
+                </div>
+                <p style="color: var(--sc-ink-soft); margin: 0.15rem 0 0 0;">Gameplay Programmer for mobile multiplayer brawler.</p>
+              </div>
+              <div class="lfg-item" data-role="sound" style="padding: 0.5rem 0.7rem; background: color-mix(in oklab, var(--sc-surface) 90%, var(--sc-canvas)); border-left: 3px solid #ffaa00; font-size: 0.8rem;">
+                <div style="display: flex; justify-content: space-between; font-family: var(--sc-font-mono);">
+                  <strong style="color: var(--sc-ink);">Apex Forge Interactive</strong>
+                  <span style="color: #ffaa00; font-size: 0.7rem; font-weight: 700;">URGENT</span>
+                </div>
+                <p style="color: var(--sc-ink-soft); margin: 0.15rem 0 0 0;">Sound Designer &amp; Composer for Tactical FPS demo.</p>
+              </div>
+            </div>
+            <div style="margin-top: 0.6rem; text-align: right;">
+              <a href="https://discord.gg/reapers" target="_blank" style="font-family: var(--sc-font-mono); font-size: 0.72rem; color: var(--sc-accent); text-decoration: none; font-weight: 700;">+ POST OPEN ROLE IN GUILD DISCORD →</a>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -1415,10 +1256,10 @@
           <div class="cyber-carousel__stage">
             <div class="cyber-carousel__hud" id="mentoringCarouselHud">🎓 MENTORING SESSION · 01 / 04</div>
             
-            <img src="Pics/Pics/Mentoring Sessions/DSC00761.JPG.jpeg" class="cyber-carousel__img is-active" alt="Mentor Reviewing Game Demo on Laptop">
-            <img src="Pics/Pics/Mentoring Sessions/DSC01093.JPG" class="cyber-carousel__img" alt="Reapers Office Hours Mentorship Session">
-            <img src="Pics/Pics/Mentoring Sessions/WhatsApp Image 2026-09-04 at 1.13.51 PM.jpeg" class="cyber-carousel__img" alt="1-on-1 Code &amp; Shader Review">
-            <img src="Pics/Pics/Mentoring Sessions/WhatsApp Image 2026-09-04 at 1.13.52 PM (1).jpeg" class="cyber-carousel__img" alt="Developer Feedback &amp; Studio Pitch Review">
+            <img src="Pics/Pics/Mentoring Sessions/DSC00761.JPG.webp" class="cyber-carousel__img is-active" alt="Mentor Reviewing Game Demo on Laptop">
+            <img src="Pics/Pics/Mentoring Sessions/DSC01093.webp" class="cyber-carousel__img" alt="Reapers Office Hours Mentorship Session">
+            <img src="Pics/Pics/Mentoring Sessions/WhatsApp Image 2026-09-04 at 1.13.51 PM.webp" class="cyber-carousel__img" alt="1-on-1 Code &amp; Shader Review">
+            <img src="Pics/Pics/Mentoring Sessions/WhatsApp Image 2026-09-04 at 1.13.52 PM (1).webp" class="cyber-carousel__img" alt="Developer Feedback &amp; Studio Pitch Review">
 
             <div class="cyber-carousel__nav">
               <button class="cyber-carousel__btn mentoring-prev-btn" aria-label="Previous photo">❮</button>
@@ -1427,10 +1268,10 @@
           </div>
 
           <div class="cyber-carousel__thumbs">
-            <div class="cyber-carousel__thumb is-active"><img src="Pics/Pics/Mentoring Sessions/DSC00761.JPG.jpeg" alt="Thumb 1"></div>
-            <div class="cyber-carousel__thumb"><img src="Pics/Pics/Mentoring Sessions/DSC01093.JPG" alt="Thumb 2"></div>
-            <div class="cyber-carousel__thumb"><img src="Pics/Pics/Mentoring Sessions/WhatsApp Image 2026-09-04 at 1.13.51 PM.jpeg" alt="Thumb 3"></div>
-            <div class="cyber-carousel__thumb"><img src="Pics/Pics/Mentoring Sessions/WhatsApp Image 2026-09-04 at 1.13.52 PM (1).jpeg" alt="Thumb 4"></div>
+            <div class="cyber-carousel__thumb is-active"><img src="Pics/Pics/Mentoring Sessions/DSC00761.JPG.webp" alt="Thumb 1"></div>
+            <div class="cyber-carousel__thumb"><img src="Pics/Pics/Mentoring Sessions/DSC01093.webp" alt="Thumb 2"></div>
+            <div class="cyber-carousel__thumb"><img src="Pics/Pics/Mentoring Sessions/WhatsApp Image 2026-09-04 at 1.13.51 PM.webp" alt="Thumb 3"></div>
+            <div class="cyber-carousel__thumb"><img src="Pics/Pics/Mentoring Sessions/WhatsApp Image 2026-09-04 at 1.13.52 PM (1).webp" alt="Thumb 4"></div>
           </div>
         </div>
         <div class="feature__copy sc-stack" data-sc-in data-sc-stagger="70">
@@ -1452,7 +1293,7 @@
   <section class="act" id="proof" data-sc-act="flow">
     <div class="sc-wrap act-inner">
       <figure class="proof__photo" data-sc-reveal="left" data-sc-reveal-at="0.06 0.6">
-        <img src="assets/event-community.jpg" width="1600" height="1066" alt="The wider Reapers and partner-community group at a shared event">
+        <img src="assets/event-community.webp" width="1600" height="1066" alt="The wider Reapers and partner-community group at a shared event">
       </figure>
       <h2 class="sc-display sc-display--lg proof__title" data-sc-in>Built with Pakistan's gaming community.</h2>
       
@@ -2075,7 +1916,7 @@
     }, 5000);
   }
 
-  initCyberCarousel('eventsCarouselWidget', 'eventsCarouselHud', 'events-prev-btn', 'events-next-btn', '📸 REAPERS EVENTS GALLERY');
+  initCyberCarousel('eventsCarouselWidget', 'eventsCarouselHud', 'events-prev-btn', 'events-next-btn', '📸 EVENTS GALLERY');
   initCyberCarousel('mentoringCarouselWidget', 'mentoringCarouselHud', 'mentoring-prev-btn', 'mentoring-next-btn', '🎓 MENTORING SESSIONS');
   })();
 
@@ -2605,6 +2446,42 @@
       playZapSFX();
     });
   }
+
+  // ---- 9. Interactive Live Chatbox & Reaction Buttons Controller ------------
+  var chatForm = document.getElementById('chatSimForm');
+  var chatInput = document.getElementById('chatSimInput');
+  var chatBody = document.getElementById('chatSimBody');
+
+  if (chatForm && chatInput && chatBody) {
+    chatForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var msg = chatInput.value.trim();
+      if (!msg) return;
+      playZapSFX();
+
+      var msgDiv = document.createElement('div');
+      msgDiv.className = 'chat-msg';
+      msgDiv.style.marginTop = '0.4rem';
+      msgDiv.innerHTML = '<span class="chat-msg__tag" style="background: var(--sc-accent); color: var(--sc-accent-ink); font-weight: 700;">YOU</span> ' +
+                         '<span class="chat-msg__text" style="color: var(--sc-ink);">' + msg.replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</span>';
+      chatBody.appendChild(msgDiv);
+      chatInput.value = '';
+      chatBody.scrollTop = chatBody.scrollHeight;
+    });
+  }
+
+  document.querySelectorAll('.react-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      playZapSFX();
+      var countSpan = btn.querySelector('.react-count');
+      if (countSpan) {
+        var current = parseInt(countSpan.textContent, 10) || 0;
+        countSpan.textContent = current + 1;
+        btn.style.borderColor = 'var(--sc-accent)';
+        btn.style.color = 'var(--sc-accent)';
+      }
+    });
+  });
 })();
 </script>
 </body>

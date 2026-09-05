@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Our Services · Reapers Gaming Arena</title>
   <meta name="description" content="Reapers Ecosystem Services — Community Chatrooms, Direct Messaging, Community Building, Event Discovery, Game Demo Showcase, Team Matchmaking, Expert Sessions, and Developer Profiles.">
-  <link rel="icon" href="assets/logo-160.png" type="image/png">
+  <link rel="icon" href="assets/logo-160.webp" type="image/png">
 
   <!-- Typography: Chakra Petch (Display), Outfit (Prose), IBM Plex Mono (Code/Labels) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -288,7 +288,7 @@
   <header class="hud" id="hud">
     <div class="hud__inner sc-wrap">
       <a class="hud__brand" href="index.html#top" aria-label="Reapers home">
-        <img src="assets/logo-160.png" alt="Reapers Logo" width="44" height="44">
+        <img src="assets/logo-160.webp" alt="Reapers Logo" width="44" height="44">
         <span class="hud__word">Reapers</span>
       </a>
 
@@ -351,10 +351,24 @@
 
           <div class="widget-box">
             <div class="widget-label">⚡ LIVE COMMUNITY CHATROOM STREAM</div>
-            <div style="font-family: var(--sc-font-mono); font-size: 0.78rem; color: var(--sc-ink); background: color-mix(in oklab, var(--sc-surface) 80%, var(--sc-canvas)); padding: 0.6rem 0.8rem; border-left: 3px solid var(--sc-accent);">
-              <span style="color: var(--sc-accent); font-weight: 700;">#unreal-dev:</span> "Does anyone have shader performance tips for mobile vulkan?"
+            <div id="serviceChatBody" style="display: flex; flex-direction: column; gap: 0.4rem; max-height: 120px; overflow-y: auto; font-family: var(--sc-font-mono); font-size: 0.78rem; color: var(--sc-ink); background: color-mix(in oklab, var(--sc-surface) 80%, var(--sc-canvas)); padding: 0.6rem 0.8rem; border-left: 3px solid var(--sc-accent);">
+              <div><span style="color: var(--sc-accent); font-weight: 700;">LHR_DEV:</span> Anyone testing their Unreal 5.4 physics build tonight?</div>
+              <div><span style="color: var(--sc-accent-2); font-weight: 700;">PIGD_PRO:</span> Post it in #demo-showcase for live review!</div>
+              <div><span style="color: var(--peak-magenta); font-weight: 700;">RPR_LEADER:</span> Registration for PGDA Game Jam drops tomorrow! 🚀</div>
             </div>
-            <div class="guild-bar">
+
+            <div style="display: flex; gap: 0.4rem; margin-top: 0.6rem; flex-wrap: wrap;">
+              <button class="svc-react-btn" style="font-family: var(--sc-font-mono); font-size: 0.72rem; padding: 0.2rem 0.5rem; background: var(--sc-surface); border: 1px solid var(--sc-hairline-strong); color: var(--sc-ink-soft); cursor: pointer;">🔥 <span class="svc-react-count">142</span></button>
+              <button class="svc-react-btn" style="font-family: var(--sc-font-mono); font-size: 0.72rem; padding: 0.2rem 0.5rem; background: var(--sc-surface); border: 1px solid var(--sc-hairline-strong); color: var(--sc-ink-soft); cursor: pointer;">🚀 <span class="svc-react-count">98</span></button>
+              <button class="svc-react-btn" style="font-family: var(--sc-font-mono); font-size: 0.72rem; padding: 0.2rem 0.5rem; background: var(--sc-surface); border: 1px solid var(--sc-hairline-strong); color: var(--sc-ink-soft); cursor: pointer;">🎮 <span class="svc-react-count">210</span></button>
+            </div>
+
+            <form id="svcChatForm" style="display: flex; gap: 0.4rem; margin-top: 0.6rem;">
+              <input type="text" id="svcChatInput" placeholder="Send a message to chat..." style="flex: 1; background: var(--sc-surface); border: 1px solid var(--sc-hairline-strong); color: var(--sc-ink); font-family: var(--sc-font-mono); font-size: 0.75rem; padding: 0.3rem 0.6rem; border-radius: 3px;" required>
+              <button type="submit" style="background: var(--sc-accent); color: var(--sc-accent-ink); border: none; font-family: var(--sc-font-mono); font-size: 0.72rem; font-weight: 700; padding: 0.3rem 0.7rem; cursor: pointer; border-radius: 3px; text-transform: uppercase;">SEND</button>
+            </form>
+
+            <div class="guild-bar" style="margin-top: 0.6rem;">
               <span class="guild-chip">CEGA</span>
               <span class="guild-chip">IGDA PAKISTAN</span>
               <span class="guild-chip">PIGD</span>
@@ -742,6 +756,39 @@
         }
         drawParticles();
       }
+
+      // 6. Interactive Chat Form & Reactions in Services Page
+      var svcChatForm = document.getElementById('svcChatForm');
+      var svcChatInput = document.getElementById('svcChatInput');
+      var svcChatBody = document.getElementById('serviceChatBody');
+
+      if (svcChatForm && svcChatInput && svcChatBody) {
+        svcChatForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var msg = svcChatInput.value.trim();
+          if (!msg) return;
+          playZapSFX();
+
+          var div = document.createElement('div');
+          div.innerHTML = '<span style="color: var(--sc-accent); font-weight: 700;">YOU:</span> ' + msg.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+          svcChatBody.appendChild(div);
+          svcChatInput.value = '';
+          svcChatBody.scrollTop = svcChatBody.scrollHeight;
+        });
+      }
+
+      document.querySelectorAll('.svc-react-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          playZapSFX();
+          var countSpan = btn.querySelector('.svc-react-count');
+          if (countSpan) {
+            var current = parseInt(countSpan.textContent, 10) || 0;
+            countSpan.textContent = current + 1;
+            btn.style.borderColor = 'var(--sc-accent)';
+            btn.style.color = 'var(--sc-accent)';
+          }
+        });
+      });
 
     })();
   </script>
