@@ -1,35 +1,1022 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Delete your Reapers account</title>
-<style>body{font-family:system-ui,sans-serif;background:#090F1C;color:#E6ECF7;max-width:720px;margin:0 auto;padding:32px 20px;line-height:1.6}
-h1{color:#fff}h2{color:#00E5FF;margin-top:32px}a{color:#D83CFF}li{margin:6px 0}</style></head>
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Delete Account · Reapers Gaming Arena</title>
+  <meta name="description" content="Reapers Privacy Policy — Learn how we collect, protect, and handle your data on Pakistan's premier gaming and developer platform.">
+  <link rel="icon" href="public/reapers-logo.webp">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700;800;900&family=Outfit:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* Knight Warrior Font Import */
+    @font-face {
+      font-family: 'Knight Warrior';
+      src: local('Knight Warrior'), local('KNIGHT WARRIOR'),
+           url('public/fonts/KnightWarrior.woff') format('woff'),
+           url('https://fonts.cdnfonts.com/s/105453/KnightWarrior-w16n8.woff') format('woff');
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      /* --bg-dark stays fixed across themes: it's the base tone behind the
+         page's ambient glow art, not page chrome, so it never flips. */
+      --bg-dark: #05030A;
+      --bg-card: rgba(14, 11, 26, 0.75);
+      --bg-page: #05030A;
+      --hairline-rgb: 255, 255, 255;
+
+      /* Text ink ladder: brightest (secondary) to dimmest (faint). */
+      --text-primary: #FFFFFF;
+      --text-secondary: #C0BDD5;
+      --text-tertiary: #9D99B5;
+      --text-faint: #6C6685;
+
+      --font-hero: "Knight Warrior", "KNIGHT WARRIOR", system-ui, sans-serif;
+      --font-display: "Chakra Petch", system-ui, -apple-system, sans-serif;
+      --font-body: "Outfit", system-ui, -apple-system, sans-serif;
+      --font-mono: "IBM Plex Mono", monospace;
+
+      --reapers-gradient: linear-gradient(95.18deg, #00E5FF 0.16%, #6D35FF 36.28%, #D83CFF 72.41%);
+      --cyan-neon: #00E5FF;
+      --purple-neon: #6D35FF;
+      --magenta-neon: #D83CFF;
+
+      --chamfer-lg: 18px;
+    }
+
+    :root[data-theme="light"] {
+      --bg-card: rgba(255, 255, 255, 0.75);
+      --bg-page: #F3F1FA;
+      --hairline-rgb: 15, 10, 26;
+
+      --text-primary: #0F0A1A;
+      --text-secondary: #2A2140;
+      --text-tertiary: #4A4066;
+      --text-faint: #948AAD;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: #FFFFFF;
+      font-family: var(--font-body);
+      overflow-x: hidden;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Floating Header - Exact Figma Specs */
+    .header-wrapper {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 1280px;
+      margin: 39px auto 0;
+      padding: 0 1.5rem;
+    }
+
+    .navbar {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 92px;
+      padding: 0 2.25rem;
+      background: #080D1A66;
+      border: 1px solid #FFFFFF1A;
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      clip-path: polygon(22px 0, 100% 0, 100% calc(100% - 22px), calc(100% - 22px) 100%, 0 100%, 0 22px);
+      filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.7));
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.25rem;
+      list-style: none;
+    }
+
+    .nav-link a {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.18em;
+      color: #9D99B5;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: all 0.25s ease;
+    }
+
+    .nav-link a:hover, .nav-link.active a {
+      color: #FFFFFF;
+      text-shadow: 0 0 12px rgba(0, 229, 255, 0.6);
+    }
+
+    .nav-brand {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .brand-logo-img {
+      height: 72px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 0 14px rgba(0, 229, 255, 0.4));
+      transition: transform 0.3s ease;
+    }
+
+    .nav-brand:hover .brand-logo-img { transform: scale(1.08); }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .icon-btn {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      color: #C0BDD5;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .icon-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #FFFFFF;
+      border-color: rgba(0, 229, 255, 0.4);
+    }
+
+    .icon-btn svg { width: 18px; height: 18px; fill: currentColor; }
+
+    .btn-download {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.65rem 1.4rem;
+      background: linear-gradient(96.05deg, #00E5FF -4.98%, #6D35FF 46.36%, #D83CFF 97.69%);
+      border: 1px solid;
+      border-image-source: linear-gradient(93.12deg, #117383 1.5%, #46096C 98.5%);
+      border-image-slice: 1;
+      color: #FFFFFF;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 0.82rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(109, 53, 255, 0.4);
+      transition: all 0.25s ease;
+      clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+    }
+
+    .btn-download:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.1);
+    }
+
+    /* Legal Hero Section */
+    .legal-hero {
+      position: relative;
+      max-width: 1280px;
+      margin: 4rem auto 2rem;
+      padding: 0 1.5rem;
+      text-align: center;
+      z-index: 2;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .chat-glow-orb {
+      position: absolute;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(0, 229, 255, 0.12) 0%, rgba(108, 43, 255, 0) 70%);
+      pointer-events: none;
+      z-index: 1;
+      animation: floatOrb 12s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatOrb {
+      0% { transform: translate(-50%, 0) scale(1); }
+      50% { transform: translate(-45%, -30px) scale(1.08); }
+      100% { transform: translate(-50%, 0) scale(1); }
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .entry-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      color: #9D99B5;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .dot-cyan { color: var(--cyan-neon); }
+    .dot-purple { color: var(--purple-neon); }
+    .dot-magenta { color: var(--magenta-neon); }
+
+    /* Global Ultra-Bold Headings */
+    h1, h2, h3, h4, h5, h6,
+    .legal-title, .legal-card-title, .card-title {
+      font-weight: 800 !important;
+      letter-spacing: 0.02em;
+    }
+
+    .legal-title {
+      font-family: var(--font-hero);
+      font-weight: 800;
+      font-size: clamp(3rem, 6vw, 76px);
+      line-height: 1.05;
+      letter-spacing: 0px;
+      text-transform: uppercase;
+      background: var(--reapers-gradient);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientShift 5s ease infinite;
+    }
+
+    .legal-subtitle {
+      max-width: 680px;
+      margin: 1rem auto 0;
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #9D99B5;
+    }
+
+    .legal-meta-card {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2rem;
+      padding: 1rem 2rem;
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      color: #6C6685;
+      text-transform: uppercase;
+    }
+
+    .legal-meta-item span {
+      color: var(--cyan-neon);
+      font-weight: 700;
+    }
+
+        /* Clean Cyberpunk TOC & Filter Pills Navigation */
+    .toc-bar, .hiring-filters {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 0.65rem 0.8rem;
+      max-width: 1100px;
+      margin: 2rem auto 0;
+      padding: 0 1rem;
+    }
+
+    .toc-pill, .filter-pill {
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.55rem 1.1rem;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #9D99B5;
+      white-space: nowrap;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      flex-shrink: 0;
+    }
+
+    .toc-pill:hover, .filter-pill:hover {
+      background: rgba(0, 229, 255, 0.1);
+      border-color: var(--cyan-neon);
+      color: var(--cyan-neon);
+      box-shadow: 0 0 16px rgba(0, 229, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .filter-pill.active {
+      background: rgba(0, 229, 255, 0.12);
+      border-color: var(--cyan-neon);
+      color: var(--cyan-neon);
+      box-shadow: 0 0 16px rgba(0, 229, 255, 0.3);
+    }
+
+    .toc-pill {
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.55rem 1.1rem;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #9D99B5;
+      white-space: nowrap;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      flex-shrink: 0;
+    }
+
+    .toc-pill:hover {
+      background: rgba(0, 229, 255, 0.1);
+      border-color: var(--cyan-neon);
+      color: var(--cyan-neon);
+      box-shadow: 0 0 16px rgba(0, 229, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+
+    /* Main Legal Content Card */
+    .legal-content-container {
+      position: relative;
+      z-index: 2;
+      max-width: 1280px;
+      margin: 2rem auto 6rem;
+      padding: 0 1.5rem;
+    }
+
+    .legal-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: clamp(2rem, 5vw, 4rem);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+    }
+
+    .legal-p {
+      color: rgba(255, 255, 255, 0.88);
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 1.2rem;
+    }
+
+    .legal-section {
+      margin-bottom: 3.5rem;
+      scroll-margin-top: 100px;
+    }
+
+    .legal-heading {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 0.75rem;
+    }
+
+    .legal-num {
+      font-family: var(--font-mono);
+      color: var(--cyan-neon);
+    }
+
+    .legal-subheading {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--cyan-neon);
+      margin-top: 1.8rem;
+      margin-bottom: 0.85rem;
+    }
+
+    /* Callout Item Grid */
+    .item-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin: 1.5rem 0;
+    }
+
+    .item-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-left: 3px solid var(--purple-neon);
+      border-radius: 12px;
+      padding: 1.2rem 1.4rem;
+      transition: all 0.3s ease;
+    }
+
+    .item-card:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(0, 229, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .item-card--cyan { border-left-color: var(--cyan-neon); }
+    .item-card--magenta { border-left-color: var(--magenta-neon); }
+
+    .item-card-title {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .item-card-desc {
+      font-size: 0.95rem;
+      line-height: 1.55;
+      color: #9D99B5;
+    }
+
+    /* Alert Banner */
+    .legal-alert {
+      background: rgba(0, 229, 255, 0.06);
+      border: 1px solid rgba(0, 229, 255, 0.3);
+      border-radius: 12px;
+      padding: 1.2rem 1.5rem;
+      margin: 1.8rem 0;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .legal-alert-icon { font-size: 1.4rem; }
+    .legal-alert-text {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: #FFFFFF;
+      line-height: 1.5;
+    }
+
+    /* Contact Card */
+    .contact-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 14px;
+      padding: 1.8rem;
+      margin-top: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      font-family: var(--font-mono);
+    }
+
+    .contact-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .contact-row a {
+      color: var(--cyan-neon);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .contact-row a:hover {
+      color: #FFFFFF;
+      text-shadow: 0 0 10px rgba(0, 229, 255, 0.6);
+    }
+
+    /* Footer & Watermark */
+    .site-footer-bar {
+      max-width: 1280px;
+      margin: 4rem auto 0;
+      padding: 1.5rem 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      color: rgba(255, 255, 255, 0.4);
+      text-transform: uppercase;
+    }
+
+    .footer-nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+      list-style: none;
+    }
+
+    .footer-link {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      color: #9D99B5;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: all 0.25s ease;
+    }
+
+    .footer-link:hover,
+    .footer-link.active {
+      color: #00E5FF;
+      text-shadow: 0 0 10px rgba(0, 229, 255, 0.6);
+    }
+
+    .footer-watermark-wrap {
+      width: 100%;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      user-select: none;
+      pointer-events: none;
+      padding-top: 2rem;
+      margin-bottom: -1rem;
+    }
+
+    .footer-watermark-text {
+      font-family: var(--font-hero);
+      font-weight: 400;
+      font-size: clamp(4rem, 31.26vw, 450.14px);
+      line-height: 0.893;
+      letter-spacing: 0;
+      color: rgba(255, 255, 255, 0.03);
+      text-align: center;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    /* Liquid Ripple / Bubble Hover Class for All Buttons */
+    .btn-bubble {
+      position: relative !important;
+      overflow: hidden !important;
+      z-index: 1;
+    }
+
+    .btn-bubble::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: radial-gradient(circle, rgba(0, 229, 255, 0.45) 0%, rgba(216, 60, 255, 0.25) 50%, transparent 80%);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.5s ease-out, height 0.5s ease-out, opacity 0.5s ease-out;
+      opacity: 0;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .btn-bubble:hover::after {
+      width: 380px;
+      height: 380px;
+      opacity: 1;
+    }
+
+    /* Scroll Reveal Animations */
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(35px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-on-scroll.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    html, body {
+      overflow-x: hidden !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      position: relative;
+    }
+
+    /* Tablet & Desktop Medium Screens (max-width: 1024px) */
+    @media (max-width: 1024px) {
+      .header-wrapper {
+        margin: 24px auto 0 !important;
+        padding: 0 1.25rem !important;
+        max-width: 100% !important;
+      }
+      .navbar {
+        padding: 0 1.25rem !important;
+      }
+      .nav-links {
+        gap: 1.25rem !important;
+      }
+      .nav-link a {
+        font-size: 0.78rem !important;
+      }
+      .legal-hero {
+        margin: 3rem auto 1.5rem !important;
+        padding: 0 1.25rem !important;
+      }
+      .legal-content-container {
+        margin: 1.5rem auto 4rem !important;
+        padding: 0 1.25rem !important;
+      }
+      .item-grid {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)) !important;
+        gap: 1.25rem !important;
+      }
+    }
+
+    /* Mobile Landscape & Mobile Screens (max-width: 768px) */
+    @media (max-width: 768px) {
+      .header-wrapper {
+        margin: 12px auto 0 !important;
+        padding: 0 0.75rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+      .navbar {
+        height: 68px !important;
+        padding: 0 0.75rem !important;
+        clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px) !important;
+      }
+      .nav-links { display: none !important; }
+      .brand-logo-img { height: 54px !important; }
+      .nav-actions { gap: 0.4rem !important; }
+      .icon-btn { width: 36px !important; height: 36px !important; }
+      .icon-btn svg { width: 16px !important; height: 16px !important; }
+      .btn-download {
+        padding: 0.5rem 0.8rem !important;
+        font-size: 0.72rem !important;
+        gap: 0.35rem !important;
+      }
+      .btn-download span { display: none !important; }
+
+      .legal-hero {
+        padding: 2.5rem 0.85rem 1.5rem !important;
+        margin: 1rem auto 1rem !important;
+        text-align: center !important;
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+      .entry-kicker {
+        font-size: 0.68rem !important;
+        letter-spacing: 0.14em !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+      }
+      .legal-title {
+        font-size: clamp(2rem, 7.5vw, 3.2rem) !important;
+        line-height: 1.1 !important;
+        overflow-wrap: break-word !important;
+        word-wrap: break-word !important;
+      }
+      .legal-subtitle {
+        font-size: 0.92rem !important;
+        line-height: 1.5 !important;
+      }
+      .legal-meta-card {
+        flex-direction: column !important;
+        gap: 0.65rem !important;
+        padding: 0.75rem 1rem !important;
+        text-align: center !important;
+        margin-top: 1.25rem !important;
+      }
+      .toc-bar {
+        padding: 0 0.25rem !important;
+        gap: 0.4rem !important;
+        margin-top: 1.25rem !important;
+      }
+      .toc-pill {
+        padding: 0.45rem 0.75rem !important;
+        font-size: 0.68rem !important;
+      }
+      .legal-content-container {
+        padding: 0 0.75rem !important;
+        margin: 1.25rem auto 3rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+      .legal-card {
+        padding: 1.4rem 1.1rem !important;
+        border-radius: 14px !important;
+      }
+      .item-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+      }
+      .legal-alert {
+        flex-direction: column !important;
+        text-align: center !important;
+      }
+      .site-footer-bar { flex-direction: column !important; gap: 1.25rem !important; text-align: center !important; margin-top: 2.5rem !important; }
+      .footer-nav-links { flex-wrap: wrap !important; justify-content: center !important; gap: 0.85rem 1.25rem !important; }
+    }
+
+    /* Small Phone Screens (max-width: 480px) */
+    @media (max-width: 480px) {
+      .legal-hero { padding: 2rem 0.5rem 1rem !important; }
+      .legal-content-container { padding: 0 0.5rem !important; }
+      .legal-card { padding: 1.25rem 0.85rem !important; }
+      .btn-download span { display: none !important; }
+    }
+  </style>
+<link rel="stylesheet" href="responsive-fix.css">
+</head>
 <body>
-<h1>Delete your Reapers account</h1>
-<p>This page explains how to delete your account and data for the <strong>Reapers</strong> app (package <code>com.reapers.pk</code>).</p>
 
-<h2>Delete it in the app</h2>
-<ol>
-<li>Open the Reapers app and sign in.</li>
-<li>Go to your <strong>Profile</strong>, then open <strong>Settings</strong>.</li>
-<li>Tap <strong>Delete account</strong>.</li>
-<li>Confirm when asked. Your account is deleted straight away.</li>
-</ol>
+  <!-- Floating Glass Navbar -->
+  <div class="header-wrapper">
+    <header class="navbar">
+      <ul class="nav-links">
+        <li class="nav-link"><a href="index.html#arena">ARENA</a></li>
+        <li class="nav-link"><a href="index.html#community">COMMUNITY</a></li>
+        <li class="nav-link"><a href="index.html#showcase-demos">SHOWCASE</a></li>
+      </ul>
+      <a href="index.html" class="nav-brand" title="Reapers Homepage">
+        <img src="public/Reapers.png" alt="Reapers Logo" class="brand-logo-img">
+      </a>
+      <div class="nav-actions">
+        <button class="icon-btn btn-bubble" id="soundBtn" title="Toggle Sound">
+          <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+        </button>
+        <a href="index.html#download" class="btn-download btn-bubble">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          <span>DOWNLOAD APP</span>
+        </a>
+      </div>
+    </header>
+  </div>
 
-<h2>Can't open the app?</h2>
-<p>Email <a href="mailto:reapers.support@gmail.com">reapers.support@gmail.com</a> from the address you signed up with and ask us to delete your account. We will reply and complete the deletion.</p>
+  
+  <main>
+    <div class="chat-glow-orb"></div>
 
-<h2>What is deleted</h2>
-<ul>
-<li>Your account and profile (name, username, email, phone, avatar, skills and roles)</li>
-<li>Your posts, comments, reactions and messages</li>
-<li>Your connections, team requests and applications</li>
-<li>Your demos, event RSVPs and expert bookings or reviews tied to your account</li>
-</ul>
+    <!-- Legal Hero Section -->
+    <section class="legal-hero reveal-on-scroll is-visible">
+      <div class="entry-kicker">
+        <span class="dot-cyan">■</span>
+        <span>Account Management</span>
+        <span class="dot-purple">■</span>
+      </div>
+      <h1 class="legal-title">Delete Account</h1>
+      <p class="legal-subtitle">
+        Instructions for deleting your account and data for the Reapers app.
+      </p>
+    </section>
 
-<h2>What may be kept</h2>
-<ul>
-<li>Backups may keep copies for a short period (up to 30 days) before they are removed.</li>
-<li>We may keep limited records if the law requires it, or to prevent abuse and fraud.</li>
-</ul>
-<p>Questions? <a href="mailto:reapers.support@gmail.com">reapers.support@gmail.com</a></p>
-</body></html>
+    <!-- Main Content -->
+    <div class="legal-content-container reveal-on-scroll is-visible">
+      <article class="legal-card">
+        
+        <section class="legal-section">
+          <h2 class="legal-heading"><span class="legal-num">01.</span> Delete it in the app</h2>
+          <p class="legal-p" style="padding-left: 1.5rem;">
+            1. Open the Reapers app and sign in.<br>
+            2. Go to your <strong>Profile</strong>, then open <strong>Settings</strong>.<br>
+            3. Tap <strong>Delete account</strong>.<br>
+            4. Confirm when asked. Your account is deleted straight away.
+          </p>
+        </section>
+
+        <section class="legal-section">
+          <h2 class="legal-heading"><span class="legal-num">02.</span> Can't open the app?</h2>
+          <p class="legal-p">
+            Email <a href="mailto:reapers.support@gmail.com" style="color: var(--cyan-neon); text-decoration: underline;">reapers.support@gmail.com</a> from the address you signed up with and ask us to delete your account. We will reply and complete the deletion.
+          </p>
+        </section>
+
+        <section class="legal-section">
+          <h2 class="legal-heading"><span class="legal-num">03.</span> What is deleted</h2>
+          <div class="item-grid">
+            <div class="item-card item-card--cyan">
+              <div class="item-card-title">👤 Profile</div>
+              <p class="item-card-desc">Your account and profile (name, username, email, phone, avatar, skills and roles)</p>
+            </div>
+            <div class="item-card item-card--magenta">
+              <div class="item-card-title">💬 Interactions</div>
+              <p class="item-card-desc">Your posts, comments, reactions and messages</p>
+            </div>
+            <div class="item-card">
+              <div class="item-card-title">🤝 Network</div>
+              <p class="item-card-desc">Your connections, team requests and applications</p>
+            </div>
+            <div class="item-card">
+              <div class="item-card-title">📅 Activity</div>
+              <p class="item-card-desc">Your demos, event RSVPs and expert bookings or reviews tied to your account</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="legal-section">
+          <h2 class="legal-heading"><span class="legal-num">04.</span> What may be kept</h2>
+          <p class="legal-p">
+            • Backups may keep copies for a short period (up to 30 days) before they are removed.<br>
+            • We may keep limited records if the law requires it, or to prevent abuse and fraud.
+          </p>
+          <div class="contact-card">
+            <div class="contact-row">
+              <span>Questions?</span>
+              <a href="mailto:reapers.support@gmail.com">reapers.support@gmail.com</a>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+</main>
+
+  <!-- Global Footer Bar -->
+  <footer class="site-footer-bar">
+    <div>© 2026 REAPERS · PAKISTAN</div>
+    <nav class="footer-nav-links">
+      <a href="services.html" class="footer-link">SERVICES</a>
+      <a href="privacy.html" class="footer-link">PRIVACY POLICY</a>
+      <a href="terms.html" class="footer-link">TERMS &amp; CONDITIONS</a>
+      <a href="/delete-account" class="footer-link active">DELETE ACCOUNT</a>
+      <a href="https://www.instagram.com/houseofthereapers?stkn=MWN2NWdseXc5NzE4cA==&amp;utm_source=ig_contact_invite" target="_blank" rel="noopener noreferrer" class="footer-link">INSTAGRAM</a>
+    </nav>
+  </footer>
+
+  <!-- Giant REAPERS Watermark -->
+  <div class="footer-watermark-wrap" aria-hidden="true">
+    <span class="footer-watermark-text">REAPERS</span>
+  </div>
+
+  <script>
+    class CyberAudioEngine {
+      constructor() { this.ctx = null; this.muted = false; }
+      init() {
+        if (!this.ctx) {
+          const AudioCtx = window.AudioContext || window.webkitAudioContext;
+          if (AudioCtx) this.ctx = new AudioCtx();
+        }
+        if (this.ctx && this.ctx.state === 'suspended') this.ctx.resume();
+      }
+      playHover(kind = 'default') {
+        if (this.muted) return; this.init(); if (!this.ctx) return;
+        try {
+          const now = this.ctx.currentTime; const gain = this.ctx.createGain();
+          if (kind === 'card') {
+            const osc = this.ctx.createOscillator(); osc.type = 'sine';
+            osc.frequency.setValueAtTime(130, now); osc.frequency.exponentialRampToValueAtTime(280, now + 0.08);
+            gain.gain.setValueAtTime(0.04, now); gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+            osc.connect(gain); gain.connect(this.ctx.destination); osc.start(now); osc.stop(now + 0.08);
+          } else if (kind === 'chip') {
+            const osc = this.ctx.createOscillator(); osc.type = 'triangle';
+            osc.frequency.setValueAtTime(1600, now); osc.frequency.exponentialRampToValueAtTime(2200, now + 0.03);
+            gain.gain.setValueAtTime(0.02, now); gain.gain.exponentialRampToValueAtTime(0.001, now + 0.03);
+            osc.connect(gain); gain.connect(this.ctx.destination); osc.start(now); osc.stop(now + 0.03);
+          } else {
+            const osc1 = this.ctx.createOscillator(); const osc2 = this.ctx.createOscillator();
+            osc1.type = 'sine'; osc2.type = 'triangle';
+            osc1.frequency.setValueAtTime(440, now); osc1.frequency.exponentialRampToValueAtTime(880, now + 0.05);
+            osc2.frequency.setValueAtTime(660, now); osc2.frequency.exponentialRampToValueAtTime(1320, now + 0.05);
+            const filter = this.ctx.createBiquadFilter(); filter.type = 'lowpass';
+            filter.frequency.setValueAtTime(2500, now); filter.frequency.exponentialRampToValueAtTime(1200, now + 0.05);
+            gain.gain.setValueAtTime(0.03, now); gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+            osc1.connect(filter); osc2.connect(filter); filter.connect(gain); gain.connect(this.ctx.destination);
+            osc1.start(now); osc2.start(now); osc1.stop(now + 0.05); osc2.stop(now + 0.05);
+          }
+        } catch (e) {}
+      }
+      playClick(kind = 'default') {
+        if (this.muted) return; this.init(); if (!this.ctx) return;
+        try {
+          const now = this.ctx.currentTime; const gain = this.ctx.createGain();
+          if (kind === 'primary' || kind === 'cta') {
+            const subOsc = this.ctx.createOscillator(); subOsc.type = 'sine';
+            subOsc.frequency.setValueAtTime(180, now); subOsc.frequency.exponentialRampToValueAtTime(42, now + 0.09);
+            const clickOsc = this.ctx.createOscillator(); clickOsc.type = 'triangle';
+            clickOsc.frequency.setValueAtTime(1200, now); clickOsc.frequency.exponentialRampToValueAtTime(300, now + 0.04);
+            gain.gain.setValueAtTime(0.12, now); gain.gain.exponentialRampToValueAtTime(0.001, now + 0.09);
+            subOsc.connect(gain); clickOsc.connect(gain); gain.connect(this.ctx.destination);
+            subOsc.start(now); clickOsc.start(now); subOsc.stop(now + 0.09); clickOsc.stop(now + 0.04);
+          } else if (kind === 'tab') {
+            const osc1 = this.ctx.createOscillator(); const osc2 = this.ctx.createOscillator();
+            osc1.type = 'sine'; osc2.type = 'sawtooth';
+            osc1.frequency.setValueAtTime(520, now); osc1.frequency.exponentialRampToValueAtTime(840, now + 0.06);
+            osc2.frequency.setValueAtTime(260, now);
+            const filter = this.ctx.createBiquadFilter(); filter.type = 'bandpass'; filter.frequency.setValueAtTime(1400, now);
+            gain.gain.setValueAtTime(0.06, now); gain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
+            osc1.connect(gain); osc2.connect(filter); filter.connect(gain); gain.connect(this.ctx.destination);
+            osc1.start(now); osc2.start(now); osc1.stop(now + 0.06); osc2.stop(now + 0.06);
+          } else {
+            const osc = this.ctx.createOscillator(); osc.type = 'triangle';
+            osc.frequency.setValueAtTime(680, now); osc.frequency.exponentialRampToValueAtTime(210, now + 0.05);
+            gain.gain.setValueAtTime(0.07, now); gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+            osc.connect(gain); gain.connect(this.ctx.destination); osc.start(now); osc.stop(now + 0.05);
+          }
+        } catch (e) {}
+      }
+      playToggle() {
+        this.init(); if (!this.ctx) return;
+        try {
+          const now = this.ctx.currentTime; const gain = this.ctx.createGain();
+          const freqs = this.muted ? [784, 523, 392] : [392, 523, 784];
+          freqs.forEach((f, idx) => {
+            const osc = this.ctx.createOscillator(); osc.type = 'sine';
+            osc.frequency.setValueAtTime(f, now + idx * 0.035);
+            gain.gain.setValueAtTime(0.04, now + idx * 0.035);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.035 + 0.08);
+            osc.connect(gain); osc.start(now + idx * 0.035); osc.stop(now + idx * 0.035 + 0.08);
+          });
+          gain.connect(this.ctx.destination);
+        } catch (e) {}
+      }
+    }
+
+    const cyberAudio = new CyberAudioEngine();
+
+      // Global First-Gesture Audio Unlock (resumes AudioContext on ANY first click/tap/keypress anywhere on page)
+      const unlockAudio = () => {
+        if (typeof cyberAudio !== 'undefined') cyberAudio.init();
+      };
+      document.addEventListener('click', unlockAudio, { once: true });
+      document.addEventListener('pointerdown', unlockAudio, { once: true });
+      document.addEventListener('keydown', unlockAudio, { once: true });
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.btn-download, .btn-bubble').forEach(el => {
+        el.addEventListener('mouseenter', () => cyberAudio.playHover('default'));
+        el.addEventListener('click', () => cyberAudio.playClick('primary'));
+      });
+      document.querySelectorAll('.legal-card').forEach(el => {
+        el.addEventListener('mouseenter', () => cyberAudio.playHover('card'));
+        el.addEventListener('click', () => cyberAudio.playClick('default'));
+      });
+      document.querySelectorAll('.toc-pill').forEach(el => {
+        el.addEventListener('mouseenter', () => cyberAudio.playHover('chip'));
+        el.addEventListener('click', () => cyberAudio.playClick('tab'));
+      });
+
+      const soundBtn = document.getElementById('soundBtn');
+      if (soundBtn) {
+        soundBtn.addEventListener('click', () => {
+          cyberAudio.muted = !cyberAudio.muted;
+          cyberAudio.playToggle();
+          soundBtn.style.color = cyberAudio.muted ? '#6C6685' : '#00E5FF';
+        });
+      }
+
+      const revealElems = document.querySelectorAll('.reveal-on-scroll');
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) entry.target.classList.add('is-visible');
+          });
+        }, { threshold: 0.1 });
+        revealElems.forEach(el => observer.observe(el));
+      } else {
+        revealElems.forEach(el => el.classList.add('is-visible'));
+      }
+    });
+  </script>
+</body>
+</html>
