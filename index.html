@@ -5699,7 +5699,7 @@
               resetChatroomsTypewriter();
             }
           });
-        }, { threshold: 0.15 });
+        }, { threshold: 05 });
         observer.observe(chatroomsSec);
       } else {
         runChatroomsTypewriter();
@@ -5721,7 +5721,7 @@
               entry.target.classList.remove('is-active');
             }
           });
-        }, { threshold: 0.15 });
+        }, { threshold: 05 });
 
         headingAnimElems.forEach(el => headingObserver.observe(el));
       } else {
