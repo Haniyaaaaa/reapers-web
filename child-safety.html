@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Our Services · Reapers Gaming Arena</title>
-  <meta name="description" content="Reapers Ecosystem Services — Community Chatrooms, Direct Messaging, Community Building, Event Discovery, Game Demo Showcase, Team Matchmaking, Expert Sessions, and Developer Profiles.">
+  <title>Child Safety · Reapers Gaming Arena</title>
+  <meta name="description" content="Reapers Privacy Policy — Learn how we collect, protect, and handle your data on Pakistan's premier gaming and developer platform.">
   <link rel="icon" href="public/reapers-logo.webp">
 
   <!-- Google Fonts -->
@@ -25,8 +25,19 @@
     }
 
     :root {
+      /* --bg-dark stays fixed across themes: it's the base tone behind the
+         page's ambient glow art, not page chrome, so it never flips. */
       --bg-dark: #05030A;
       --bg-card: rgba(14, 11, 26, 0.75);
+      --bg-page: #05030A;
+      --hairline-rgb: 255, 255, 255;
+
+      /* Text ink ladder: brightest (secondary) to dimmest (faint). */
+      --text-primary: #FFFFFF;
+      --text-secondary: #C0BDD5;
+      --text-tertiary: #9D99B5;
+      --text-faint: #6C6685;
+
       --font-hero: "Knight Warrior", "KNIGHT WARRIOR", system-ui, sans-serif;
       --font-display: "Chakra Petch", system-ui, -apple-system, sans-serif;
       --font-body: "Outfit", system-ui, -apple-system, sans-serif;
@@ -38,6 +49,17 @@
       --magenta-neon: #D83CFF;
 
       --chamfer-lg: 18px;
+    }
+
+    :root[data-theme="light"] {
+      --bg-card: rgba(255, 255, 255, 0.75);
+      --bg-page: #F3F1FA;
+      --hairline-rgb: 15, 10, 26;
+
+      --text-primary: #0F0A1A;
+      --text-secondary: #2A2140;
+      --text-tertiary: #4A4066;
+      --text-faint: #948AAD;
     }
 
     * {
@@ -53,18 +75,6 @@
       overflow-x: hidden;
       min-height: 100vh;
       -webkit-font-smoothing: antialiased;
-    }
-
-    /* Ambient 3D Canvas Background */
-    #services3dCanvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.45;
     }
 
     /* Floating Header - Exact Figma Specs */
@@ -187,8 +197,8 @@
       filter: brightness(1.1);
     }
 
-    /* Hero Section */
-    .services-hero {
+    /* Legal Hero Section */
+    .legal-hero {
       position: relative;
       max-width: 1280px;
       margin: 4rem auto 2rem;
@@ -206,7 +216,7 @@
       transform: translateX(-50%);
       width: 600px;
       height: 600px;
-      background: radial-gradient(circle, rgba(0, 229, 255, 0.14) 0%, rgba(108, 43, 255, 0) 70%);
+      background: radial-gradient(circle, rgba(0, 229, 255, 0.12) 0%, rgba(108, 43, 255, 0) 70%);
       pointer-events: none;
       z-index: 1;
       animation: floatOrb 12s ease-in-out infinite alternate;
@@ -243,12 +253,12 @@
 
     /* Global Ultra-Bold Headings */
     h1, h2, h3, h4, h5, h6,
-    .services-title, .service-title, .card-title {
+    .legal-title, .legal-card-title, .card-title {
       font-weight: 800 !important;
       letter-spacing: 0.02em;
     }
 
-    .services-title {
+    .legal-title {
       font-family: var(--font-hero);
       font-weight: 800;
       font-size: clamp(3rem, 6vw, 76px);
@@ -262,7 +272,7 @@
       animation: gradientShift 5s ease infinite;
     }
 
-    .services-subtitle {
+    .legal-subtitle {
       max-width: 680px;
       margin: 1rem auto 0;
       font-family: var(--font-body);
@@ -303,9 +313,6 @@
       max-width: 1100px;
       margin: 2rem auto 0;
       padding: 0 1rem;
-      width: 100%;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
     }
 
     .toc-pill, .filter-pill {
@@ -372,8 +379,8 @@
     }
 
 
-    /* Main Services Grid Container */
-    .services-main-wrap {
+    /* Main Legal Content Card */
+    .legal-content-container {
       position: relative;
       z-index: 2;
       max-width: 1280px;
@@ -381,145 +388,145 @@
       padding: 0 1.5rem;
     }
 
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-      gap: 2rem;
-    }
-
-    /* Cyber Glass Service Card */
-    .service-card {
+    .legal-card {
       background: var(--bg-card);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 20px;
-      padding: 2.2rem;
-      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.5);
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 1.5rem;
-      transition: all 0.3s ease;
-      scroll-margin-top: 100px;
-    }
-
-    .service-card:hover {
-      transform: translateY(-5px);
-      border-color: rgba(0, 229, 255, 0.4);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 25px rgba(0, 229, 255, 0.15);
-    }
-
-    .service-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 0.5rem;
-    }
-
-    .service-icon-badge {
-      font-size: 1.5rem;
-      width: 48px;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0, 229, 255, 0.08);
-      border: 1px solid rgba(0, 229, 255, 0.3);
-      border-radius: 12px;
-    }
-
-    .service-icon-badge--magenta {
-      background: rgba(216, 60, 255, 0.08);
-      border-color: rgba(216, 60, 255, 0.3);
-    }
-
-    .service-num {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--cyan-neon);
-      letter-spacing: 0.15em;
-    }
-
-    .service-num--magenta { color: var(--magenta-neon); }
-
-    .service-title {
-      font-family: var(--font-display);
-      font-size: 1.45rem;
-      font-weight: 700;
-      color: #FFFFFF;
-      margin-bottom: 0.5rem;
-    }
-
-    .service-desc {
-      color: #9D99B5;
-      font-size: 0.98rem;
-      line-height: 1.6;
-    }
-
-    /* Embedded Interactive Live Widgets */
-    .widget-box {
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 12px;
-      padding: 1.2rem;
-    }
-
-    .widget-label {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: var(--cyan-neon);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-bottom: 0.75rem;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .widget-label--magenta { color: var(--magenta-neon); }
-
-    .guild-bar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-top: 0.75rem;
-    }
-
-    .guild-chip {
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      padding: 0.25em 0.6em;
-      background: rgba(0, 229, 255, 0.08);
-      border: 1px solid rgba(0, 229, 255, 0.3);
-      color: var(--cyan-neon);
-      font-weight: 700;
-      border-radius: 4px;
-    }
-
-    /* Summary Card */
-    .summary-card {
-      background: var(--bg-card);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(0, 229, 255, 0.3);
-      border-radius: 20px;
-      padding: clamp(2rem, 5vw, 3.5rem);
-      margin-top: 4rem;
-      text-align: center;
+      padding: clamp(2rem, 5vw, 4rem);
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
     }
 
-    .summary-quote {
+    .legal-p {
+      color: rgba(255, 255, 255, 0.88);
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 1.2rem;
+    }
+
+    .legal-section {
+      margin-bottom: 3.5rem;
+      scroll-margin-top: 100px;
+    }
+
+    .legal-heading {
       font-family: var(--font-display);
-      font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+      font-size: clamp(1.4rem, 3vw, 2rem);
       font-weight: 700;
       color: #FFFFFF;
-      max-width: 800px;
-      margin: 0 auto 1.8rem;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 0.75rem;
+    }
+
+    .legal-num {
+      font-family: var(--font-mono);
+      color: var(--cyan-neon);
+    }
+
+    .legal-subheading {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--cyan-neon);
+      margin-top: 1.8rem;
+      margin-bottom: 0.85rem;
+    }
+
+    /* Callout Item Grid */
+    .item-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin: 1.5rem 0;
+    }
+
+    .item-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-left: 3px solid var(--purple-neon);
+      border-radius: 12px;
+      padding: 1.2rem 1.4rem;
+      transition: all 0.3s ease;
+    }
+
+    .item-card:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(0, 229, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .item-card--cyan { border-left-color: var(--cyan-neon); }
+    .item-card--magenta { border-left-color: var(--magenta-neon); }
+
+    .item-card-title {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .item-card-desc {
+      font-size: 0.95rem;
+      line-height: 1.55;
+      color: #9D99B5;
+    }
+
+    /* Alert Banner */
+    .legal-alert {
+      background: rgba(0, 229, 255, 0.06);
+      border: 1px solid rgba(0, 229, 255, 0.3);
+      border-radius: 12px;
+      padding: 1.2rem 1.5rem;
+      margin: 1.8rem 0;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .legal-alert-icon { font-size: 1.4rem; }
+    .legal-alert-text {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: #FFFFFF;
       line-height: 1.5;
+    }
+
+    /* Contact Card */
+    .contact-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 14px;
+      padding: 1.8rem;
+      margin-top: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      font-family: var(--font-mono);
+    }
+
+    .contact-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .contact-row a {
+      color: var(--cyan-neon);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .contact-row a:hover {
+      color: #FFFFFF;
+      text-shadow: 0 0 10px rgba(0, 229, 255, 0.6);
     }
 
     /* Footer & Watermark */
@@ -651,17 +658,17 @@
       .nav-link a {
         font-size: 0.78rem !important;
       }
-      .services-hero {
+      .legal-hero {
         margin: 3rem auto 1.5rem !important;
         padding: 0 1.25rem !important;
       }
-      .services-main-wrap {
+      .legal-content-container {
         margin: 1.5rem auto 4rem !important;
         padding: 0 1.25rem !important;
       }
-      .services-grid {
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
-        gap: 1.5rem !important;
+      .item-grid {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)) !important;
+        gap: 1.25rem !important;
       }
     }
 
@@ -690,7 +697,7 @@
       }
       .btn-download span { display: none !important; }
 
-      .services-hero {
+      .legal-hero {
         padding: 2.5rem 0.85rem 1.5rem !important;
         margin: 1rem auto 1rem !important;
         text-align: center !important;
@@ -703,13 +710,13 @@
         flex-wrap: wrap !important;
         justify-content: center !important;
       }
-      .services-title {
+      .legal-title {
         font-size: clamp(2rem, 7.5vw, 3.2rem) !important;
         line-height: 1.1 !important;
         overflow-wrap: break-word !important;
         word-wrap: break-word !important;
       }
-      .services-subtitle {
+      .legal-subtitle {
         font-size: 0.92rem !important;
         line-height: 1.5 !important;
       }
@@ -729,28 +736,23 @@
         padding: 0.45rem 0.75rem !important;
         font-size: 0.68rem !important;
       }
-      .services-main-wrap {
+      .legal-content-container {
         padding: 0 0.75rem !important;
         margin: 1.25rem auto 3rem !important;
         width: 100% !important;
         max-width: 100% !important;
       }
-      .services-grid {
-        grid-template-columns: 1fr !important;
-        gap: 1.25rem !important;
-        padding: 0 !important;
-      }
-      .service-card {
+      .legal-card {
         padding: 1.4rem 1.1rem !important;
         border-radius: 14px !important;
       }
-      .service-header {
-        gap: 0.5rem !important;
+      .item-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
       }
-      .service-card-footer {
+      .legal-alert {
         flex-direction: column !important;
-        align-items: stretch !important;
-        gap: 0.75rem !important;
+        text-align: center !important;
       }
       .site-footer-bar { flex-direction: column !important; gap: 1.25rem !important; text-align: center !important; margin-top: 2.5rem !important; }
       .footer-nav-links { flex-wrap: wrap !important; justify-content: center !important; gap: 0.85rem 1.25rem !important; }
@@ -758,18 +760,15 @@
 
     /* Small Phone Screens (max-width: 480px) */
     @media (max-width: 480px) {
-      .services-hero { padding: 2rem 0.5rem 1rem !important; }
-      .services-main-wrap { padding: 0 0.5rem !important; }
-      .service-card { padding: 1.25rem 0.85rem !important; }
+      .legal-hero { padding: 2rem 0.5rem 1rem !important; }
+      .legal-content-container { padding: 0 0.5rem !important; }
+      .legal-card { padding: 1.25rem 0.85rem !important; }
       .btn-download span { display: none !important; }
     }
   </style>
 <link rel="stylesheet" href="responsive-fix.css">
 </head>
 <body>
-
-  <!-- Ambient 3D Particle Canvas -->
-  <canvas id="services3dCanvas"></canvas>
 
   <!-- Floating Glass Navbar -->
   <div class="header-wrapper">
@@ -794,280 +793,89 @@
     </header>
   </div>
 
+  
   <main>
     <div class="chat-glow-orb"></div>
 
-    <!-- Services Hero Section -->
-    <section class="services-hero reveal-on-scroll">
+    <!-- Legal Hero Section -->
+    <section class="legal-hero reveal-on-scroll is-visible">
       <div class="entry-kicker">
-        <span class="kicker-dot-wrap">
-          <span class="dot-cyan">●</span>
-          <span class="dot-purple">●</span>
-        </span>
-        <span>⚡ // REAPERS PLATFORM ECOSYSTEM</span>
+        <span class="dot-cyan">■</span>
+        <span>Reapers Policy</span>
+        <span class="dot-purple">■</span>
       </div>
-
-      <h1 class="services-title">OUR SERVICES<span class="dot-magenta">.</span></h1>
-      <p class="services-subtitle">
-        Reapers is a community and networking platform built for gamers and game developers in Pakistan and beyond. Here is what we offer:
+      <h1 class="legal-title">Child Safety</h1>
+      <p class="legal-subtitle">
+        Our commitment to keeping our community safe for everyone, especially younger users.
       </p>
-
-      <div class="legal-meta-card">
-        <div class="legal-meta-item">ECOSYSTEM: <span>8 CORE SERVICES</span></div>
-        <div class="legal-meta-item">TARGET: <span>GAMERS &amp; GAME DEVELOPERS</span></div>
-        <div class="legal-meta-item">REGION: <span>PAKISTAN &amp; BEYOND</span></div>
-      </div>
-
-      <!-- Quick TOC Navigation Pills -->
-      <div class="toc-bar">
-        <a href="#sec-chat" class="toc-pill btn-bubble">01. Chatrooms</a>
-        <a href="#sec-dm" class="toc-pill btn-bubble">02. Direct Messaging</a>
-        <a href="#sec-build" class="toc-pill btn-bubble">03. Community Building</a>
-        <a href="#sec-events" class="toc-pill btn-bubble">04. Event Discovery</a>
-        <a href="#sec-demo" class="toc-pill btn-bubble">05. Demo Showcase</a>
-        <a href="#sec-hiring" class="toc-pill btn-bubble">06. Team Matchmaking</a>
-        <a href="#sec-expert" class="toc-pill btn-bubble">07. Expert Sessions</a>
-        <a href="#sec-profile" class="toc-pill btn-bubble">08. Developer Profiles</a>
-      </div>
     </section>
 
-    <!-- Main Services Grid -->
-    <div class="services-main-wrap reveal-on-scroll">
-      <div class="services-grid">
-
-        <!-- 1. Community Chatrooms -->
-        <article class="service-card" id="sec-chat">
-          <div>
-            <div class="service-header">
-              <div class="service-icon-badge">💬</div>
-              <span class="service-num">SERVICE 01</span>
-            </div>
-            <h2 class="service-title">1. Community Chatrooms</h2>
-            <p class="service-desc">
-              Join topic- and game-based chatrooms to talk with other gamers and developers in real time, or connect with existing gaming communities like CEGA, IGDA, PIGD, PGDA, and Pakistan Game Dev — all in one place.
-            </p>
+    <!-- Main Content -->
+    <div class="legal-content-container reveal-on-scroll is-visible">
+      <article class="legal-card">
+        
+        <section class="legal-section">
+          <h2 class="legal-heading"><span class="legal-num">01.</span> Minimum Age Requirement</h2>
+          <p class="legal-p">
+            The Reapers platform is strictly intended for users who are at least <strong>16 years of age</strong>. We do not knowingly permit children under this age to create accounts, and we do not knowingly collect personal information from children under 16.
+          </p>
+          <div class="legal-alert">
+            <span class="legal-alert-icon">⚠️</span>
+            <span class="legal-alert-text">If we discover that an account has been created by someone under the age of 16, the account and all associated data will be immediately suspended and permanently deleted.</span>
           </div>
+        </section>
 
-          <div class="widget-box">
-            <div class="widget-label">⚡ ACTIVE CHANNELS &amp; GUILDS</div>
-            <div style="display: flex; flex-direction: column; gap: 0.6rem;">
-              <div style="display: flex; gap: 0.4rem; flex-wrap: wrap; font-family: var(--font-mono); font-size: 0.75rem;">
-                <span style="background: rgba(0, 229, 255, 0.1); border: 1px solid rgba(0, 229, 255, 0.3); color: var(--cyan-neon); padding: 0.25rem 0.6rem; border-radius: 4px; font-weight: 700;"># GAME-DEV</span>
-                <span style="background: rgba(109, 53, 255, 0.1); border: 1px solid rgba(109, 53, 255, 0.3); color: var(--purple-neon); padding: 0.25rem 0.6rem; border-radius: 4px; font-weight: 700;"># DEMO-SHOWCASE</span>
-                <span style="background: rgba(216, 60, 255, 0.1); border: 1px solid rgba(216, 60, 255, 0.3); color: var(--magenta-neon); padding: 0.25rem 0.6rem; border-radius: 4px; font-weight: 700;"># LFG-ARENA</span>
-              </div>
-              <div class="guild-bar" style="margin-top: 0.2rem;">
-                <span class="guild-chip">CEGA</span>
-                <span class="guild-chip">IGDA PAKISTAN</span>
-                <span class="guild-chip">PIGD</span>
-                <span class="guild-chip">PGDA</span>
-                <span class="guild-chip">PAK GAME DEVS</span>
-              </div>
+        <section class="legal-section">
+          <h2 class="legal-heading"><span class="legal-num">02.</span> Reporting Underage Accounts</h2>
+          <p class="legal-p">
+            Community safety relies on all of us. If you believe a user on Reapers is under the age of 16, please report the account using the in-app reporting tool or contact our support team directly. We take these reports very seriously and will investigate them promptly.
+          </p>
+        </section>
+
+        <section class="legal-section">
+          <h2 class="legal-heading"><span class="legal-num">03.</span> Safe Community Guidelines</h2>
+          <div class="item-grid">
+            <div class="item-card item-card--cyan">
+              <div class="item-card-title">🛡️ Zero Tolerance</div>
+              <p class="item-card-desc">We have zero tolerance for any content or behavior that exploits, harms, or endangers minors in any way.</p>
             </div>
-          </div>
-        </article>
-
-        <!-- 2. Direct Messaging -->
-        <article class="service-card" id="sec-dm">
-          <div>
-            <div class="service-header">
-              <div class="service-icon-badge">✉️</div>
-              <span class="service-num">SERVICE 02</span>
+            <div class="item-card item-card--magenta">
+              <div class="item-card-title">🚫 Content Moderation</div>
+              <p class="item-card-desc">Our platform uses a mix of automated tools and human moderation to identify and remove inappropriate content.</p>
             </div>
-            <h2 class="service-title">2. Direct Messaging</h2>
-            <p class="service-desc">
-              Message other users one-on-one to network, collaborate, or just talk games — separate from group chatrooms.
-            </p>
-          </div>
-
-          <div class="widget-box">
-            <div class="widget-label">📩 1-ON-1 ENCRYPTED DIRECT MESSAGING</div>
-            <div style="display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.85rem;">
-              <div style="background: rgba(0, 0, 0, 0.4); padding: 0.6rem 0.8rem; border-radius: 8px; align-self: flex-start; max-width: 90%; border-left: 3px solid var(--purple-neon);">
-                <span style="font-family: var(--font-mono); color: var(--purple-neon); font-size: 0.72rem; display: block; font-weight: 700;">@ApexDeveloper:</span>
-                Hey! Loved your 3D environment demo. Open for a co-op jam?
-              </div>
-              <div style="background: rgba(0, 229, 255, 0.1); padding: 0.6rem 0.8rem; border-radius: 8px; align-self: flex-end; max-width: 90%; border: 1px solid var(--cyan-neon);">
-                <span style="font-family: var(--font-mono); color: var(--cyan-neon); font-size: 0.72rem; display: block; font-weight: 700;">@You:</span>
-                Thanks! Absolutely, let's connect on Discord &amp; build it.
-              </div>
+            <div class="item-card">
+              <div class="item-card-title">🛑 Blocking & Reporting</div>
+              <p class="item-card-desc">Users have robust tools to block unwanted contact and report violations directly to our Trust & Safety team.</p>
             </div>
           </div>
-        </article>
+        </section>
 
-        <!-- 3. Community Building -->
-        <article class="service-card" id="sec-build">
-          <div>
-            <div class="service-header">
-              <div class="service-icon-badge service-icon-badge--magenta">🏰</div>
-              <span class="service-num service-num--magenta">SERVICE 03</span>
-            </div>
-            <h2 class="service-title">3. Community Building</h2>
-            <p class="service-desc">
-              Create and manage your own community or chat room, invite members, and grow a space around your game, studio, or interest.
-            </p>
-          </div>
-
-          <div class="widget-box">
-            <div class="widget-label widget-label--magenta">🛠️ COMMUNITY &amp; GUILD CREATOR</div>
-            <div style="display: flex; flex-direction: column; gap: 0.6rem;">
-              <input type="text" id="communityNameInput" value="Cyber Blade Studio HQ" readonly style="background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.15); color: #FFFFFF; font-family: var(--font-mono); font-size: 0.8rem; padding: 0.5rem 0.8rem; border-radius: 6px;">
-              <div style="display: flex; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.72rem; color: #9D99B5;">
-                <span style="background: rgba(0, 229, 255, 0.08); padding: 0.3rem 0.6rem; border: 1px solid rgba(0, 229, 255, 0.3); color: var(--cyan-neon); border-radius: 4px;">🌐 PUBLIC</span>
-                <span style="background: rgba(216, 60, 255, 0.08); padding: 0.3rem 0.6rem; border: 1px solid rgba(216, 60, 255, 0.3); color: var(--magenta-neon); border-radius: 4px;">👥 1,420 MEMBERS</span>
-              </div>
+        <section class="legal-section">
+          <h2 class="legal-heading"><span class="legal-num">04.</span> Contact & Support</h2>
+          <p class="legal-p">
+            If you are a parent or guardian and have concerns about your child's data or activity on Reapers, please contact us immediately.
+          </p>
+          <div class="contact-card">
+            <div class="contact-row">
+              <span>Trust & Safety Team:</span>
+              <a href="mailto:reapers.support@gmail.com" style="color: var(--cyan-neon); text-decoration: underline;">reapers.support@gmail.com</a>
             </div>
           </div>
-        </article>
+        </section>
 
-        <!-- 4. Event Discovery & Hosting -->
-        <article class="service-card" id="sec-events">
-          <div>
-            <div class="service-header">
-              <div class="service-icon-badge">📅</div>
-              <span class="service-num">SERVICE 04</span>
-            </div>
-            <h2 class="service-title">4. Event Discovery &amp; Hosting</h2>
-            <p class="service-desc">
-              Discover and RSVP to gaming events — watch parties, indie developer meetups, tournaments, and workshops — or post your own, whether online or in-person.
-            </p>
-          </div>
-
-          <div class="widget-box">
-            <div class="widget-label">🎟️ EVENT SPOTLIGHT &amp; HOSTING</div>
-            <div style="font-family: var(--font-mono); font-size: 0.82rem; color: #FFFFFF;">
-              <div style="font-weight: 700; color: var(--cyan-neon); margin-bottom: 0.3rem;">PGDA NATIONAL GAME JAM 2026</div>
-              <div style="font-size: 0.75rem; color: #9D99B5; margin-bottom: 0.75rem;">📍 Lahore Expo &amp; Online · 48-Hour Sprint</div>
-              <button id="rsvpBtn" class="btn-bubble" style="background: var(--reapers-gradient); color: #FFFFFF; border: none; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; padding: 0.6rem 1rem; cursor: pointer; text-transform: uppercase; width: 100%; border-radius: 6px; box-shadow: 0 4px 15px rgba(0, 229, 255, 0.3);">
-                ✓ RSVP FOR EVENT (482 ATTENDING)
-              </button>
-            </div>
-          </div>
-        </article>
-
-        <!-- 5. Game Demo Showcase -->
-        <article class="service-card" id="sec-demo">
-          <div>
-            <div class="service-header">
-              <div class="service-icon-badge">🎮</div>
-              <span class="service-num">SERVICE 05</span>
-            </div>
-            <h2 class="service-title">5. Game Demo Showcase</h2>
-            <p class="service-desc">
-              Upload short gameplay demos of your project, browse demos from other developers, and get structured feedback and reviews from the community.
-            </p>
-          </div>
-
-          <div class="widget-box">
-            <div class="widget-label">📹 GAMEPLAY DEMO SHOWCASE FEED</div>
-            <div style="position: relative; border: 1px solid rgba(255, 255, 255, 0.15); overflow: hidden; border-radius: 8px;">
-              <video id="serviceDemoVid" autoplay loop muted playsinline src="public/videos/vid-1.mp4" style="width: 100%; height: 135px; object-fit: cover; display: block;"></video>
-              <div style="position: absolute; bottom: 8px; left: 8px; font-family: var(--font-mono); font-size: 0.72rem; background: rgba(5, 3, 10, 0.85); backdrop-filter: blur(12px); padding: 0.3rem 0.6rem; color: var(--cyan-neon); border-radius: 4px; border: 1px solid rgba(0, 229, 255, 0.4);">
-                ⭐ 4.9/5.0 COMMUNITY RATING (128 REVIEWS)
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <!-- 6. Team Hiring & Matchmaking -->
-        <article class="service-card" id="sec-hiring">
-          <div>
-            <div class="service-header">
-              <div class="service-icon-badge">🤝</div>
-              <span class="service-num">SERVICE 06</span>
-            </div>
-            <h2 class="service-title">6. Team Hiring &amp; Matchmaking</h2>
-            <p class="service-desc">
-              Find teammates for your game-development project by posting your requirements and sharing your demo — or browse open listings to join a team that needs your skills.
-            </p>
-          </div>
-
-          <div class="widget-box">
-            <div class="widget-label">⚡ LFG MATCHMAKING FILTERS</div>
-            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-              <span style="font-family: var(--font-mono); font-size: 0.75rem; padding: 0.35rem 0.75rem; background: rgba(0, 229, 255, 0.12); color: var(--cyan-neon); font-weight: 700; border-radius: 9999px; border: 1px solid var(--cyan-neon);">3D ARTIST</span>
-              <span style="font-family: var(--font-mono); font-size: 0.75rem; padding: 0.35rem 0.75rem; background: rgba(255, 255, 255, 0.04); color: #9D99B5; border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 9999px;">UNITY DEV</span>
-              <span style="font-family: var(--font-mono); font-size: 0.75rem; padding: 0.35rem 0.75rem; background: rgba(255, 255, 255, 0.04); color: #9D99B5; border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 9999px;">UNREAL 5</span>
-              <span style="font-family: var(--font-mono); font-size: 0.75rem; padding: 0.35rem 0.75rem; background: rgba(255, 255, 255, 0.04); color: #9D99B5; border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 9999px;">SOUND</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- 7. Expert Guidance Sessions -->
-        <article class="service-card" id="sec-expert">
-          <div>
-            <div class="service-header">
-              <div class="service-icon-badge service-icon-badge--magenta">🎓</div>
-              <span class="service-num service-num--magenta">SERVICE 07</span>
-            </div>
-            <h2 class="service-title">7. Expert Guidance Sessions</h2>
-            <p class="service-desc">
-              Book short 10-15 minute sessions with verified industry experts to get feedback, mentorship, or a review on your game or project.
-            </p>
-          </div>
-
-          <div class="widget-box">
-            <div class="widget-label widget-label--magenta">⏱️ 10-15 MIN MENTOR CALL BOOKING</div>
-            <div style="font-family: var(--font-mono); font-size: 0.82rem; color: #FFFFFF; display: flex; justify-content: space-between; align-items: center;">
-              <div>
-                <strong style="color: var(--magenta-neon); display: block;">Senior Unreal Architect</strong>
-                <span style="font-size: 0.72rem; color: #9D99B5;">Next slot: Today @ 5:30 PM</span>
-              </div>
-              <button id="bookExpertBtn" class="btn-bubble" style="background: rgba(216, 60, 255, 0.15); color: var(--magenta-neon); border: 1px solid var(--magenta-neon); font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; padding: 0.5rem 1rem; cursor: pointer; border-radius: 6px;">
-                BOOK 15M
-              </button>
-            </div>
-          </div>
-        </article>
-
-        <!-- 8. Developer & Gamer Profiles -->
-        <article class="service-card" id="sec-profile">
-          <div>
-            <div class="service-header">
-              <div class="service-icon-badge">🛡️</div>
-              <span class="service-num">SERVICE 08</span>
-            </div>
-            <h2 class="service-title">8. Developer &amp; Gamer Profiles</h2>
-            <p class="service-desc">
-              Build a public profile and portfolio showcasing your skills, past projects, and demos — so other developers, gamers, and experts can find and connect with you.
-            </p>
-          </div>
-
-          <div class="widget-box">
-            <div class="widget-label">🪪 REAPERS GAMER ID &amp; DEV PORTFOLIO CARD</div>
-            <div style="display: flex; align-items: center; gap: 1rem;">
-              <div style="width: 44px; height: 44px; border-radius: 50%; background: var(--reapers-gradient); color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 800; font-family: var(--font-display); box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);">
-                RPR
-              </div>
-              <div style="font-family: var(--font-mono); font-size: 0.8rem;">
-                <div style="color: #FFFFFF; font-weight: 700;">Zayn_Dev · LVL 42 VERIFIED</div>
-                <div style="color: var(--cyan-neon); font-size: 0.72rem;">C++ · Unreal 5 · Gameplay Shader Art</div>
-              </div>
-            </div>
-          </div>
-        </article>
-
-      </div>
-
-      <!-- Summary Callout Card -->
-      <div class="summary-card">
-        <p class="summary-quote">
-          "Reapers brings community, events, feedback, and mentorship together in one platform — built for the people making and playing games."
-        </p>
-        <a href="index.html#download" class="btn-download btn-bubble" style="display: inline-flex; padding: 0.9rem 2.5rem; font-size: 0.9rem;">JOIN REAPERS TODAY →</a>
-      </div>
+      </article>
     </div>
-  </main>
+</main>
 
   <!-- Global Footer Bar -->
   <footer class="site-footer-bar">
     <div>© 2026 REAPERS · PAKISTAN</div>
     <nav class="footer-nav-links">
-      <a href="services.html" class="footer-link active">SERVICES</a>
+      <a href="services.html" class="footer-link">SERVICES</a>
       <a href="privacy.html" class="footer-link">PRIVACY POLICY</a>
       <a href="terms.html" class="footer-link">TERMS &amp; CONDITIONS</a>
       <a href="/delete-account" class="footer-link">DELETE ACCOUNT</a>
-      <a href="/child-safety" class="footer-link">CHILD SAFETY</a>
+      <a href="/child-safety" class="footer-link active">CHILD SAFETY</a>
       <a href="https://www.instagram.com/houseofthereapers?stkn=MWN2NWdseXc5NzE4cA==&amp;utm_source=ig_contact_invite" target="_blank" rel="noopener noreferrer" class="footer-link">INSTAGRAM</a>
     </nav>
   </footer>
@@ -1176,11 +984,11 @@
         el.addEventListener('mouseenter', () => cyberAudio.playHover('default'));
         el.addEventListener('click', () => cyberAudio.playClick('primary'));
       });
-      document.querySelectorAll('.service-card').forEach(el => {
+      document.querySelectorAll('.legal-card').forEach(el => {
         el.addEventListener('mouseenter', () => cyberAudio.playHover('card'));
         el.addEventListener('click', () => cyberAudio.playClick('default'));
       });
-      document.querySelectorAll('.toc-pill, .guild-chip').forEach(el => {
+      document.querySelectorAll('.toc-pill').forEach(el => {
         el.addEventListener('mouseenter', () => cyberAudio.playHover('chip'));
         el.addEventListener('click', () => cyberAudio.playClick('tab'));
       });
@@ -1194,92 +1002,6 @@
         });
       }
 
-      // Interactive Widgets in Services Page
-      const rsvpBtn = document.getElementById('rsvpBtn');
-      if (rsvpBtn) {
-        rsvpBtn.addEventListener('click', () => {
-          cyberAudio.playClick();
-          rsvpBtn.textContent = '✓ RSVP CONFIRMED (483 ATTENDING)';
-          rsvpBtn.style.background = 'rgba(0, 229, 255, 0.2)';
-          rsvpBtn.style.color = '#00E5FF';
-          rsvpBtn.style.border = '1px solid #00E5FF';
-        });
-      }
-
-      const bookExpertBtn = document.getElementById('bookExpertBtn');
-      if (bookExpertBtn) {
-        bookExpertBtn.addEventListener('click', () => {
-          cyberAudio.playClick();
-          bookExpertBtn.textContent = '✓ RESERVED';
-          bookExpertBtn.style.background = 'rgba(216, 60, 255, 0.2)';
-          bookExpertBtn.style.color = '#D83CFF';
-          bookExpertBtn.style.border = '1px solid #D83CFF';
-        });
-      }
-
-
-      // 3D Particles Canvas
-      const canvas = document.getElementById('services3dCanvas');
-      if (canvas) {
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-        const numParticles = 45;
-
-        function resizeCanvas() {
-          canvas.width = window.innerWidth;
-          canvas.height = window.innerHeight;
-        }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-
-        for (let i = 0; i < numParticles; i++) {
-          particles.push({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            vx: (Math.random() - 0.5) * 0.35,
-            vy: (Math.random() - 0.5) * 0.35,
-            radius: Math.random() * 2 + 1
-          });
-        }
-
-        function drawParticles() {
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-          particles.forEach((p, idx) => {
-            p.x += p.vx;
-            p.y += p.vy;
-
-            if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-            if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
-
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(0, 229, 255, 0.3)';
-            ctx.fill();
-
-            for (let j = idx + 1; j < particles.length; j++) {
-              const p2 = particles[j];
-              const dx = p.x - p2.x;
-              const dy = p.y - p2.y;
-              const dist = Math.sqrt(dx * dx + dy * dy);
-
-              if (dist < 130) {
-                ctx.beginPath();
-                ctx.moveTo(p.x, p.y);
-                ctx.lineTo(p2.x, p2.y);
-                ctx.strokeStyle = 'rgba(109, 53, 255, ' + (0.12 * (1 - dist / 130)) + ')';
-                ctx.lineWidth = 0.8;
-                ctx.stroke();
-              }
-            }
-          });
-
-          requestAnimationFrame(drawParticles);
-        }
-        drawParticles();
-      }
-
-      // Scroll Reveal
       const revealElems = document.querySelectorAll('.reveal-on-scroll');
       if ('IntersectionObserver' in window) {
         const observer = new IntersectionObserver((entries) => {
